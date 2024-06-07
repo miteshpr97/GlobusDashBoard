@@ -120,7 +120,7 @@ export default function SideBar() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <MenuItems/>
+       
         <List>
           {/* {menuItems.map((item, index) => (
             <div key={index}>

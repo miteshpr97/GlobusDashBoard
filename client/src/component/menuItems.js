@@ -1,4 +1,3 @@
-
 // // menuItems.js
 // import React, { useEffect, useState } from "react";
 // import LeaderboardIcon from "@mui/icons-material/Leaderboard";
@@ -36,7 +35,7 @@
 //         menuMap[item.MODULE_CD] = {
 //           text: item.MODULE_NM,
 //           icon: <LeaderboardIcon />,
-//           path: "/dashboard", 
+//           path: "/dashboard",
 //           submenu: []
 //         };
 //       }
@@ -80,20 +79,26 @@
 //   },
 // ];
 
-
 // menuItems.js
-
-
 
 import React, { useEffect, useState } from "react";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import { _post } from "../CommonUtilAPI/GLApiClient";
-import { List, ListItem, ListItemIcon, ListItemText, Collapse } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+  ListItemButton,
+} from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 export default function MenuItems() {
   const [menuData, setMenuData] = useState([]);
   const [open, setOpen] = useState({});
+
+  console.log(menuData, "menudata");
 
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -117,25 +122,28 @@ export default function MenuItems() {
 
   const processMenuData = (data) => {
     const menuMap = {};
-    data.forEach(item => {
+    data.forEach((item) => {
       if (!menuMap[item.MODULE_CD]) {
         menuMap[item.MODULE_CD] = {
           text: item.MODULE_NM,
           icon: <LeaderboardIcon />,
-          path: "/dashboard", 
-          submenu: []
+          path: "/dashboard",
+          submenu: [],
         };
       }
       menuMap[item.MODULE_CD].submenu.push({
         text: item.PAGE_NM,
-        path: item.PAGE_LNK
+        path: item.PAGE_LNK,
       });
     });
     return Object.values(menuMap);
   };
 
   const handleClick = (moduleCd) => {
-    setOpen(prevState => ({ ...prevState, [moduleCd]: !prevState[moduleCd] }));
+    setOpen((prevState) => ({
+      ...prevState,
+      [moduleCd]: !prevState[moduleCd],
+    }));
   };
 
   if (!menuData || menuData.length === 0) {
@@ -145,13 +153,58 @@ export default function MenuItems() {
   return (
     <List>
       {menuData.map((menuItem, index) => (
-        <div key={index}>
-          <ListItem button onClick={() => handleClick(menuItem.text)}>
-            <ListItemIcon>{menuItem.icon}</ListItemIcon>
-            <ListItemText primary={menuItem.text} />
+        <ListItem key={index} disablePadding sx={{ display: "block" }}>
+          <ListItemButton
+            onClick={() => handleClick(menuItem.text)}
+            sx={{
+              minHeight: 48,
+              color: "white",
+              justifyContent: open ? "initial" : "center",
+              px: 1.5,
+              mt: 1,
+              borderBottom: "1px solid #ccc",
+              background: " #045e84",
+              ":hover": {
+                background: "#045e8490",
+                color: "white",
+              },
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : "auto",
+                justifyContent: "center",
+                color: "white",
+
+                ":hover": {
+                  background: "#045e8477",
+                  color: "#045e84",
+                },
+              }}
+            >
+              {menuItem.icon}
+            </ListItemIcon>
+            <ListItemText
+              primary={menuItem.text}
+              style={{
+                margin: 0,
+
+                overflow: "hidden",
+              }}
+            />
             {open[menuItem.text] ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={open[menuItem.text]} timeout="auto" unmountOnExit>
+          </ListItemButton>
+          <Collapse
+            in={open[menuItem.text]}
+            timeout="auto"
+            unmountOnExit
+            sx={{
+              background: " #045e8430",
+              color:"#045e84",
+            
+            }}
+          >
             <List component="div" disablePadding>
               {menuItem.submenu.map((subItem, subIndex) => (
                 <ListItem button key={subIndex} sx={{ pl: 4 }}>
@@ -160,8 +213,8 @@ export default function MenuItems() {
               ))}
             </List>
           </Collapse>
-        </div>
+        </ListItem>
       ))}
     </List>
   );
-};
+}
