@@ -125,14 +125,14 @@ export default function MenuItems() {
     data.forEach((item) => {
       if (!menuMap[item.MODULE_CD]) {
         menuMap[item.MODULE_CD] = {
-          text: item.MODULE_NM,
+          text: item.MODULE_CD,
           icon: <LeaderboardIcon />,
           path: "/dashboard",
           submenu: [],
         };
       }
       menuMap[item.MODULE_CD].submenu.push({
-        text: item.PAGE_NM,
+        text: item.MENU_NM,
         path: item.PAGE_LNK,
       });
     });
