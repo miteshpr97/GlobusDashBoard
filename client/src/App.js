@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Login from './auth/Login/Login';
 import { Dashboard } from './Pages/Dashboard/Dashboard';
-import GLBtn from './component/Buttons/GLBtn';
+
 
 
 
@@ -12,10 +12,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard/>}></Route>
-      
-        <Route path="/glbtn" element={<GLBtn/>}></Route>
-
+        <Route path="/dashboard" element={<Dashboard/>}></Route>      
+     
       </Routes>
 
     </>

@@ -1,26 +1,61 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import CustomButton from './CustomButton';
+import { Box, Container } from '@mui/material';
 
 const GLBtn = () => {
+    const handleClick = () => {
+        alert('Button clicked!');
+    };
+
     return (
-        <div
-            style={{ width: "60vw", height: "60px", backgroundColor: "#95D2B3", marginLeft: "20px", marginTop: "10px" }}
-        >
-            <div
-                style={{ padding: "12px", display: "flex", gap: "10px" }}
+        <Box sx={{ height: "100vh" }}>
+            <Container
+                sx={{ 
+                    display: "flex", 
+                    flexDirection: "column", 
+                    backgroundColor: "#86B6F6", 
+                    width: "120px",
+                    gap: '10px', 
+                    height: "400px",
+                    alignItems: 'center',
+                    marginTop: "10px",
+                    marginRight: "10px"
+                }}
             >
-                <Button 
-                    variant="contained" 
-                    style={{ backgroundColor: "#FF5733", color: "#FFFFFF" }}
+                <CustomButton 
+                    variant='contained' 
+                    onClick={handleClick}
+                    sx={{ backgroundColor: '#003285', color: 'white' }}
                 >
-                    VIEW
-                </Button>
-                <Button variant="contained" color="primary">SAVE</Button>
-                <Button variant="contained" color="secondary">DELETE</Button>
-                <Button variant="contained" color="success">UPDATE</Button>
-            </div>
-        </div>
+                    SAVE
+                </CustomButton>
+
+                <CustomButton 
+                    variant='contained' 
+                    onClick={handleClick}
+                    sx={{ backgroundColor: '#7E8EF1', color: 'white' }}
+                >
+                    UPDATE
+                </CustomButton>
+
+                <CustomButton 
+                    variant='contained' 
+                    onClick={handleClick}
+                    sx={{ backgroundColor: '#A1C398', color: 'white' }}
+                >
+                    DELETE
+                </CustomButton>
+
+                <CustomButton 
+                    variant='contained' 
+                    onClick={handleClick}
+                    sx={{ backgroundColor: '#704264', color: 'white' }}
+                >
+                    EXCEL
+                </CustomButton>
+            </Container>
+        </Box>
     );
-}
+};
 
 export default GLBtn;
