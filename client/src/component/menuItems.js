@@ -80,6 +80,7 @@
 // ];
 
 // menuItems.js
+
 import React, { useEffect, useState } from "react";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import { _post } from "../CommonUtilAPI/GLApiClient";
@@ -166,7 +167,7 @@ export default function MenuItems() {
               minHeight: 48,
               color: "white",
               justifyContent: "initial",
-              px: 1.5,
+              px: 1,
               mt: 1,
               borderBottom: "1px solid #ccc",
               background: "#045e84",
@@ -179,7 +180,8 @@ export default function MenuItems() {
             <ListItemIcon
               sx={{
                 minWidth: 0,
-                mr: 3,
+                mr: 1.5,
+
                 justifyContent: "center",
                 color: "white",
                 ":hover": {
@@ -191,8 +193,10 @@ export default function MenuItems() {
               {module.icon}
             </ListItemIcon>
             <ListItemText
-              primary={module.text}
-              style={{ margin: 0, overflow: "hidden" }}
+              primary={<div style={{ fontSize: "0.95rem" }}>{module.text}</div>}
+              sx={{
+                opacity: open ? 1 : 0,
+              }}
             />
             {open[module.text] ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
@@ -204,14 +208,18 @@ export default function MenuItems() {
           >
             <List component="div" disablePadding>
               {module.submenu.map((menu, subIndex) => (
-                <ListItem key={subIndex} disablePadding sx={{ display: "block" }}>
+                <ListItem
+                  key={subIndex}
+                  disablePadding
+                  sx={{ display: "block" }}
+                >
                   <ListItemButton
                     onClick={() => handleClick(`${module.text}-${menu.text}`)}
                     sx={{
                       pl: 4,
                       color: "white",
                       justifyContent: "initial",
-                      px: 1.5,
+                      px: 1.2,
                       mt: 1,
                       borderBottom: "1px solid #ccc",
                       background: "#045e84",
@@ -221,8 +229,31 @@ export default function MenuItems() {
                       },
                     }}
                   >
-                    <ListItemText primary={menu.text} />
-                    {open[`${module.text}-${menu.text}`] ? <ExpandLess /> : <ExpandMore />}
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: 1.5,
+
+                        justifyContent: "center",
+                        color: "white",
+                        ":hover": {
+                          background: "#045e8477",
+                          color: "#045e84",
+                        },
+                      }}
+                    >
+                      {module.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <div style={{ fontSize: "0.9rem" }}>{menu.text}</div>
+                      }
+                    />
+                    {open[`${module.text}-${menu.text}`] ? (
+                      <ExpandLess />
+                    ) : (
+                      <ExpandMore />
+                    )}
                   </ListItemButton>
                   <Collapse
                     in={open[`${module.text}-${menu.text}`]}
@@ -232,8 +263,14 @@ export default function MenuItems() {
                   >
                     <List component="div" disablePadding>
                       {menu.submenu.map((subItem, subSubIndex) => (
-                        <ListItem button key={subSubIndex} sx={{ pl: 8 }}>
-                          <ListItemText primary={subItem.text} />
+                        <ListItem button key={subSubIndex} sx={{ pl: 5 }}>
+                          <ListItemText
+                            primary={
+                              <div style={{ fontSize: "0.85rem" }}>
+                                {subItem.text}
+                              </div>
+                            }
+                          />
                         </ListItem>
                       ))}
                     </List>
@@ -247,4 +284,3 @@ export default function MenuItems() {
     </List>
   );
 }
-
