@@ -35,7 +35,7 @@ const GLBtn = () => {
                     onClick={handleClick}
                     sx={{ backgroundColor: '#7E8EF1', color: 'white' }}
                 >
-                    UPDATE
+                    UPDATE    
                 </CustomButton>
 
                 <CustomButton 
