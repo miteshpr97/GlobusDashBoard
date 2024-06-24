@@ -5,6 +5,7 @@ import SideBar from "../../component/SideBar";
 
 
 import "./Dashboard.css"
+import GLBtn from "../../component/Buttons/GLBtn";
 
 export const Dashboard = () => {
   return (
@@ -20,7 +21,7 @@ export const Dashboard = () => {
         }}
       >
         
-    helllo
+    <GLBtn/>
       </Box>
     </Box>
   );

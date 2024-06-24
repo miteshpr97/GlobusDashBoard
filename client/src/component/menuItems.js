@@ -79,6 +79,8 @@
 //   },
 // ];
 
+
+
 // menuItems.js
 
 import React, { useEffect, useState } from "react";
@@ -97,6 +99,9 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 export default function MenuItems() {
   const [menuData, setMenuData] = useState([]);
   const [open, setOpen] = useState({});
+
+
+  console.log(menuData);
 
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -123,7 +128,7 @@ export default function MenuItems() {
     data.forEach((item) => {
       if (!menuMap[item.MODULE_CD]) {
         menuMap[item.MODULE_CD] = {
-          text: item.MODULE_NM,
+          text: item.MODULE_CD,
           icon: <LeaderboardIcon />,
           submenu: {},
         };
