@@ -109,7 +109,10 @@ export default function MenuItems() {
           USER_CD: window.sessionStorage.getItem("USER_CD"),
         });
         if (response.status === 200) {
+
+          sessionStorage.setItem("menuData", JSON.stringify(response.data));
           const processedData = processMenuData(response.data);
+          
           setMenuData(processedData);
         } else {
           console.error("Failed to fetch menu data", response.status);

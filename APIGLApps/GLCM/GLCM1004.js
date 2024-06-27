@@ -16,8 +16,8 @@ router.post("/", (req, res) => {
   console.log("AccessRights");
   const resultCall = new Promise((resolve, reject) => {
     const strParaMeter = {
-      USER_CD: req.body.id,
-      PAGE_ID: req.body.PAGE_ID,
+      USER_CD: req.body.USER_CD,
+      PAGE_CD: req.body.PAGE_CD,
     };
     resolve(dbUtil.dbUtil_Temp.Select_SP("SP_GLCM1003", strParaMeter));
   });
