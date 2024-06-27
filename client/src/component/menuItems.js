@@ -100,7 +100,27 @@ export default function MenuItems() {
   const [open, setOpen] = useState({});
 
 
-  console.log(menuData);
+
+  // useEffect(() => {
+  //   const fetchMenuData = async () => {
+  //     try {
+  //       const response = await _post("/api/Menu", {
+  //         USER_CD: window.sessionStorage.getItem("USER_CD"),
+  //       });
+  //       if (response.status === 200) {
+  //         setStoreMenuData(response.data)
+  //         const processedData = processMenuData(response.data);
+  //         setMenuData(processedData);
+  //       } else {
+  //         console.error("Failed to fetch menu data", response.status);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching menu data", error);
+  //     }
+  //   };
+
+  //   fetchMenuData();
+  // }, []);
 
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -109,11 +129,15 @@ export default function MenuItems() {
           USER_CD: window.sessionStorage.getItem("USER_CD"),
         });
         if (response.status === 200) {
-
-          sessionStorage.setItem("menuData", JSON.stringify(response.data));
+         
           const processedData = processMenuData(response.data);
-          
           setMenuData(processedData);
+  
+          // Find pagePermissions and store it in sessionStorage
+          const pagePermissions = response.data.find(item => item.PAGE_CD);
+          if (pagePermissions) {
+            window.sessionStorage.setItem('PAGE_CD',(pagePermissions.PAGE_CD));
+          }
         } else {
           console.error("Failed to fetch menu data", response.status);
         }
@@ -121,9 +145,12 @@ export default function MenuItems() {
         console.error("Error fetching menu data", error);
       }
     };
-
+  
     fetchMenuData();
   }, []);
+  
+
+
 
   const processMenuData = (data) => {
     const menuMap = {};

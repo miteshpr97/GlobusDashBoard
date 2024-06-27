@@ -7,19 +7,18 @@ import { Box, Container } from '@mui/material';
 const AcessBtn = () => {
     const [permissions, setPermissions] = useState(null);
 
+
     useEffect(() => {
         const fetchPermissions = async () => {
             try {
                 const response = await axios.post('/api/AccessRight/', {
-                     USER_CD: "GL00001",
-                    // USER_CD: window.sessionStorage.getItem("USER_CD"),  
-                    PAGE_CD: "GLCMA100200"
+                    USER_CD: window.sessionStorage.getItem("USER_CD"),
+                    PAGE_CD: window.sessionStorage.getItem("PAGE_CD"),
                 });
 
                 if (response.status === 200) {
                     const data = response.data;
-                    // Find the object with PAGE_CD = "GLCMA100200"
-                    const pagePermissions = data.find(page => page.PAGE_CD === "GLCMA100200");
+                    const pagePermissions = data.find(page => page.PAGE_CD === window.sessionStorage.getItem("PAGE_CD"));
                     setPermissions(pagePermissions);
                 }
             } catch (error) {
