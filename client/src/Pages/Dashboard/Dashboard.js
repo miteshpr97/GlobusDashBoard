@@ -3,9 +3,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import SideBar from "../../component/SideBar";
 
+import "./Dashboard.css";
 
-import "./Dashboard.css"
-import GLBtn from "../../component/Buttons/GLBtn";
+import AcessBtn from "../../component/AcessRight/AcessBtn";
 
 export const Dashboard = () => {
   return (
@@ -20,8 +20,7 @@ export const Dashboard = () => {
           height: "93vh",
         }}
       >
-        
-    <GLBtn/>
+        <AcessBtn />
       </Box>
     </Box>
   );

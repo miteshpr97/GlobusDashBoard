@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Login from './auth/Login/Login';
 import { Dashboard } from './Pages/Dashboard/Dashboard';
+import UserCreation from './Pages/UserCreation/UserCreation';
 
 
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard/>}></Route>      
+        <Route path="/UserCreation" element={<UserCreation/>}></Route>      
      
       </Routes>
 
