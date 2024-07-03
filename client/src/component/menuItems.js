@@ -403,7 +403,7 @@ export default function MenuItems() {
       }
       menuMap[item.MODULE_CD].submenu[item.MENU_CD].submenu.push({
         text: item.PAGE_NM,
-        path: item.PAGE_NM === "User Creation" ? "/UserCreation" : item.PAGE_LNK,
+        path: item.PAGE_NM === "User Creation" ? "/UserCreation.js" : item.PAGE_LNK,
       });
     });
 
