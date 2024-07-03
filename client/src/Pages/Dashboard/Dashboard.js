@@ -6,7 +6,7 @@ import SideBar from "../../component/SideBar";
 import "./Dashboard.css";
 
 
-import CommonBtn from "../../component/CommonComponnets/CommonBtn";
+
 
 export const Dashboard = () => {
   return (
@@ -22,9 +22,7 @@ export const Dashboard = () => {
         }}
       >
 
-        <CommonBtn
-          PAGE_CD="GLCMA100100"
-        />
+       
       </Box>
     </Box>
   );
