@@ -40,7 +40,14 @@ const CommonBtn = ({ PAGE_CD }) => {
   }
 
   return (
-    <Box>
+    <Box sx={{
+      width: "100%",
+      height: "60px",
+      background: "#dddddd",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-start",
+    }}>
       <Container>
         <Stack direction="row" spacing={2}>
           {permissions.PAGE_INQUIRY === "Y" && (
