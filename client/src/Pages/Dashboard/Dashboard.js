@@ -22,7 +22,9 @@ export const Dashboard = () => {
         }}
       >
         
-   <AcessBtn/>
+   <AcessBtn
+   PAGE_CD ="GLCMA100100"
+   />
       </Box>
     </Box>
   );

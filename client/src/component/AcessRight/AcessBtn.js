@@ -4,16 +4,17 @@ import axios from 'axios';
 import CustomButton from '../Buttons/CustomButton';
 import { Box, Container } from '@mui/material';
 
-const AcessBtn = () => {
+const AcessBtn = ({PAGE_CD}) => {
     const [permissions, setPermissions] = useState(null);
-
+console.log(PAGE_CD, "page btn code");
 
     useEffect(() => {
         const fetchPermissions = async () => {
             try {
                 const response = await axios.post('/api/AccessRight/', {
                     USER_CD: window.sessionStorage.getItem("USER_CD"),
-                    PAGE_CD: window.sessionStorage.getItem("PAGE_CD"),
+                    // PAGE_CD: window.sessionStorage.getItem("PAGE_CD"),
+                    PAGE_CD:PAGE_CD
                 });
 
                 if (response.status === 200) {

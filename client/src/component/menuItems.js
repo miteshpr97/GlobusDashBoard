@@ -100,27 +100,9 @@ export default function MenuItems() {
   const [open, setOpen] = useState({});
 
 
+  
 
-  // useEffect(() => {
-  //   const fetchMenuData = async () => {
-  //     try {
-  //       const response = await _post("/api/Menu", {
-  //         USER_CD: window.sessionStorage.getItem("USER_CD"),
-  //       });
-  //       if (response.status === 200) {
-  //         setStoreMenuData(response.data)
-  //         const processedData = processMenuData(response.data);
-  //         setMenuData(processedData);
-  //       } else {
-  //         console.error("Failed to fetch menu data", response.status);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching menu data", error);
-  //     }
-  //   };
 
-  //   fetchMenuData();
-  // }, []);
 
   useEffect(() => {
     const fetchMenuData = async () => {
