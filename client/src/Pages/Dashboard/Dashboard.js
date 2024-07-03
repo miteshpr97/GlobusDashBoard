@@ -5,7 +5,8 @@ import SideBar from "../../component/SideBar";
 
 import "./Dashboard.css";
 
-import AcessBtn from "../../component/AcessRight/AcessBtn";
+
+import CommonBtn from "../../component/CommonComponnets/CommonBtn";
 
 export const Dashboard = () => {
   return (
@@ -20,10 +21,10 @@ export const Dashboard = () => {
           height: "93vh",
         }}
       >
-        
-   <AcessBtn
-   PAGE_CD ="GLCMA100100"
-   />
+
+        <CommonBtn
+          PAGE_CD="GLCMA100100"
+        />
       </Box>
     </Box>
   );

@@ -4,7 +4,7 @@ import axios from 'axios';
 import CustomButton from '../Buttons/CustomButton';
 import { Box, Container } from '@mui/material';
 
-const AcessBtn = ({PAGE_CD}) => {
+const CommonBtn = ({PAGE_CD}) => {
     const [permissions, setPermissions] = useState(null);
 console.log(PAGE_CD, "page btn code");
 
@@ -108,4 +108,5 @@ console.log(PAGE_CD, "page btn code");
     );
 };
 
-export default AcessBtn;
+export default CommonBtn;
+
