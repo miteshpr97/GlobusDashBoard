@@ -325,16 +325,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
@@ -350,14 +340,9 @@ import {
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 export default function MenuItems() {
-  const navigate = useNavigate(); // Add this line
+  const navigate = useNavigate();
   const [menuData, setMenuData] = useState([]);
   const [open, setOpen] = useState({});
-
-
-  
-
-
 
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -369,10 +354,10 @@ export default function MenuItems() {
           const processedData = processMenuData(response.data);
           setMenuData(processedData);
 
-          // Find pagePermissions and store it in sessionStorage
-          const pagePermissions = response.data.find(item => item.PAGE_CD);
+          
+          const pagePermissions = response.data.find((item) => item.PAGE_CD);
           if (pagePermissions) {
-            window.sessionStorage.setItem('PAGE_CD',(pagePermissions.PAGE_CD));
+            window.sessionStorage.setItem("PAGE_CD", pagePermissions.PAGE_CD);
           }
         } else {
           console.error("Failed to fetch menu data", response.status);
@@ -403,7 +388,7 @@ export default function MenuItems() {
       }
       menuMap[item.MODULE_CD].submenu[item.MENU_CD].submenu.push({
         text: item.PAGE_NM,
-        path: item.PAGE_NM === "User Creation" ? "/UserCreation.js" : item.PAGE_LNK,
+        path: item.PAGE_LNK, 
       });
     });
 
@@ -421,7 +406,11 @@ export default function MenuItems() {
   };
 
   const handleSubMenuClick = (path) => {
-    navigate(path); // Use navigate to change the route
+    if (path) {
+      navigate(path);
+    } else {
+      console.error("No path provided for this menu item");
+    }
   };
 
   if (!menuData || menuData.length === 0) {
@@ -452,7 +441,6 @@ export default function MenuItems() {
               sx={{
                 minWidth: 0,
                 mr: 1.5,
-
                 justifyContent: "center",
                 color: "white",
                 ":hover": {
@@ -504,7 +492,6 @@ export default function MenuItems() {
                       sx={{
                         minWidth: 0,
                         mr: 1.5,
-
                         justifyContent: "center",
                         color: "white",
                         ":hover": {
@@ -534,8 +521,11 @@ export default function MenuItems() {
                   >
                     <List component="div" disablePadding>
                       {menu.submenu.map((subItem, subSubIndex) => (
-                        <ListItem button key={subSubIndex} sx={{ pl: 5 }}
-                          onClick={() => handleSubMenuClick(subItem.path)} // Add this line
+                        <ListItem
+                          button
+                          key={subSubIndex}
+                          sx={{ pl: 5 }}
+                          onClick={() => handleSubMenuClick(subItem.path)} 
                         >
                           <ListItemText
                             primary={
