@@ -26,6 +26,7 @@ router.post("/", (req, res) => {
         objCongig.glJWTPriveteKey
       );
       console.log(dataResult);
+      console.log(tokenId);
       res.header("x-gl-Auth-Token", tokenId).send(result); //
     } else {
       res.header("x-gl-Auth-Token", null).send(result); //

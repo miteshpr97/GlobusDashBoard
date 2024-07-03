@@ -17,7 +17,7 @@ router.get("/", objVerify, (req, res) => {
   });
 });
 
-router.post("/", objVerify, async (req, res) => {
+router.post("/", objVerify , async (req, res) => {
   console.log("Menu");
   const resultCall = new Promise((resolve, reject) => {
     const strParaMeter = {

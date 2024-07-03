@@ -3,8 +3,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import SideBar from "../../component/SideBar";
 
-
-import "./Dashboard.css"
+import "./Dashboard.css";
 
 import AcessBtn from "../../component/AcessRight/AcessBtn";
 
