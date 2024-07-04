@@ -117,7 +117,7 @@ const GLCMA100100 = () => {
               </div>
 
               <Grid container spacing={0.5}>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="EMPLOYEE CODE"
                     variant="outlined"
@@ -129,7 +129,7 @@ const GLCMA100100 = () => {
                 </Grid>
               </Grid>
               <Grid container spacing={0.5}>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="SUR NAME"
                     variant="outlined"
@@ -139,7 +139,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="FIRST NAME"
                     variant="outlined"
@@ -149,7 +149,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="MIDDLE NAME"
                     variant="outlined"
@@ -159,7 +159,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="LAST NAME"
                     variant="outlined"
@@ -169,7 +169,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="POSITION CODE"
                     variant="outlined"
@@ -179,7 +179,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="DEPARTMENT CODE"
                     variant="outlined"
@@ -189,7 +189,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="EMAIL"
                     variant="outlined"
@@ -199,7 +199,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="EMAIL_PER"
                     variant="outlined"
@@ -209,7 +209,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="MOBILE NO 1"
                     variant="outlined"
@@ -219,7 +219,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="MOB_PER_01"
                     variant="outlined"
@@ -229,7 +229,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="MOB_NO_02"
                     variant="outlined"
@@ -239,7 +239,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="EMPLOYEE Type"
                     variant="outlined"
@@ -249,7 +249,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="REF_NO"
                     variant="outlined"
@@ -259,7 +259,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="STATUS"
                     variant="outlined"
@@ -269,7 +269,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="DATE_JOIN"
                     variant="outlined"
@@ -279,7 +279,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="DATE_BIRTH"
                     variant="outlined"
@@ -289,7 +289,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="GENDER"
                     variant="outlined"
@@ -299,7 +299,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="RELIGION"
                     variant="outlined"
@@ -309,7 +309,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="ADD_01"
                     variant="outlined"
@@ -319,7 +319,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="ADD_STATE"
                     variant="outlined"
@@ -329,7 +329,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="ADD_LANDMARK"
                     variant="outlined"
@@ -339,7 +339,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="ADD_CITY"
                     variant="outlined"
@@ -349,7 +349,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="ADD_PIN"
                     variant="outlined"
@@ -359,7 +359,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="PAN_CARD"
                     variant="outlined"
@@ -369,7 +369,7 @@ const GLCMA100100 = () => {
                     size="small"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     label="NATION_ID"
                     variant="outlined"
