@@ -183,7 +183,7 @@ const EmpInfo = () => {
       sx={{
         width: "100%",
         height: "67%",
-        background: "grey",
+        background: "#dddddd",
         padding: "10px",
         marginTop: "10px",
       }}
