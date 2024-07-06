@@ -4,7 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import Login from './auth/Login/Login';
 import { Dashboard } from './Pages/Dashboard/Dashboard';
 import GLCMA100100 from './Pages/GLCMA100100';
-import GLCMA100200 from './Pages/GLCMA100200';
+import GLCMA100200 from './Pages/GLCMA100200/GLCMA100200';
+
 
 
 function App() {
