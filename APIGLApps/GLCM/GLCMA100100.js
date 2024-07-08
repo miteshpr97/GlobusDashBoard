@@ -2,6 +2,7 @@ const express = require("express");
 const dbUtil = require("../DBCall/DBUtil");
 const router = express.Router();
 
+// Registering a user
 router.post("/", async (req, res) => {
   console.log("RegisterUser");
 
@@ -46,6 +47,43 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: "An error occurred while registering the user." });
+  }
+});
+
+// getting all users
+router.get("/", async (req, res) => {
+  console.log("GettingAllUsers");
+
+  const selectQuery = `SELECT * FROM TGL_CM_B001;`
+
+  try {
+    const result = await dbUtil.dbUtil_Temp.Select_Query(selectQuery);
+    console.log("Result", result);
+    res.status(201).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "An error occurred while registering the user." });
+  }
+});
+
+// getting user data by EMP_CD
+router.get("/:EMP_CD", async (req, res) => {
+  const EMP_CD = req.params.EMP_CD; 
+  console.log(`Getting user data for EMP_CD: ${EMP_CD}`);
+
+  const selectQuery = `SELECT * FROM TGL_CM_B001 WHERE EMP_CD = '${EMP_CD}';`;
+
+  try {
+    const result = await dbUtil.dbUtil_Temp.Select_Query(selectQuery);
+    console.log("Result", result);
+    if (result.length === 0) {
+      res.status(404).send({ error: "No user found with the given EMP_CD." });
+    } else {
+      res.status(200).send(result);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "An error occurred while fetching user data." });
   }
 });
 
