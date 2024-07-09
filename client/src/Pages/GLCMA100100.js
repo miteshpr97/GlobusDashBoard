@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, MenuItem, TextField } from "@mui/material";
 import React from "react";
 import SideBar from "../component/SideBar";
 import CommonBtn from "../component/CommonComponnets/CommonBtn";
@@ -277,6 +277,10 @@ const GLCMA100100 = () => {
                     required
                     fullWidth
                     size="small"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </Grid>
                 <Grid item xs={4}>
@@ -287,6 +291,10 @@ const GLCMA100100 = () => {
                     required
                     fullWidth
                     size="small"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </Grid>
                 <Grid item xs={4}>
@@ -297,7 +305,13 @@ const GLCMA100100 = () => {
                     required
                     fullWidth
                     size="small"
-                  />
+                    select
+                  >
+                   <MenuItem value="">SELECT GENDER</MenuItem>
+                    <MenuItem value="MALE">MALE</MenuItem>
+                    <MenuItem value="FEMALE">FEMALE</MenuItem>
+                    <MenuItem value="OTHERS">OTHERS</MenuItem>
+                  </TextField>
                 </Grid>
                 <Grid item xs={4}>
                   <TextField
