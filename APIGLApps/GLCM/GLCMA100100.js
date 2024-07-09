@@ -51,13 +51,15 @@ router.post("/", async (req, res) => {
 });
 
 // getting all users
-router.get("/", async (req, res) => {
+router.post("/Users", async (req, res) => {
   console.log("GettingAllUsers");
 
-  const selectQuery = `SELECT * FROM TGL_CM_B001;`
+  const strParaMeter = {
+    EMP_CD: req.body.EMP_CD || '%'
+  };
 
   try {
-    const result = await dbUtil.dbUtil_Temp.Select_Query(selectQuery);
+    const result = await dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100100_01", strParaMeter);
     console.log("Result", result);
     res.status(201).send(result);
   } catch (error) {
@@ -68,8 +70,8 @@ router.get("/", async (req, res) => {
 
 // getting user data by EMP_CD
 router.get("/:EMP_CD", async (req, res) => {
-  const EMP_CD = req.params.EMP_CD; 
   console.log(`Getting user data for EMP_CD: ${EMP_CD}`);
+  const EMP_CD = req.params.EMP_CD; 
 
   const selectQuery = `SELECT * FROM TGL_CM_B001 WHERE EMP_CD = '${EMP_CD}';`;
 
