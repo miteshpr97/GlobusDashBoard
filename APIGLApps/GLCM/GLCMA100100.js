@@ -55,12 +55,12 @@ router.get("/", async (req, res) => {
   console.log("GettingAllUsers");
 
   const strParaMeter = {
-    EMP_CD: req.query.EMP_CD
+    EMP_CD: req.query.EMP_CD || ''
   };
 
   try {
     const result = await dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100100_01", strParaMeter);
-    res.status(201).send(result);
+    res.status(200).send(result);
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: "An error occurred while registering the user." });
