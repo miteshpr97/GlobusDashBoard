@@ -12,6 +12,23 @@ const router = express.Router();
  *
  */
 //Access Rights For employee for Page...
+
+router.get("/",async(req,res) => {
+  console.log("GettingUserAccessTemplate");
+  const strParaMeter = {
+    USER_CD : "",
+    PAGE_CD : ""
+  }
+  try {
+    const result  = await dbUtil.dbUtil_Temp.Select_SP("SP_GLCM1003", strParaMeter);
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({error:"An error occured while fetching the template"});
+  }
+})
+
+// Getting user access by their user cd and page cd 
 router.post("/", (req, res) => {
   console.log("AccessRights");
   const resultCall = new Promise((resolve, reject) => {
