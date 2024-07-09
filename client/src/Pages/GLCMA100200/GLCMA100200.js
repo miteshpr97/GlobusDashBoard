@@ -60,18 +60,13 @@ const GLCMA100200 = () => {
         </Box>
         <Box
           sx={{
-            width: "100%",
-            height: "100vh",
-            background: "#dddddd",
+background:"yellow",
             marginTop: "10px",
-            padding: "10px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+
           }}
         >
           <EmpList />
-          <EmpInfo />
+
         </Box>
       </Box>
     </Box>

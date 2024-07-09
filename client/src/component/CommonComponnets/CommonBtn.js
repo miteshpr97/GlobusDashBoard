@@ -47,8 +47,9 @@ const CommonBtn = ({ PAGE_CD }) => {
       display: "flex",
       alignItems: "center",
       justifyContent: "flex-start",
+      padding:"0px 10px"
     }}>
-      <Container>
+
         <Stack direction="row" spacing={2}>
           {permissions.PAGE_INQUIRY === "Y" && (
             <CustomButton
@@ -100,7 +101,7 @@ const CommonBtn = ({ PAGE_CD }) => {
             </CustomButton>
           )}
         </Stack>
-      </Container>
+
     </Box>
   );
 };
