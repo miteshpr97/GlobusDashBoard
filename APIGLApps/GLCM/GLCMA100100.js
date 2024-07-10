@@ -41,16 +41,54 @@ router.post("/", async (req, res) => {
   };
 
   try {
-    const result = await dbUtil.dbUtil_Temp.Save_SP("SP_GLCMA100100", strParaMeter);
+    const result = await dbUtil.dbUtil_Temp.Save_SP(
+      "SP_GLCMA100100",
+      strParaMeter
+    );
     console.log("Result", result);
     res.status(201).send(result);
   } catch (error) {
     console.log(error);
-    res.status(500).send({ error: "An error occurred while registering the user." });
+    res
+      .status(500)
+      .send({ error: "An error occurred while registering the user." });
   }
 });
 
+router.get("/:EMP_CD", async (req, res) => {
+  console.log("Menu");
+  const resultCall = new Promise((resolve, reject) => {
+    const strParaMeter = {
+      EMP_CD: req.params.EMP_CD,
+    };
+    console.log("Para 1", strParaMeter);
+    resolve(dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100100_01", strParaMeter));
+  });
+
+  resultCall.then((result) => {
+    console.log("Result", result);
+    res.send(result);
+  });
+});
+
+router.get("/", async (req, res) => {
+  console.log("Menu");
+  const resultCall = new Promise((resolve, reject) => {
+    const strParaMeter = {
+      EMP_CD: req.params.EMP_CD,
+    };
+    console.log("Para 1", strParaMeter);
+    resolve(dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100100_01", strParaMeter));
+  });
+
+  resultCall.then((result) => {
+    console.log("Result", result);
+    res.send(result);
+  });
+});
+
 // getting all users
+/*
 router.get("/", async (req, res) => {
   console.log("GettingAllUsers");
 
@@ -85,6 +123,6 @@ router.get("/:EMP_CD", async (req, res) => {
     console.log(error);
     res.status(500).send({ error: "An error occurred while fetching user data." });
   }
-});
+});*/
 
 module.exports = router;
