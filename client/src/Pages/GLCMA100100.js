@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 
 import IconButton from "@mui/material/IconButton";
-import WidgetsIcon from "@mui/icons-material/Widgets";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import SearchIcon from "@mui/icons-material/Search";
 import { fetchUserCreationData } from "../features/userCreation/userCreationSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -106,20 +106,16 @@ const GLCMA100100 = () => {
             marginTop: "10px",
             display: "flex",
             justifyContent: "space-between",
-          
+          padding:"10px"
           }}
         >
           <Box
             sx={{
-              width: "28%",
+              width: "25%",
               height: "100%",
-              background: "#dddddd",
-              padding: "10px",
+              background: "white",
             }}
           >
-            <Box
-              sx={{ width: "100%", height: "100%", background: "white" }}
-            >
                   <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440, overflowX: "auto" }}>
             <Table stickyHeader aria-label="sticky table">
@@ -188,13 +184,12 @@ const GLCMA100100 = () => {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-            </Box>
           </Box>
           <Box
             sx={{
-              width: "72%",
+              width: "74%",
               height: "100%",
-              background: "#dddddd",
+              background: "white",
               padding: "10px",
             }}
           >
@@ -214,7 +209,7 @@ const GLCMA100100 = () => {
                 height: "100%",
                 width: "100%",
                 padding:"10px",
-                background:"white"
+                background:"#f3f3f3"
               }}
               noValidate
               autoComplete="off"
@@ -224,10 +219,9 @@ const GLCMA100100 = () => {
                   width: "100%",
                   display: "flex",
                   alignItems: "center",
-                  paddingLeft: "10px",
                 }}
               >
-                <WidgetsIcon sx={{ color: "orange" }} />
+                <PersonAddIcon sx={{ color: "orange" }} />
                 <h4 style={{ margin: 10 }}>User Creation</h4>
               </div>
 
