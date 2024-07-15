@@ -2,6 +2,19 @@ const express = require("express");
 const dbUtil = require("../DBCall/DBUtil");
 const router = express.Router();
 
+// getting all users as well as details of specific user
+router.get("/Users", async (req, res) => {
+  console.log("GettingAllUsers");
+
+  try {
+    const result = await dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100200_03");
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "An error occurred while registering the user." });
+  }
+});
+
 // Getting template for user access Page...
 router.get("/",async(req,res) => {
   console.log("GettingUserAccessPageTemplate");
