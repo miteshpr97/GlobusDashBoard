@@ -10,6 +10,19 @@ export const fetchUserCreationData = createAsyncThunk(
   }
 );
 
+export const createUserData = createAsyncThunk(
+  'userCreation/createUserData',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('api/UserCreation', userData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+
+)
+
 const userCreationSlice = createSlice({
   name: 'userCreation',
   initialState: {
@@ -30,6 +43,20 @@ const userCreationSlice = createSlice({
       .addCase(fetchUserCreationData.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+
+      .addCase(createUserData.pending, (state)=> {
+        state.status = "loading"
+      })
+
+      .addCase(createUserData.fulfilled, (state, action)=>{
+        state.status = "succeeded";
+        state.data.push(action.payload);
+      })
+
+      .addCase(createUserData.rejected, (state, action)=>{
+        state.status = "pending"
+        state.error = action.payload
       });
   },
 });
