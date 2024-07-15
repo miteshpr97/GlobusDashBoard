@@ -4,7 +4,6 @@ import SideBar from "../component/SideBar";
 import CommonBtn from "../component/CommonComponnets/CommonBtn";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
-
 import IconButton from "@mui/material/IconButton";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import SearchIcon from "@mui/icons-material/Search";

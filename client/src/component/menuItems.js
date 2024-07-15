@@ -344,6 +344,9 @@ export default function MenuItems() {
   const [menuData, setMenuData] = useState([]);
   const [open, setOpen] = useState({});
 
+
+  
+
   useEffect(() => {
     const fetchMenuData = async () => {
       try {

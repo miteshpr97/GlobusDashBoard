@@ -19,7 +19,7 @@ import logo from "../assets/logo/OWM_Final.png";
 const drawerWidth = 200;
 
 
-//console.log(menuItems)
+
 
 
 
