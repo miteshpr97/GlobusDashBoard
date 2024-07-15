@@ -2,6 +2,7 @@ const express = require("express");
 const dbUtil = require("../DBCall/DBUtil");
 const router = express.Router();
 
+// Registering a user
 router.post("/", async (req, res) => {
   console.log("RegisterUser");
 
@@ -43,6 +44,23 @@ router.post("/", async (req, res) => {
     const result = await dbUtil.dbUtil_Temp.Save_SP("SP_GLCMA100100", strParaMeter);
     console.log("Result", result);
     res.status(201).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "An error occurred while registering the user." });
+  }
+});
+
+// getting all users as well as details of specific user
+router.get("/", async (req, res) => {
+  console.log("GettingAllUsers");
+
+  const strParaMeter = {
+    EMP_CD: req.query.EMP_CD || ''
+  };
+
+  try {
+    const result = await dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100100_01", strParaMeter);
+    res.status(200).send(result);
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: "An error occurred while registering the user." });

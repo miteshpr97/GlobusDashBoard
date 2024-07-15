@@ -1,24 +1,26 @@
+import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,  } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { Box, Paper, TablePagination } from "@mui/material";
+import SideBar from "../../component/SideBar";
+import CommonBtn from "../../component/CommonComponnets/CommonBtn";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+
+import IconButton from "@mui/material/IconButton";
+
+import SearchIcon from "@mui/icons-material/Search";
+import { fetchUserCreationData } from "../../features/userCreation/userCreationSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserCreationData } from "../../../features/userCreation/userCreationSlice";
-import EmpInfo from "../EmpInfo/EmpInfo";
+import CreateUser from "./CreateUser/CreateUser";
 
 const columns = [
   { id: "EMP_CD", label: "EMP_CD", minWidth: 70 },
   { id: "EMP_NM", label: "EMP Name", minWidth: 120 },
 ];
 
-const EmpList = () => {
+const GLCMA100100 = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [selectedUser, setSelectedUser] = useState(null);
+
 
   const dispatch = useDispatch();
   const userCreation = useSelector((state) => state.userCreation);
@@ -45,28 +47,77 @@ const EmpList = () => {
   };
 
 
-  const handleRowClick = (row) => {
-    setSelectedUser(row);
-  };
-  return (
-    <Box
-      sx={{
-        width: "100%",
-        padding: "10px",
-        display: "flex",
-        justifyContent: "space-between",
 
-        background: "#dddddd",
-      }}
-    >
+  return (
+    <Box sx={{ display: "flex" }}>
+      <SideBar />
       <Box
+        component="main"
         sx={{
-          width: "25%",
-          height: "100%",
-          background: "white",
+          flexGrow: 1,
+          p: 3,
+          marginTop: "55px",
         }}
       >
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <Box>
+          <CommonBtn PAGE_CD="GLCMA100100" />
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            background: "#dddddd",
+            marginTop: "10px",
+            padding: "10px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: 300,
+
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search"
+              inputProps={{ "aria-label": "search " }}
+            />
+
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#003285", color: "white" }}
+          >
+            ADD EMPLOYEE
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            background: "#dddddd",
+            marginTop: "10px",
+            display: "flex",
+            justifyContent: "space-between",
+          padding:"10px"
+          }}
+        >
+          <Box
+            sx={{
+              width: "25%",
+              height: "100%",
+              background: "white",
+            }}
+          >
+                  <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440, overflowX: "auto" }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -96,8 +147,7 @@ const EmpList = () => {
                         role="checkbox"
                         tabIndex={-1}
                         key={row.EMP_CD}
-                        onClick={() => handleRowClick(row)}
-                        style={{ cursor: "pointer" }}
+
                       >
                         {columns.map((column) => {
                           let value;
@@ -109,6 +159,7 @@ const EmpList = () => {
                           return (
                             <TableCell
                               key={column.id}
+
                               align={column.align}
                               style={{ padding: "10px" }}
                             >
@@ -134,19 +185,21 @@ const EmpList = () => {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
+          </Box>
+          <Box
+            sx={{
+              width: "74%",
+              height: "100%",
+              background: "white",
+              padding: "10px",
+            }}
+          >
+        <CreateUser/>
+          </Box>
+        </Box>
       </Box>
-      <Box
-    sx={{
-      width: "74%",
-      height: "100%",
-      background: "white",
-      padding: "10px",
-    }}
-  >
-      <EmpInfo user={selectedUser}/>
-      </Box >
     </Box>
   );
 };
 
-export default EmpList;
+export default GLCMA100100;

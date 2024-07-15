@@ -1,15 +1,37 @@
 const express = require("express");
 const sql = require("mysql");
 var config = require("../DBConfig/mySQLConfig");
+const util = require("util");
+
+// async function Select_Query(strSqlSelectQuery) {
+//   try {
+//     console.log(config.db.host + " :" + config.db.database);
+//     let pool = await sql.connect(config.db);
+//     let resultSet = await pool.request().query(strSqlSelectQuery);
+//     return resultSet.recordsets;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 async function Select_Query(strSqlSelectQuery) {
   try {
     console.log(config.db.host + " :" + config.db.database);
-    let pool = await sql.connect(config.db);
-    let resultSet = await pool.request().query(strSqlSelectQuery);
-    return resultSet.recordsets;
+
+    // Create a connection to the database
+    const connection = sql.createConnection(config.db);
+    
+    // Promisify the query method
+    const query = util.promisify(connection.query).bind(connection);
+    
+    // Execute the query
+    const resultSet = await query(strSqlSelectQuery);
+    console.log(resultSet);
+    
+    return resultSet;
   } catch (error) {
     console.log(error);
+    throw error; 
   }
 }
 
@@ -23,8 +45,8 @@ async function Select_SP(strSP_name, strParameter) {
     const keyTemp = [];
     const sqlSpPara = [];
     const keyValue = [];
-    if (strParameter != "") {
-      let entries = Object.entries(strParameter).forEach((entry) => {
+    if (strParameter && typeof strParameter === 'object') {
+      Object.entries(strParameter).forEach((entry) => {
         const [key, value] = entry;
         console.log("Key :" + key);
         console.log("Values :" + value);
