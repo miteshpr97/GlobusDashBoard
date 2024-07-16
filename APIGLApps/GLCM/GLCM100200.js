@@ -29,20 +29,19 @@ router.get("/",async(req,res) => {
 })
 
 // Getting user access by their user cd  
-router.post("/", (req, res) => {
-  console.log("AccessRights");
-  const resultCall = new Promise((resolve, reject) => {
-    const strParaMeter = {
-      USER_CD: req.body.USER_CD,
-    };
-    resolve(dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100200_05", strParaMeter));
-  });
-
-  resultCall.then((result) => {
-    console.log("Result", result);
-    res.send(result);
-  });
-});
+router.post("/",async(req,res) => {
+  console.log("AccessRightsOfUser");
+  const strParaMeter = {
+    USER_CD : req.body.USER_CD
+  }; 
+  try {
+    const result = await dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100200_05" , strParaMeter);
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "An error occurred while registering the user." });
+  }
+})
 
 // Save user's access
 router.post("/Save", async (req, res) => {
