@@ -11,8 +11,8 @@ module.exports = function (app) {
   app.use(express.json());
   app.use("/api/login", apiLogin);
   app.use("/api/Menu", apiMenu);
-  app.use("/api/AccessRight", objVerify, apiAccessRight);
-  app.use("/api/UserCreation", objVerify, apiUserCreation);
+  app.use("/api/AccessRight", apiAccessRight);
+  app.use("/api/UserCreation", apiUserCreation);
 
   app.use(glErrors);
 };
