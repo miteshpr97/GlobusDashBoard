@@ -45,8 +45,8 @@ async function Select_SP(strSP_name, strParameter) {
     const keyTemp = [];
     const sqlSpPara = [];
     const keyValue = [];
-    if (strParameter != "") {
-      let entries = Object.entries(strParameter).forEach((entry) => {
+    if (strParameter && typeof strParameter === 'object') {
+      Object.entries(strParameter).forEach((entry) => {
         const [key, value] = entry;
         console.log("Key :" + key);
         console.log("Values :" + value);

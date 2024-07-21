@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -122,121 +121,10 @@ export default function SideBar() {
         <Divider />
        
         <List>
-          {/* {menuItems.map((item, index) => (
-            <div key={index}>
-              <ListItem
-                disablePadding
-                sx={{ display: "block" }}
-                onClick={() => navigate(item.path)}
-              >
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    color: "#045e84",
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                    mt: 1,
-                    borderBottom: "1px solid #ccc",
-                    // Add styles for the active menu item based on the route
-                    ...(location.pathname === item.path && {
-                      background: " #045e84",
-                      color: "white",
-                    }),
-                    ":hover": {
-                      background: "#045e8477", // Add the desired hover background color
-                      color: "white", // Add the desired hover text color
-                    },
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                      color: "#045e84",
-                      ...(location.pathname === item.path && {
-                        background: " #045e84",
-                        color: "white",
-                      }),
-                      ":hover": {
-                        background: "#045e8477", // Add the desired hover background color
-                        color: "white", // Add the desired hover text color
-                      },
-                    }}
-                  >
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      <div
-                        style={{ fontSize: "1rem", fontFamily: "Georgia, serif" }}
-                      >
-                        {item.text}
-                      </div>
-                    }
-                    sx={{
-                      opacity: open ? 1 : 0,
-                    }}
-                  />
-                  {item.submenu && (
-                    open ? 
-                    (submenuOpen[index] ? <ExpandLessIcon onClick={() => handleToggleSubMenu(index)} /> : <ExpandMoreIcon onClick={() => handleToggleSubMenu(index)} />) 
-                    : 
-                    (location.pathname === item.path ? <ExpandLessIcon onClick={() => handleToggleSubMenu(index)} /> : <ExpandMoreIcon onClick={() => handleToggleSubMenu(index)} />)
-                  )}
-                </ListItemButton>
-              </ListItem>
-              {item.submenu && submenuOpen[index] && (
-                <List>
-                  {item.submenu.map((subItem, subIndex) => (
-                    <ListItem
-                      key={subIndex}
-                      disablePadding
-                      sx={{ display: "block", pl: 4 }}
-                      onClick={() => handleSubMenuClick(subItem.path)}
-                    >
-                      <ListItemButton
-                        sx={{
-                          minHeight: 48,
-                          color: "#045e84",
-                          justifyContent: "initial",
-                          px: 2.5,
-                          mt: 1,
-                          borderBottom: "1px solid #ccc",
-                          // Add styles for the active menu item based on the route
-                          ...(location.pathname === subItem.path && {
-                            background: " #045e84",
-                            color: "white",
-                          }),
-                          ":hover": {
-                            background: "#045e8477", // Add the desired hover background color
-                            color: "white", // Add the desired hover text color
-                          },
-                        }}
-                      >
-                        <ListItemText
-                          primary={
-                            <div
-                              style={{
-                                fontSize: "1rem",
-                                fontFamily: "Georgia, serif",
-                              }}
-                            >
-                              {subItem.text}
-                            </div>
-                          }
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
-                </List>
-              )}
-            </div>
-          ))} */}
+       
          <MenuItems/>
         </List>
       </Drawer>
     </Box>
   );
 }
-
