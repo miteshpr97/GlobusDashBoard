@@ -61,9 +61,15 @@ async function Select_SP(strSP_name, strParameter) {
     console.log("Key Value :", keyValue);
 
     let sqlMainSp = strSP_name;
+    // if (keyTemp.length > 0) {
+    //   sqlMainSp =
+    //     sqlMainSp + "(" + sqlSpPara.join() + ",@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)";
+    // }
     if (keyTemp.length > 0) {
-      sqlMainSp =
-        sqlMainSp + "(" + sqlSpPara.join() + ",@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)";
+      sqlMainSp = `${strSP_name}(${sqlSpPara.join()},@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)`;
+    } else {
+      // No input parameters
+      sqlMainSp = `${strSP_name}(@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)`;
     }
     let spPass = "CALL " + sqlMainSp;
     //End
@@ -90,75 +96,6 @@ async function Select_SP(strSP_name, strParameter) {
     ///End Data......................
   } catch (error) {
     console.log(error);
-  }
-}
-
-async function select_SP(strSP_name, strParameter = {}) {
-  try {
-    console.log("strSP_name:", strSP_name);
-    console.log(config.db.host + ":", config.db.database);
-    console.log("Parameter:", JSON.stringify(strParameter));
-
-    const keyTemp = [];
-    const sqlSpPara = [];
-    const keyValue = [];
-
-    if (strParameter && typeof strParameter === 'object') {
-      Object.entries(strParameter).forEach((entry) => {
-        const [key, value] = entry;
-        console.log("Key:", key);
-        console.log("Values:", value);
-        sqlSpPara.push("?");
-        keyTemp.push("i_" + key);
-        keyValue.push(value);
-      });
-    }
-
-    console.log("Key Temp:", keyTemp);
-    console.log("Key SP Para:", sqlSpPara);
-    console.log("Key Value:", keyValue);
-
-    // Add OUT parameters to the call
-    sqlSpPara.push("@O_ERR_LVL");
-    sqlSpPara.push("@O_ERR_CD");
-    sqlSpPara.push("@O_ERR_NM");
-
-    let sqlMainSp = `${strSP_name}(${sqlSpPara.join()})`;
-    let spPass = `CALL ${sqlMainSp}`;
-
-    // DB Connection
-    let pool = sql.createConnection(config.db);
-
-    const selectDataResult = () => {
-      return new Promise((resolve, reject) => {
-        pool.query(spPass, keyValue, (error, result, fields) => {
-          if (error) {
-            return reject(error);
-          }
-          console.log("Result final:", result);
-
-          // Retrieve the OUT parameter values
-          pool.query('SELECT @O_ERR_LVL AS O_ERR_LVL, @O_ERR_CD AS O_ERR_CD, @O_ERR_NM AS O_ERR_NM', (err, outParams) => {
-            if (err) {
-              return reject(err);
-            }
-            console.log("OUT parameters:", outParams[0]);
-
-            // Combine result and outParams into a single array
-            const finalResult = result[0].concat([outParams[0]]);
-            return resolve(finalResult);
-          });
-        });
-      });
-    };
-
-    // Result Data
-    const combinedResult = await selectDataResult();
-    console.log(combinedResult);
-    return combinedResult;
-  } catch (error) {
-    console.log(error);
-    throw error; // Rethrow the error to be caught by the caller
   }
 }
 
@@ -281,4 +218,4 @@ async function Save_SP(strSP_name, strParameter) {
   }
 }
 
-module.exports = { Select_Query, Select_SP,select_SP, Save_SP };
+module.exports = { Select_Query, Select_SP, Save_SP };

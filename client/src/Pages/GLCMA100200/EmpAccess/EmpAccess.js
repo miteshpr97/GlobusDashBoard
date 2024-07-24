@@ -167,9 +167,10 @@ const EmpAccess = () => {
   };
 
   return (
-    <Box>
+    <Box >
       <TableContainer component={Paper}>
-        <Table>
+        <Table   size="sm"
+  stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell>Module</TableCell>
