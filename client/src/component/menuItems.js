@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
+import { useNavigate, useLocation } from "react-router-dom"; 
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import { _post } from "../CommonUtilAPI/GLApiClient";
 import {
@@ -14,7 +14,7 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 export default function MenuItems() {
   const navigate = useNavigate();
-  const location = useLocation(); // Add this line to get the current location
+  const location = useLocation(); 
   const [menuData, setMenuData] = useState([]);
   const [open, setOpen] = useState({});
 
@@ -88,7 +88,7 @@ export default function MenuItems() {
     }
   };
 
-  const isActivePath = (path) => location.pathname === path; // Function to check if the current path matches
+  const isActivePath = (path) => location.pathname === path; 
 
   if (!menuData || menuData.length === 0) {
     return <div>Loading...</div>;
