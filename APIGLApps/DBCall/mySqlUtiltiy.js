@@ -35,16 +35,75 @@ async function Select_Query(strSqlSelectQuery) {
   }
 }
 
-async function Select_SP(strSP_name, strParameter) {
+// async function Select_SP(strSP_name, strParameter) {
+//   try {
+//     //Query Data only
+//     console.log("strSP_name:" + strSP_name);
+//     console.log(config.db.host + " :" + config.db.database);
+//     console.log("Parameter:" + strParameter);
+
+//     const keyTemp = [];
+//     const sqlSpPara = [];
+//     const keyValue = [];
+//     if (strParameter && typeof strParameter === 'object') {
+//       Object.entries(strParameter).forEach((entry) => {
+//         const [key, value] = entry;
+//         console.log("Key :" + key);
+//         console.log("Values :" + value);
+//         sqlSpPara.push("?");
+//         keyTemp.push("i_" + key);
+//         keyValue.push(value);
+//       });
+//     }
+
+//     console.log("Key Temp :", keyTemp);
+//     console.log("Key SP Para :", sqlSpPara);
+//     console.log("Key Value :", keyValue);
+
+//     let sqlMainSp = strSP_name;
+//     if (keyTemp.length > 0) {
+//       sqlMainSp =
+//         sqlMainSp + "(" + sqlSpPara.join() + ",@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)";
+//     }
+//     let spPass = "CALL " + sqlMainSp;
+//     //End
+//     //Start DB Connection..................
+//     let pool = sql.createConnection(config.db);
+//     selectDataResult = () => {
+//       return new Promise((resolve, reject) => {
+//         pool.query(spPass, keyValue, (error, result, fields) => {
+//           if (error) {
+//             return reject(error);
+//           }
+//           console.log("Result final: ", result);
+
+//           return resolve(result[0]);
+//         });
+//       });
+//     };
+//     //End Of DB....................
+
+//     //Result Data
+//     const result = await selectDataResult();
+//     console.log(result);
+//     return result;
+//     ///End Data......................
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+async function Select_SP(strSP_name, strParameter = {}) {
   try {
-    //Query Data only
+    // Query Data only
     console.log("strSP_name:" + strSP_name);
     console.log(config.db.host + " :" + config.db.database);
-    console.log("Parameter:" + strParameter);
+    console.log("Parameter:" + JSON.stringify(strParameter));
 
     const keyTemp = [];
     const sqlSpPara = [];
     const keyValue = [];
+
     if (strParameter && typeof strParameter === 'object') {
       Object.entries(strParameter).forEach((entry) => {
         const [key, value] = entry;
@@ -60,16 +119,18 @@ async function Select_SP(strSP_name, strParameter) {
     console.log("Key SP Para :", sqlSpPara);
     console.log("Key Value :", keyValue);
 
-    let sqlMainSp = strSP_name;
-    if (keyTemp.length > 0) {
-      sqlMainSp =
-        sqlMainSp + "(" + sqlSpPara.join() + ",@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)";
-    }
-    let spPass = "CALL " + sqlMainSp;
-    //End
-    //Start DB Connection..................
+    // Add OUT parameters to the call
+    sqlSpPara.push("@O_ERR_LVL");
+    sqlSpPara.push("@O_ERR_CD");
+    sqlSpPara.push("@O_ERR_NM");
+
+    let sqlMainSp = `${strSP_name}(${sqlSpPara.join()})`;
+    let spPass = `CALL ${sqlMainSp}`;
+
+    // DB Connection
     let pool = sql.createConnection(config.db);
-    selectDataResult = () => {
+
+    const selectDataResult = () => {
       return new Promise((resolve, reject) => {
         pool.query(spPass, keyValue, (error, result, fields) => {
           if (error) {
@@ -77,17 +138,23 @@ async function Select_SP(strSP_name, strParameter) {
           }
           console.log("Result final: ", result);
 
-          return resolve(result[0]);
+          // Retrieve the OUT parameter values
+          pool.query('SELECT @O_ERR_LVL AS O_ERR_LVL, @O_ERR_CD AS O_ERR_CD, @O_ERR_NM AS O_ERR_NM', (err, outParams) => {
+            if (err) {
+              return reject(err);
+            }
+            console.log("OUT parameters: ", outParams[0]);
+
+            return resolve({ result: result[0], outParams: outParams[0] });
+          });
         });
       });
     };
-    //End Of DB....................
 
-    //Result Data
+    // Result Data
     const result = await selectDataResult();
     console.log(result);
     return result;
-    ///End Data......................
   } catch (error) {
     console.log(error);
   }
