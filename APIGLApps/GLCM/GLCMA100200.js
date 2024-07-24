@@ -35,7 +35,7 @@ router.get("/",async(req,res) => {
   console.log("GettingUserAccessPageTemplate");
 
   try {
-    const result  = await dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100200_06");
+    const result  = await dbUtil.dbUtil_Temp.select_SP("SP_GLCMA100200_06");
     res.status(200).send(result);
   } catch (error) {
     console.log(error);

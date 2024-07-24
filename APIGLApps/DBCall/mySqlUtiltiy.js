@@ -35,65 +35,65 @@ async function Select_Query(strSqlSelectQuery) {
   }
 }
 
-// async function Select_SP(strSP_name, strParameter) {
-//   try {
-//     //Query Data only
-//     console.log("strSP_name:" + strSP_name);
-//     console.log(config.db.host + " :" + config.db.database);
-//     console.log("Parameter:" + strParameter);
+async function Select_SP(strSP_name, strParameter) {
+  try {
+    //Query Data only
+    console.log("strSP_name:" + strSP_name);
+    console.log(config.db.host + " :" + config.db.database);
+    console.log("Parameter:" + strParameter);
 
-//     const keyTemp = [];
-//     const sqlSpPara = [];
-//     const keyValue = [];
-//     if (strParameter && typeof strParameter === 'object') {
-//       Object.entries(strParameter).forEach((entry) => {
-//         const [key, value] = entry;
-//         console.log("Key :" + key);
-//         console.log("Values :" + value);
-//         sqlSpPara.push("?");
-//         keyTemp.push("i_" + key);
-//         keyValue.push(value);
-//       });
-//     }
+    const keyTemp = [];
+    const sqlSpPara = [];
+    const keyValue = [];
+    if (strParameter && typeof strParameter === 'object') {
+      Object.entries(strParameter).forEach((entry) => {
+        const [key, value] = entry;
+        console.log("Key :" + key);
+        console.log("Values :" + value);
+        sqlSpPara.push("?");
+        keyTemp.push("i_" + key);
+        keyValue.push(value);
+      });
+    }
 
-//     console.log("Key Temp :", keyTemp);
-//     console.log("Key SP Para :", sqlSpPara);
-//     console.log("Key Value :", keyValue);
+    console.log("Key Temp :", keyTemp);
+    console.log("Key SP Para :", sqlSpPara);
+    console.log("Key Value :", keyValue);
 
-//     let sqlMainSp = strSP_name;
-//     if (keyTemp.length > 0) {
-//       sqlMainSp =
-//         sqlMainSp + "(" + sqlSpPara.join() + ",@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)";
-//     }
-//     let spPass = "CALL " + sqlMainSp;
-//     //End
-//     //Start DB Connection..................
-//     let pool = sql.createConnection(config.db);
-//     selectDataResult = () => {
-//       return new Promise((resolve, reject) => {
-//         pool.query(spPass, keyValue, (error, result, fields) => {
-//           if (error) {
-//             return reject(error);
-//           }
-//           console.log("Result final: ", result);
+    let sqlMainSp = strSP_name;
+    if (keyTemp.length > 0) {
+      sqlMainSp =
+        sqlMainSp + "(" + sqlSpPara.join() + ",@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)";
+    }
+    let spPass = "CALL " + sqlMainSp;
+    //End
+    //Start DB Connection..................
+    let pool = sql.createConnection(config.db);
+    selectDataResult = () => {
+      return new Promise((resolve, reject) => {
+        pool.query(spPass, keyValue, (error, result, fields) => {
+          if (error) {
+            return reject(error);
+          }
+          console.log("Result final: ", result);
 
-//           return resolve(result[0]);
-//         });
-//       });
-//     };
-//     //End Of DB....................
+          return resolve(result[0]);
+        });
+      });
+    };
+    //End Of DB....................
 
-//     //Result Data
-//     const result = await selectDataResult();
-//     console.log(result);
-//     return result;
-//     ///End Data......................
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+    //Result Data
+    const result = await selectDataResult();
+    console.log(result);
+    return result;
+    ///End Data......................
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-async function Select_SP(strSP_name, strParameter = {}) {
+async function select_SP(strSP_name, strParameter = {}) {
   try {
     // Query Data only
     console.log("strSP_name:" + strSP_name);
@@ -160,63 +160,63 @@ async function Select_SP(strSP_name, strParameter = {}) {
   }
 }
 
-// async function Save_SP(strSP_name, strParameter) {
-//   try {
-//     //Query Data only
-//     console.log("strSP_name:" + strSP_name);
-//     console.log(config.db.host + " :" + config.db.database);
-//     console.log("Parameter:" + strParameter);
+async function Save_SP(strSP_name, strParameter) {
+  try {
+    //Query Data only
+    console.log("strSP_name:" + strSP_name);
+    console.log(config.db.host + " :" + config.db.database);
+    console.log("Parameter:" + strParameter);
 
-//     const keyTemp = [];
-//     const sqlSpPara = [];
-//     const keyValue = [];
-//     if (strParameter != "") {
-//       let entries = Object.entries(strParameter).forEach((entry) => {
-//         const [key, value] = entry;
-//         console.log("Key :" + key);
-//         console.log("Values :" + value);
-//         sqlSpPara.push("?");
-//         keyTemp.push("i_" + key);
-//         keyValue.push(value);
-//       });
-//     }
+    const keyTemp = [];
+    const sqlSpPara = [];
+    const keyValue = [];
+    if (strParameter != "") {
+      let entries = Object.entries(strParameter).forEach((entry) => {
+        const [key, value] = entry;
+        console.log("Key :" + key);
+        console.log("Values :" + value);
+        sqlSpPara.push("?");
+        keyTemp.push("i_" + key);
+        keyValue.push(value);
+      });
+    }
 
-//     console.log("Key Temp :", keyTemp);
-//     console.log("Key SP Para :", sqlSpPara);
-//     console.log("Key Value :", keyValue);
+    console.log("Key Temp :", keyTemp);
+    console.log("Key SP Para :", sqlSpPara);
+    console.log("Key Value :", keyValue);
 
-//     let sqlMainSp = strSP_name;
-//     if (keyTemp.length > 0) {
-//       sqlMainSp =
-//         sqlMainSp + "(" + sqlSpPara.join() + ",@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)";
-//     }
-//     let spPass = "CALL " + sqlMainSp;
-//     //End
-//     //Start DB Connection..................
-//     let pool = sql.createConnection(config.db);
-//     selectDataResult = () => {
-//       return new Promise((resolve, reject) => {
-//         pool.query(spPass, keyValue, (error, result, fields) => {
-//           if (error) {
-//             return reject(error);
-//           }
-//           console.log("Result final: ", result);
+    let sqlMainSp = strSP_name;
+    if (keyTemp.length > 0) {
+      sqlMainSp =
+        sqlMainSp + "(" + sqlSpPara.join() + ",@O_ERR_LVL,@O_ERR_CD,@O_ERR_NM)";
+    }
+    let spPass = "CALL " + sqlMainSp;
+    //End
+    //Start DB Connection..................
+    let pool = sql.createConnection(config.db);
+    selectDataResult = () => {
+      return new Promise((resolve, reject) => {
+        pool.query(spPass, keyValue, (error, result, fields) => {
+          if (error) {
+            return reject(error);
+          }
+          console.log("Result final: ", result);
 
-//           return resolve(result[0]);
-//         });
-//       });
-//     };
-//     //End Of DB.......................
+          return resolve(result[0]);
+        });
+      });
+    };
+    //End Of DB.......................
 
-//     //Result Data
-//     const result = await selectDataResult();
-//     console.log("Result Final from MySql: ", result);
-//     return result;
-//     ///End Data......................
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+    //Result Data
+    const result = await selectDataResult();
+    console.log("Result Final from MySql: ", result);
+    return result;
+    ///End Data......................
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 async function Save_SP(strSP_name, strParameter) {
   try {
@@ -279,4 +279,4 @@ async function Save_SP(strSP_name, strParameter) {
   }
 }
 
-module.exports = { Select_Query, Select_SP, Save_SP };
+module.exports = { Select_Query, Select_SP,select_SP, Save_SP };
