@@ -193,7 +193,7 @@ const EmpAccess = ({ USER_CD }) => {
   console.log(userAccessData);
 
 
-  // console.log(empCd,"user data");
+  
 
   useEffect(() => {
     const fetchData = async () => {

@@ -187,7 +187,9 @@ const EmpInfo = ({ user }) => {
           marginTop: "10px",
         }}
       >
-       <EmpAccess empCd={user ? user.EMP_CD : null} />
+        <EmpAccess
+           USER_CD={user? user.EMP_CD: null}
+        />
       </Box>
     </Box>
   );
