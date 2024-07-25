@@ -112,7 +112,7 @@ const GLCMA100100 = () => {
         >
           <Box
             sx={{
-              width: "25%",
+              width: '25vw',
               height: "100%",
               background: "white",
             }}
@@ -188,10 +188,12 @@ const GLCMA100100 = () => {
           </Box>
           <Box
             sx={{
-              width: "74%",
+              // width: "74%",
+              width:"55vw",
               height: "100%",
               background: "white",
               padding: "10px",
+              marginLeft:"10px"
             }}
           >
         <CreateUser/>

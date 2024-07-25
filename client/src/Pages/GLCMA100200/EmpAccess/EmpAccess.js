@@ -84,9 +84,7 @@
 
 
 
-
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Table,
   TableBody,
@@ -97,29 +95,58 @@ import {
   Paper,
   Checkbox,
   Box,
+  TablePagination,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-const data = [
-  { module: 'CM', id: 'CMA100', menu: 'Basic Setting', pageId: 'GLCMA100100', name: 'User Creation' },
-  { module: 'CM', id: 'CMA100', menu: 'Basic Setting', pageId: 'GLCMA100200', name: 'User Access' },
-  { module: 'CM', id: 'CMB100', menu: 'Common Code', pageId: 'GLCMB100100', name: 'Create Common Code' },
-];
-
-const initialState = data.reduce((acc, item, index) => {
-  acc[index] = { yesNo: false, inquiry: false, save: false };
-  return acc;
-}, {});
+import axios from 'axios';
 
 const EmpAccess = () => {
-  const [permissions, setPermissions] = useState(initialState);
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [permissions, setPermissions] = useState({});
+  
+  console.log(data , "data");
 
-  const handleCheckboxChange = (index, action) => {
+  useEffect(() => {
+    // Fetch data from the API
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('api/GLCMA100200/');
+        setData(response.data);
+        const initialState = response.data.reduce((acc, item, index) => {
+          acc[index] = {
+            PAGE_YN: "",
+            PAGE_INQUIRY: false,
+            PAGE_SAVE: false,
+            PAGE_UPDATE: false,
+            PAGE_DELETE: false,
+            PAGE_APP_Y1: false,
+            PAGE_APP_Y2: false,
+            PAGE_APP_Y3: false,
+            PAGE_APP_Y4: false,
+            PAGE_APP_Y5: false,
+            PAGE_APP_Y6: false,
+            PAGE_PRINT: false,
+            PAGE_EXCEL: false,
+          };
+          return acc;
+        }, {});
+        setPermissions(initialState);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleCheckboxChange = (index, field) => {
     setPermissions((prevState) => ({
       ...prevState,
       [index]: {
         ...prevState[index],
-        [action]: !prevState[index][action],
+        [field]: !prevState[index][field],
       },
     }));
   };
@@ -130,10 +157,20 @@ const EmpAccess = () => {
     },
   }));
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   return (
-    <Box>
+    <Box >
       <TableContainer component={Paper}>
-        <Table>
+        <Table   size="sm"
+  stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell>Module</TableCell>
@@ -144,39 +181,51 @@ const EmpAccess = () => {
               <TableCell>Yes/No</TableCell>
               <TableCell>Inquiry</TableCell>
               <TableCell>Save</TableCell>
+              <TableCell>Update</TableCell>
+              <TableCell>Delete</TableCell>
+              <TableCell>App Y1</TableCell>
+              <TableCell>App Y2</TableCell>
+              <TableCell>App Y3</TableCell>
+              <TableCell>App Y4</TableCell>
+              <TableCell>App Y5</TableCell>
+              <TableCell>App Y6</TableCell>
+              <TableCell>Print</TableCell>
+              <TableCell>Excel</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row, index) => (
-              <StyledTableRow key={index}>
-                <TableCell>{row.module}</TableCell>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.menu}</TableCell>
-                <TableCell>{row.pageId}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell align="center">
-                  <Checkbox
-                    checked={permissions[index].yesNo}
-                    onChange={() => handleCheckboxChange(index, 'yesNo')}
-                  />
-                </TableCell>
-                <TableCell align="center">
-                  <Checkbox
-                    checked={permissions[index].inquiry}
-                    onChange={() => handleCheckboxChange(index, 'inquiry')}
-                  />
-                </TableCell>
-                <TableCell align="center">
-                  <Checkbox
-                    checked={permissions[index].save}
-                    onChange={() => handleCheckboxChange(index, 'save')}
-                  />
-                </TableCell>
-              </StyledTableRow>
-            ))}
+            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+              const actualIndex = page * rowsPerPage + index; // Get the actual index in the data array
+              return (
+                <StyledTableRow key={actualIndex}>
+                  <TableCell>{row.MODULE_CD}</TableCell>
+                  <TableCell>{row.MENU_CD}</TableCell>
+                  <TableCell>{row.MENU_NM}</TableCell>
+                  <TableCell>{row.PAGE_ID}</TableCell>
+                  <TableCell>{row.PAGE_NM}</TableCell>
+                  {['PAGE_YN', 'PAGE_INQUIRY', 'PAGE_SAVE', 'PAGE_UPDATE', 'PAGE_DELETE', 'PAGE_APP_Y1', 'PAGE_APP_Y2', 'PAGE_APP_Y3', 'PAGE_APP_Y4', 'PAGE_APP_Y5', 'PAGE_APP_Y6', 'PAGE_PRINT', 'PAGE_EXCEL'].map((field) => (
+                    <TableCell align="center" key={field}>
+                      <Checkbox
+                        checked={permissions[actualIndex] ? permissions[actualIndex][field] : false}
+                        onChange={() => handleCheckboxChange(actualIndex, field)}
+                      />
+                    </TableCell>
+                  ))}
+                </StyledTableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Box>
   );
 };

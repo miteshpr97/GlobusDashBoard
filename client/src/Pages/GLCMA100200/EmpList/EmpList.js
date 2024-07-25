@@ -55,13 +55,12 @@ const EmpList = () => {
         padding: "10px",
         display: "flex",
         justifyContent: "space-between",
-
         background: "#dddddd",
       }}
     >
       <Box
         sx={{
-          width: "25%",
+          width: '25vw',
           height: "100%",
           background: "white",
         }}
@@ -137,10 +136,11 @@ const EmpList = () => {
       </Box>
       <Box
     sx={{
-      width: "74%",
+      width: "55vw",
       height: "100%",
       background: "white",
       padding: "10px",
+      marginLeft:"10px"
     }}
   >
       <EmpInfo user={selectedUser}/>

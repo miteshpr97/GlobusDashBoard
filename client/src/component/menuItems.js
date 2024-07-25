@@ -27,13 +27,14 @@ export default function MenuItems() {
           USER_CD: window.sessionStorage.getItem("USER_CD"),
         });
         if (response.status === 200) {
+
           const processedData = processMenuData(response.data);
           setMenuData(processedData);
           
-          const pagePermissions = response.data.find((item) => item.PAGE_CD);
-          if (pagePermissions) {
-            window.sessionStorage.setItem("PAGE_CD", pagePermissions.PAGE_CD);
-          }
+          // const pagePermissions = response.data.find((item) => item.PAGE_CD);
+          // if (pagePermissions) {
+          //   window.sessionStorage.setItem("PAGE_CD", pagePermissions.PAGE_CD);
+          // }
         } else {
           console.error("Failed to fetch menu data", response.status);
         }

@@ -178,8 +178,7 @@ const EmpInfo = ({ user }) => {
       </Box>
       <Box
         sx={{
-          width: "100%",
-          height: "67%",
+          maxWidth:"100%",
           background: "#f3f3f3",
           padding: "10px",
           marginTop: "10px",
