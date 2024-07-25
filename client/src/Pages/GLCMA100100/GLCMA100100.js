@@ -25,6 +25,8 @@ const GLCMA100100 = () => {
   const dispatch = useDispatch();
   const userCreation = useSelector((state) => state.userCreation);
 
+  console.log(userCreation, "userdtaa");
+
   useEffect(() => {
     dispatch(fetchUserCreationData());
   }, [dispatch]);
@@ -112,7 +114,7 @@ const GLCMA100100 = () => {
         >
           <Box
             sx={{
-              width: "25%",
+              width: '22vw',
               height: "100%",
               background: "white",
             }}
@@ -188,10 +190,12 @@ const GLCMA100100 = () => {
           </Box>
           <Box
             sx={{
-              width: "74%",
+              // width: "74%",
+              width:"56vw",
               height: "100%",
               background: "white",
               padding: "10px",
+              marginLeft:"10px"
             }}
           >
         <CreateUser/>

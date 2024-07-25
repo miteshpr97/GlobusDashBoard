@@ -10,7 +10,7 @@ const CommonBtn = ({ PAGE_CD }) => {
   useEffect(() => {
     const fetchPermissions = async () => {
       try {
-        const response = await axios.post("/api/GLCM100200/", {
+        const response = await axios.post("/api/GLCMA100200/", {
           USER_CD: window.sessionStorage.getItem("USER_CD"),
           // PAGE_CD: window.sessionStorage.getItem("PAGE_CD"),
           PAGE_CD: PAGE_CD,
@@ -18,6 +18,7 @@ const CommonBtn = ({ PAGE_CD }) => {
 
         if (response.status === 200) {
           const data = response.data;
+          console.log(data, "dataatatt");
           const pagePermissions = data.find(
             (page) => page.PAGE_CD === window.sessionStorage.getItem("PAGE_CD")
           );
@@ -56,7 +57,7 @@ const CommonBtn = ({ PAGE_CD }) => {
               variant="contained"
               onClick={() => handleClick("INQUIRY")}
               sx={{ backgroundColor: "#003285", color: "white" }}
-            >
+            > 
               INQUIRY
             </CustomButton>
           )}
@@ -101,7 +102,6 @@ const CommonBtn = ({ PAGE_CD }) => {
             </CustomButton>
           )}
         </Stack>
-
     </Box>
   );
 };

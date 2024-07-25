@@ -44,10 +44,10 @@ router.get("/",async(req,res) => {
 })
 
 // Getting user access by their user cd  
-router.post("/",async(req,res) => {
+router.get("/:USER_CD",async(req,res) => {
   console.log("AccessRightsOfUser");
   const strParaMeter = {
-    USER_CD : req.body.USER_CD
+    USER_CD : req.params.USER_CD
   }; 
   try {
     const result = await dbUtil.dbUtil_Temp.Select_SP("SP_GLCMA100200_05" , strParaMeter);
