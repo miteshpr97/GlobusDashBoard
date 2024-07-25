@@ -183,7 +183,11 @@ import {
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
+<<<<<<< HEAD
 const EmpAccess = ({ USER_CD }) => {
+=======
+const EmpAccess = ({ empCd }) => {
+>>>>>>> 4ef6b731605b9f102b375311bd3e62b160b3dc7e
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -192,16 +196,25 @@ const EmpAccess = ({ USER_CD }) => {
 
   console.log(userAccessData);
 
+
+  console.log(empCd,"user data");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('api/GLCMA100200/');
         setData(response.data);
 
+<<<<<<< HEAD
         if (USER_CD) {
           const userAccessResponse = await axios.get(`api/GLCMA100200/${USER_CD}`);
           const userAccessData = userAccessResponse.data;
           setUserAccessData(userAccessData);
+=======
+        const userAccessResponse = await axios.get(`api/GLCMA100200/${empCd}`);
+        const userAccessData = userAccessResponse.data;
+        setUserAccessData(userAccessData);
+>>>>>>> 4ef6b731605b9f102b375311bd3e62b160b3dc7e
 
           const initialState = response.data.reduce((acc, item, index) => {
             const userAccessItem = userAccessData.find(ua => ua.PAGE_CD === item.PAGE_CD);
@@ -257,6 +270,8 @@ const EmpAccess = ({ USER_CD }) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+
 
   return (
     <Box>
