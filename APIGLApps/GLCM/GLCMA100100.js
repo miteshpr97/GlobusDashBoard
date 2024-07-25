@@ -88,7 +88,7 @@ router.get("/", async (req, res) => {
 });
 
 // getting all users as well as details of specific user
-router.get("/", async (req, res) => {
+/*router.get("/", async (req, res) => {
   console.log("GettingAllUsers");
 
   const strParaMeter = {
