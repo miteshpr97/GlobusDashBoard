@@ -4,14 +4,10 @@ import SideBar from "../../component/SideBar";
 import CommonBtn from "../../component/CommonComponnets/CommonBtn";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
-
 import IconButton from "@mui/material/IconButton";
-
 import SearchIcon from "@mui/icons-material/Search";
-
 import EmpList from "./EmpList/EmpList";
-import EmpInfo from "./EmpInfo/EmpInfo";
-import GLCMA100100 from "../GLCMA100100/GLCMA100100";
+// import EmpInfo from "./EmpInfo/EmpInfo";
 
 const GLCMA100200 = () => {
   return (
@@ -61,7 +57,6 @@ const GLCMA100200 = () => {
         </Box>
         <Box
           sx={{
-            background: "yellow",
             marginTop: "10px",
           }}
         >
