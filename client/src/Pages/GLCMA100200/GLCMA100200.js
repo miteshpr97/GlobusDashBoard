@@ -58,10 +58,10 @@ const GLCMA100200 = () => {
         <Box
           sx={{
             marginTop: "10px",
-
           }}
         >
           <EmpList />
+          
 
         </Box>
       </Box>
@@ -70,3 +70,4 @@ const GLCMA100200 = () => {
 };
 
 export default GLCMA100200;
+

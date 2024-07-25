@@ -14,6 +14,6 @@ function checkVerify(req, res, next) {
   } catch (ex) {
     res.status(400).send("Invalid Token");
   }
-}
+}  
 
 module.exports = checkVerify;

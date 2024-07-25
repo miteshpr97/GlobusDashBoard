@@ -56,7 +56,7 @@ const CommonBtn = ({ PAGE_CD }) => {
               variant="contained"
               onClick={() => handleClick("INQUIRY")}
               sx={{ backgroundColor: "#003285", color: "white" }}
-            >
+            > 
               INQUIRY
             </CustomButton>
           )}
@@ -101,7 +101,6 @@ const CommonBtn = ({ PAGE_CD }) => {
             </CustomButton>
           )}
         </Stack>
-
     </Box>
   );
 };
