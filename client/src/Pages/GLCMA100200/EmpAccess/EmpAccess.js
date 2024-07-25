@@ -82,8 +82,6 @@
 // export default EmpAccess;
 
 
-
-
 import React, { useState, useEffect } from 'react';
 import {
   Table,
@@ -100,13 +98,40 @@ import {
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
-const EmpAccess = () => {
+const EmpAccess = ({ user }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [permissions, setPermissions] = useState({});
-  
-  console.log(data , "data");
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+  console.log(userData, "userdata1241");
+
+  useEffect(() => {
+    if (!user || !user.EMP_CD) {
+      setError('User data is not available.');
+      setLoading(false);
+      return;
+    }
+
+    // Fetch user-specific data
+    const fetchUserData = async () => {
+      const url = `api/GLCMA100200/${user.EMP_CD}`;
+      try {
+        const response = await axios.get(url);
+        setUserData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
 
   useEffect(() => {
     // Fetch data from the API
@@ -116,7 +141,7 @@ const EmpAccess = () => {
         setData(response.data);
         const initialState = response.data.reduce((acc, item, index) => {
           acc[index] = {
-            PAGE_YN: "",
+            PAGE_YN: false,
             PAGE_INQUIRY: false,
             PAGE_SAVE: false,
             PAGE_UPDATE: false,
@@ -165,6 +190,9 @@ const EmpAccess = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <Box >
