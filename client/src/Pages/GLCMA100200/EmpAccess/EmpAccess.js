@@ -167,7 +167,6 @@
 
 
 
-
 import React, { useState, useEffect } from 'react';
 import {
   Table,
@@ -184,14 +183,14 @@ import {
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
-const EmpAccess = () => {
+const EmpAccess = ({ USER_CD }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [permissions, setPermissions] = useState({});
   const [userAccessData, setUserAccessData] = useState(null);
 
-  console.log(userAccessData, "data access");
+  console.log(userAccessData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -199,38 +198,40 @@ const EmpAccess = () => {
         const response = await axios.get('api/GLCMA100200/');
         setData(response.data);
 
-        const userAccessResponse = await axios.get('api/GLCMA100200/GLA100001');
-        const userAccessData = userAccessResponse.data;
-        setUserAccessData(userAccessData);
+        if (USER_CD) {
+          const userAccessResponse = await axios.get(`api/GLCMA100200/${USER_CD}`);
+          const userAccessData = userAccessResponse.data;
+          setUserAccessData(userAccessData);
 
-        const initialState = response.data.reduce((acc, item, index) => {
-          const userAccessItem = userAccessData.find(ua => ua.PAGE_CD === item.PAGE_CD);
-          acc[index] = {
-            PAGE_YN: userAccessItem ? userAccessItem.PAGE_YN === 'Y' : false,
-            PAGE_INQUIRY: userAccessItem ? userAccessItem.PAGE_INQUIRY === 'Y' : false,
-            PAGE_SAVE: userAccessItem ? userAccessItem.PAGE_SAVE === 'Y' : false,
-            PAGE_UPDATE: userAccessItem ? userAccessItem.PAGE_UPDATE === 'Y' : false,
-            PAGE_DELETE: userAccessItem ? userAccessItem.PAGE_DELETE === 'Y' : false,
-            PAGE_APP_Y1: userAccessItem ? userAccessItem.PAGE_APP_Y1 === 'Y' : false,
-            PAGE_APP_Y2: userAccessItem ? userAccessItem.PAGE_APP_Y2 === 'Y' : false,
-            PAGE_APP_Y3: userAccessItem ? userAccessItem.PAGE_APP_Y3 === 'Y' : false,
-            PAGE_APP_Y4: userAccessItem ? userAccessItem.PAGE_APP_Y4 === 'Y' : false,
-            PAGE_APP_Y5: userAccessItem ? userAccessItem.PAGE_APP_Y5 === 'Y' : false,
-            PAGE_APP_Y6: userAccessItem ? userAccessItem.PAGE_APP_Y6 === 'Y' : false,
-            PAGE_PRINT: userAccessItem ? userAccessItem.PAGE_PRINT === 'Y' : false,
-            PAGE_EXCEL: userAccessItem ? userAccessItem.PAGE_EXCEL === 'Y' : false,
-          };
-          return acc;
-        }, {});
+          const initialState = response.data.reduce((acc, item, index) => {
+            const userAccessItem = userAccessData.find(ua => ua.PAGE_CD === item.PAGE_CD);
+            acc[index] = {
+              PAGE_YN: userAccessItem ? userAccessItem.PAGE_YN === 'Y' : false,
+              PAGE_INQUIRY: userAccessItem ? userAccessItem.PAGE_INQUIRY === 'Y' : false,
+              PAGE_SAVE: userAccessItem ? userAccessItem.PAGE_SAVE === 'Y' : false,
+              PAGE_UPDATE: userAccessItem ? userAccessItem.PAGE_UPDATE === 'Y' : false,
+              PAGE_DELETE: userAccessItem ? userAccessItem.PAGE_DELETE === 'Y' : false,
+              PAGE_APP_Y1: userAccessItem ? userAccessItem.PAGE_APP_Y1 === 'Y' : false,
+              PAGE_APP_Y2: userAccessItem ? userAccessItem.PAGE_APP_Y2 === 'Y' : false,
+              PAGE_APP_Y3: userAccessItem ? userAccessItem.PAGE_APP_Y3 === 'Y' : false,
+              PAGE_APP_Y4: userAccessItem ? userAccessItem.PAGE_APP_Y4 === 'Y' : false,
+              PAGE_APP_Y5: userAccessItem ? userAccessItem.PAGE_APP_Y5 === 'Y' : false,
+              PAGE_APP_Y6: userAccessItem ? userAccessItem.PAGE_APP_Y6 === 'Y' : false,
+              PAGE_PRINT: userAccessItem ? userAccessItem.PAGE_PRINT === 'Y' : false,
+              PAGE_EXCEL: userAccessItem ? userAccessItem.PAGE_EXCEL === 'Y' : false,
+            };
+            return acc;
+          }, {});
 
-        setPermissions(initialState);
+          setPermissions(initialState);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [USER_CD]); // Depend on USER_CD so it fetches data when USER_CD changes
 
   const handleCheckboxChange = (index, field) => {
     setPermissions((prevState) => ({
@@ -321,4 +322,3 @@ const EmpAccess = () => {
 };
 
 export default EmpAccess;
-

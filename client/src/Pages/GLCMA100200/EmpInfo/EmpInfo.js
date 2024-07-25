@@ -4,6 +4,8 @@ import ProfilePhoto from "../../../assets/logo/profilepic2.jpg";
 import EmpAccess from '../EmpAccess/EmpAccess';
 
 const EmpInfo = ({ user }) => {
+  
+
   return (
     <Box sx={{ width: "100%", }}>
       <Box
@@ -28,7 +30,7 @@ const EmpInfo = ({ user }) => {
                 fontSize: "0.8rem",
               },
             },
-    
+
             height: "100%",
             width: "65%",
           }}
@@ -153,7 +155,7 @@ const EmpInfo = ({ user }) => {
         <Box
           sx={{
             width: "35%",
-           
+
             padding: "10px",
             display: "flex",
             alignItems: "center",
@@ -176,15 +178,18 @@ const EmpInfo = ({ user }) => {
           </Box>
         </Box>
       </Box>
+
       <Box
         sx={{
-          maxWidth:"100%",
+          maxWidth: "100%",
           background: "#f3f3f3",
           padding: "10px",
           marginTop: "10px",
         }}
       >
-        <EmpAccess />
+        <EmpAccess
+           USER_CD={user? user.EMP_CD: null}
+        />
       </Box>
     </Box>
   );
