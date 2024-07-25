@@ -18,6 +18,7 @@ const CommonBtn = ({ PAGE_CD }) => {
 
         if (response.status === 200) {
           const data = response.data;
+          console.log(data, "dataatatt");
           const pagePermissions = data.find(
             (page) => page.PAGE_CD === window.sessionStorage.getItem("PAGE_CD")
           );
