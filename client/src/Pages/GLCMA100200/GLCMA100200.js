@@ -11,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import EmpList from "./EmpList/EmpList";
 import EmpInfo from "./EmpInfo/EmpInfo";
+import GLCMA100100 from "../GLCMA100100/GLCMA100100";
 
 const GLCMA100200 = () => {
   return (
@@ -60,12 +61,12 @@ const GLCMA100200 = () => {
         </Box>
         <Box
           sx={{
-background:"yellow",
+            background: "yellow",
             marginTop: "10px",
-
           }}
         >
           <EmpList />
+          
 
         </Box>
       </Box>
@@ -74,3 +75,4 @@ background:"yellow",
 };
 
 export default GLCMA100200;
+

@@ -11,9 +11,10 @@ import {
   Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { red } from "@mui/material/colors";
 
 const EmpAccess = () => {
-  const pages = ["PAGE1", "PAGE2", "PAGE3", "PAGE4"];
+  const pages = ["UserCreation", "UserAccess", "CreateComminCode" ];
   const actions = ["EDIT", "DELETE", "DOWNLOAD", "CREATE"];
 
   const initialState = pages.reduce((acc, page) => {
@@ -43,9 +44,9 @@ const EmpAccess = () => {
   }));
 
   return (
-    <Box>
+    <Box >
       <TableContainer component={Paper}>
-        <Table>
+        <Table style={{backgroundColor:"red"}}>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
@@ -80,6 +81,9 @@ const EmpAccess = () => {
 };
 
 export default EmpAccess;
+
+
+
 
 // import React, { useState } from 'react';
 // import {
