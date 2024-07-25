@@ -111,15 +111,15 @@ const EmpAccess = ({ user }) => {
   console.log(userData, "userdata1241");
 
   useEffect(() => {
-    if (!user || !user.EMP_CD) {
-      setError('User data is not available.');
-      setLoading(false);
-      return;
-    }
+    // if (!user || !user.EMP_CD) {
+    //   setError('User data is not available.');
+    //   setLoading(false);
+    //   return;
+    // }
 
     // Fetch user-specific data
     const fetchUserData = async () => {
-      const url = `api/GLCMA100200/${user.EMP_CD}`;
+      const url = 'api/GLCMA100200/GLA100001';
       try {
         const response = await axios.get(url);
         setUserData(response.data);
@@ -131,7 +131,7 @@ const EmpAccess = ({ user }) => {
     };
 
     fetchUserData();
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     // Fetch data from the API
