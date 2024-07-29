@@ -125,6 +125,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CustomButton from "../Buttons/CustomButton";
 import { Box, Stack } from "@mui/material";
+import { _post_WithoutToken } from "../../CommonUtilAPI/GLApiClient";
 
 const CommonBtn = ({ PAGE_CD, SAVE_CLICK }) => {
   const [permissions, setPermissions] = useState(null);
@@ -133,7 +134,7 @@ const CommonBtn = ({ PAGE_CD, SAVE_CLICK }) => {
   useEffect(() => {
     const fetchPermissions = async () => {
       try {
-        const response = await axios.post("/api/AccessRight/", {
+        const response = await _post_WithoutToken("/api/AccessRight/", {
           USER_CD: window.sessionStorage.getItem("USER_CD"),
           // PAGE_CD: window.sessionStorage.getItem("PAGE_CD"),
           PAGE_CD: PAGE_CD,
@@ -141,7 +142,7 @@ const CommonBtn = ({ PAGE_CD, SAVE_CLICK }) => {
 
         if (response.status === 200) {
           const data = response.data;
-          console.log(data, "dataatatt");
+          console.log(data, "data 12345");
           const pagePermissions = data.find((page) => page.PAGE_CD === PAGE_CD);
           setPermissions(pagePermissions);
         }

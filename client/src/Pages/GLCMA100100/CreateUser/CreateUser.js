@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Grid, MenuItem, TextField } from "@mui/material";
+import { Box, Grid, MenuItem, TextField, Button } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { createUserData } from "../../../features/userCreation/userCreationSlice";
 
@@ -39,6 +39,9 @@ const CreateUser = () => {
     UPD_DATE: null,
   });
 
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  
   const dispatch = useDispatch();
   const status = useSelector((state) => state.userCreation.status);
   const error = useSelector((state) => state.userCreation.error);
@@ -51,9 +54,26 @@ const CreateUser = () => {
     });
   };
 
+  const validateForm = () => {
+    const errors = {};
+    Object.keys(userData).forEach((key) => {
+      if (!userData[key] && key !== "UPD_BY" && key !== "UPD_DATE") {
+        errors[key] = `${key} is required`;
+      }
+    });
+    return errors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createUserData(userData));
+    const errors = validateForm();
+    if (Object.keys(errors).length === 0) {
+      dispatch(createUserData(userData));
+      setFormSubmitted(true);
+    } else {
+      setFormErrors(errors);
+      setFormSubmitted(false);
+    }
   };
 
   return (
@@ -99,6 +119,10 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.EMP_CD}
+            InputProps={{
+              readOnly: true,
+            }}
+         
           />
         </Grid>
       </Grid>
@@ -108,11 +132,13 @@ const CreateUser = () => {
             label="FIRST NAME"
             variant="outlined"
             name="EMP_FNM"
-            required
             fullWidth
             size="small"
             onChange={handleInputChange}
             value={userData.EMP_FNM}
+            required
+            error={!!formErrors.EMP_FNM}
+            helperText={formErrors.EMP_FNM}
           />
         </Grid>
         <Grid item xs={4}>
@@ -120,11 +146,13 @@ const CreateUser = () => {
             label="SECOND NAME"
             variant="outlined"
             name="EMP_SNM"
-            required
             fullWidth
             size="small"
             onChange={handleInputChange}
             value={userData.EMP_SNM}
+            required
+            error={!!formErrors.EMP_SNM}
+            helperText={formErrors.EMP_SNM}
           />
         </Grid>
         <Grid item xs={4}>
@@ -132,11 +160,13 @@ const CreateUser = () => {
             label="MIDDLE NAME"
             variant="outlined"
             name="EMP_MNM"
-            required
             fullWidth
             size="small"
             onChange={handleInputChange}
             value={userData.EMP_MNM}
+            required
+            error={!!formErrors.EMP_MNM}
+            helperText={formErrors.EMP_MNM}
           />
         </Grid>
         <Grid item xs={4}>
@@ -149,6 +179,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.EMP_LNM}
+            error={!!formErrors.EMP_LNM}
+            helperText={formErrors.EMP_LNM}
           />
         </Grid>
         <Grid item xs={4}>
@@ -161,6 +193,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.POS_CD}
+            error={!!formErrors.POS_CD}
+            helperText={formErrors.POS_CD}
           />
         </Grid>
         <Grid item xs={4}>
@@ -173,6 +207,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.DEPT_CD}
+            error={!!formErrors.DEPT_CD}
+            helperText={formErrors.DEPT_CD}
           />
         </Grid>
         <Grid item xs={4}>
@@ -185,6 +221,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.EMAIL}
+            error={!!formErrors.EMAIL}
+            helperText={formErrors.EMAIL}
           />
         </Grid>
         <Grid item xs={4}>
@@ -197,6 +235,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.EMAIL_PER}
+            error={!!formErrors.EMAIL_PER}
+            helperText={formErrors.EMAIL_PER}
           />
         </Grid>
         <Grid item xs={4}>
@@ -209,6 +249,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.MOB_NO_01}
+            error={!!formErrors.MOB_NO_01}
+            helperText={formErrors.MOB_NO_01}
           />
         </Grid>
         <Grid item xs={4}>
@@ -221,6 +263,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.MOB_PER_01}
+            error={!!formErrors.MOB_PER_01}
+            helperText={formErrors.MOB_PER_01}
           />
         </Grid>
         <Grid item xs={4}>
@@ -233,6 +277,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.MOB_NO_02}
+            error={!!formErrors.MOB_NO_02}
+            helperText={formErrors.MOB_NO_02}
           />
         </Grid>
         <Grid item xs={4}>
@@ -245,6 +291,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.EMP_TP}
+            error={!!formErrors.EMP_TP}
+            helperText={formErrors.EMP_TP}
           />
         </Grid>
         <Grid item xs={4}>
@@ -257,6 +305,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.REF_NO}
+            error={!!formErrors.REF_NO}
+            helperText={formErrors.REF_NO}
           />
         </Grid>
         <Grid item xs={4}>
@@ -269,6 +319,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.STATUS}
+            error={!!formErrors.STATUS}
+            helperText={formErrors.STATUS}
           />
         </Grid>
         <Grid item xs={4}>
@@ -285,6 +337,8 @@ const CreateUser = () => {
             }}
             onChange={handleInputChange}
             value={userData.DATE_JOIN}
+            error={!!formErrors.DATE_JOIN}
+            helperText={formErrors.DATE_JOIN}
           />
         </Grid>
         <Grid item xs={4}>
@@ -301,6 +355,8 @@ const CreateUser = () => {
             }}
             onChange={handleInputChange}
             value={userData.DATE_BIRTH}
+            error={!!formErrors.DATE_BIRTH}
+            helperText={formErrors.DATE_BIRTH}
           />
         </Grid>
         <Grid item xs={4}>
@@ -314,6 +370,8 @@ const CreateUser = () => {
             select
             onChange={handleInputChange}
             value={userData.GENDER}
+            error={!!formErrors.GENDER}
+            helperText={formErrors.GENDER}
           >
             <MenuItem value="">SELECT GENDER</MenuItem>
             <MenuItem value="MALE">MALE</MenuItem>
@@ -331,6 +389,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.RELIGION}
+            error={!!formErrors.RELIGION}
+            helperText={formErrors.RELIGION}
           />
         </Grid>
         <Grid item xs={4}>
@@ -343,6 +403,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.ADD_01}
+            error={!!formErrors.ADD_01}
+            helperText={formErrors.ADD_01}
           />
         </Grid>
         <Grid item xs={4}>
@@ -355,6 +417,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.ADD_STATE}
+            error={!!formErrors.ADD_STATE}
+            helperText={formErrors.ADD_STATE}
           />
         </Grid>
         <Grid item xs={4}>
@@ -367,6 +431,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.ADD_LANDMARK}
+            error={!!formErrors.ADD_LANDMARK}
+            helperText={formErrors.ADD_LANDMARK}
           />
         </Grid>
         <Grid item xs={4}>
@@ -379,6 +445,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.ADD_CITY}
+            error={!!formErrors.ADD_CITY}
+            helperText={formErrors.ADD_CITY}
           />
         </Grid>
         <Grid item xs={4}>
@@ -391,6 +459,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.ADD_PIN}
+            error={!!formErrors.ADD_PIN}
+            helperText={formErrors.ADD_PIN}
           />
         </Grid>
         <Grid item xs={4}>
@@ -403,6 +473,8 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.PAN_CARD}
+            error={!!formErrors.PAN_CARD}
+            helperText={formErrors.PAN_CARD}
           />
         </Grid>
         <Grid item xs={4}>
@@ -415,12 +487,17 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.NATION_ID}
+            error={!!formErrors.NATION_ID}
+            helperText={formErrors.NATION_ID}
           />
         </Grid>
       </Grid>
-      <button type="submit">submit</button>
+      <Button type="submit" variant="contained" color="primary">
+        Submit
+      </Button>
       {status === "loading" && <p>Loading...</p>}
       {status === "failed" && <p>Error: {error}</p>}
+      {formSubmitted && status === "succeeded" && <p>Form submitted successfully!</p>}
     </Box>
   );
 };
