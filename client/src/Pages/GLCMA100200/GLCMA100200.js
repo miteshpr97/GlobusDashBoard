@@ -10,6 +10,10 @@ import EmpList from "./EmpList/EmpList";
 // import EmpInfo from "./EmpInfo/EmpInfo";
 
 const GLCMA100200 = () => {
+  const Save_CLick = () => {
+    alert(`Save GLCMA100200 button clicked!`);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <SideBar />
@@ -22,7 +26,7 @@ const GLCMA100200 = () => {
         }}
       >
         <Box>
-          <CommonBtn PAGE_CD="GLCMA100100" />
+          <CommonBtn PAGE_CD="GLCMA100200" SAVE_CLICK={Save_CLick} />
         </Box>
         <Box
           sx={{
@@ -55,14 +59,13 @@ const GLCMA100200 = () => {
             </IconButton>
           </Paper>
         </Box>
+
         <Box
           sx={{
             marginTop: "10px",
           }}
         >
           <EmpList />
-          
-
         </Box>
       </Box>
     </Box>
@@ -70,4 +73,3 @@ const GLCMA100200 = () => {
 };
 
 export default GLCMA100200;
-

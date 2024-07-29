@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, Grid, MenuItem, TextField } from '@mui/material';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { createUserData } from '../../../features/userCreation/userCreationSlice';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Grid, MenuItem, TextField } from "@mui/material";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { createUserData } from "../../../features/userCreation/userCreationSlice";
 
 const CreateUser = () => {
   const [userData, setUserData] = useState({
@@ -36,7 +36,7 @@ const CreateUser = () => {
     REG_BY: "",
     REG_DATE: "",
     UPD_BY: null,
-    UPD_DATE: null
+    UPD_DATE: null,
   });
 
   const dispatch = useDispatch();
@@ -55,8 +55,6 @@ const CreateUser = () => {
     e.preventDefault();
     dispatch(createUserData(userData));
   };
-
-  
 
   return (
     <Box
@@ -421,8 +419,8 @@ const CreateUser = () => {
         </Grid>
       </Grid>
       <button type="submit">submit</button>
-      {status === 'loading' && <p>Loading...</p>}
-      {status === 'failed' && <p>Error: {error}</p>}
+      {status === "loading" && <p>Loading...</p>}
+      {status === "failed" && <p>Error: {error}</p>}
     </Box>
   );
 };
