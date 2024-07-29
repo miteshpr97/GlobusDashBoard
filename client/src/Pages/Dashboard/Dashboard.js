@@ -1,12 +1,7 @@
 import React from "react";
-
 import Box from "@mui/material/Box";
 import SideBar from "../../component/SideBar";
-
 import "./Dashboard.css";
-
-
-
 
 export const Dashboard = () => {
   return (
@@ -21,8 +16,6 @@ export const Dashboard = () => {
           height: "93vh",
         }}
       >
-
-       
       </Box>
     </Box>
   );

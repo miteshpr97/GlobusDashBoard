@@ -60,7 +60,7 @@ const EmpList = () => {
     >
       <Box
         sx={{
-          width: '25vw',
+          width: '22vw',
           height: "100%",
           background: "white",
         }}
@@ -136,7 +136,7 @@ const EmpList = () => {
       </Box>
       <Box
     sx={{
-      width: "55vw",
+      width: "56vw",
       height: "100%",
       background: "white",
       padding: "10px",
@@ -150,3 +150,17 @@ const EmpList = () => {
 };
 
 export default EmpList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

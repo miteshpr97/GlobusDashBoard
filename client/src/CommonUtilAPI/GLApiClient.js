@@ -7,11 +7,11 @@ const axiosInstance = axios.create({
 });
 const authTokenGl = window.sessionStorage.getItem("authToken");
 
-console.log(authTokenGl)
+console.log(authTokenGl);
 const axiosInstance_WithToken = axios.create({
   //baseURL: "http://localhost:5000/api",
   headers: {
-     "x-gl-Auth-Token" : window.sessionStorage.getItem("authToken"),
+    "x-gl-Auth-Token": window.sessionStorage.getItem("authToken"),
     "Content-Type": "application/json",
   },
   withCredentials: true,

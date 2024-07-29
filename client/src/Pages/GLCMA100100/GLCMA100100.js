@@ -1,4 +1,14 @@
-import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,  } from "@mui/material";
+import {
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SideBar from "../../component/SideBar";
 import CommonBtn from "../../component/CommonComponnets/CommonBtn";
@@ -21,9 +31,10 @@ const GLCMA100100 = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-
   const dispatch = useDispatch();
   const userCreation = useSelector((state) => state.userCreation);
+
+  console.log(userCreation, "userdtaa");
 
   useEffect(() => {
     dispatch(fetchUserCreationData());
@@ -45,8 +56,9 @@ const GLCMA100100 = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-
+  const Save_CLick = () => {
+    alert(`Save GLCMA100100 button clicked!`);
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -60,7 +72,7 @@ const GLCMA100100 = () => {
         }}
       >
         <Box>
-          <CommonBtn PAGE_CD="GLCMA100100" />
+          <CommonBtn PAGE_CD="GLCMA100100" SAVE_CLICK={Save_CLick} />
         </Box>
         <Box
           sx={{
@@ -80,7 +92,6 @@ const GLCMA100100 = () => {
               display: "flex",
               alignItems: "center",
               width: 300,
-
             }}
           >
             <InputBase
@@ -107,96 +118,97 @@ const GLCMA100100 = () => {
             marginTop: "10px",
             display: "flex",
             justifyContent: "space-between",
-          padding:"10px"
+            padding: "10px",
           }}
         >
           <Box
             sx={{
-              width: '25vw',
+              width: "22vw",
               height: "100%",
               background: "white",
             }}
           >
-                  <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 440, overflowX: "auto" }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{
-                        minWidth: column.minWidth,
-                        fontWeight: "700",
-                        padding: "10px",
-                      }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {userCreation.data
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.EMP_CD}
-
-                      >
-                        {columns.map((column) => {
-                          let value;
-                          if (column.id === "EMP_NM") {
-                            value = `${row.EMP_FNM} ${row.EMP_LNM}`;
-                          } else {
-                            value = row[column.id];
-                          }
-                          return (
-                            <TableCell
-                              key={column.id}
-
-                              align={column.align}
-                              style={{ padding: "10px" }}
-                            >
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={userCreation.data.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Paper>
+            <Paper sx={{ width: "100%", overflow: "hidden" }}>
+              <TableContainer sx={{ maxHeight: 440, overflowX: "auto" }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={{
+                            minWidth: column.minWidth,
+                            fontWeight: "700",
+                            padding: "10px",
+                          }}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {userCreation.data
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((row) => {
+                        return (
+                          <TableRow
+                            hover
+                            role="checkbox"
+                            tabIndex={-1}
+                            key={row.EMP_CD}
+                          >
+                            {columns.map((column) => {
+                              let value;
+                              if (column.id === "EMP_NM") {
+                                value = `${row.EMP_FNM} ${row.EMP_LNM}`;
+                              } else {
+                                value = row[column.id];
+                              }
+                              return (
+                                <TableCell
+                                  key={column.id}
+                                  align={column.align}
+                                  style={{ padding: "10px" }}
+                                >
+                                  {column.format && typeof value === "number"
+                                    ? column.format(value)
+                                    : value}
+                                </TableCell>
+                              );
+                            })}
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={userCreation.data.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Paper>
           </Box>
           <Box
             sx={{
               // width: "74%",
-              width:"55vw",
+              width: "56vw",
               height: "100%",
               background: "white",
               padding: "10px",
-              marginLeft:"10px"
+              marginLeft: "10px",
             }}
           >
-        <CreateUser/>
+            <CreateUser />
           </Box>
         </Box>
       </Box>
