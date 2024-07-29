@@ -21,10 +21,7 @@ const EmpAccess = ({ USER_CD }) => {
   const [permissions, setPermissions] = useState({});
   const [userAccessData, setUserAccessData] = useState(null);
 
-  console.log(userAccessData);
-
-
-  
+  console.log(userAccessData, "user Acess data show");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,6 +64,7 @@ const EmpAccess = ({ USER_CD }) => {
     fetchData();
   }, [USER_CD]);
 
+
   const handleCheckboxChange = (index, field) => {
     setPermissions((prevState) => ({
       ...prevState,
@@ -92,72 +90,70 @@ const EmpAccess = ({ USER_CD }) => {
     setPage(0);
   };
 
-
-
   return (
     <Box>
-     <TableContainer
-  component={Paper}
-  style={{ 
-    maxHeight: 440, 
-    overflow: 'auto', 
-    border: '1px solid #ddd' 
-  }}
->
-  <Table
-    size="sm"
-    stickyHeader
-    style={{ 
-      minWidth: 650, 
-      borderCollapse: 'collapse'
-    }}
-  >
-    <TableHead>
-      <TableRow style={{ backgroundColor: '#f5f5f5' }}>
-        <TableCell style={{ fontWeight: 'bold' }}>Module</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>ID</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Menu</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Page ID</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Name</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Y/N</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Inquiry</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Save</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Update</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Delete</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>App Y1</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>App Y2</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>App Y3</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>App Y4</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>App Y5</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>App Y6</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Print</TableCell>
-        <TableCell style={{ fontWeight: 'bold' }}>Excel</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
-        const actualIndex = page * rowsPerPage + index; // Get the actual index in the data array
-        return (
-          <StyledTableRow key={actualIndex} style={{ borderBottom: '1px solid #ddd' }}>
-            <TableCell>{row.MODULE_CD}</TableCell>
-            <TableCell>{row.MENU_CD}</TableCell>
-            <TableCell>{row.MENU_NM}</TableCell>
-            <TableCell>{row.PAGE_ID}</TableCell>
-            <TableCell>{row.PAGE_NM}</TableCell>
-            {['PAGE_YN', 'PAGE_INQUIRY', 'PAGE_SAVE', 'PAGE_UPDATE', 'PAGE_DELETE', 'PAGE_APP_Y1', 'PAGE_APP_Y2', 'PAGE_APP_Y3', 'PAGE_APP_Y4', 'PAGE_APP_Y5', 'PAGE_APP_Y6', 'PAGE_PRINT', 'PAGE_EXCEL'].map((field) => (
-              <TableCell align="center" key={field}>
-                <Checkbox
-                  checked={permissions[actualIndex] ? permissions[actualIndex][field] : false}
-                  onChange={() => handleCheckboxChange(actualIndex, field)}
-                />
-              </TableCell>
-            ))}
-          </StyledTableRow>
-        );
-      })}
-    </TableBody>
-  </Table>
-</TableContainer>
+      <TableContainer
+        component={Paper}
+        style={{
+          maxHeight: 440,
+          overflow: 'auto',
+          border: '1px solid #ddd'
+        }}
+      >
+        <Table
+          size="sm"
+          stickyHeader
+          style={{
+            minWidth: 650,
+            borderCollapse: 'collapse'
+          }}
+        >
+          <TableHead>
+            <TableRow style={{ backgroundColor: '#f5f5f5' }}>
+              <TableCell style={{ fontWeight: 'bold' }}>Module</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>ID</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Menu</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Page ID</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Name</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Y/N</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Inquiry</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Save</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Update</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Delete</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>App Y1</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>App Y2</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>App Y3</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>App Y4</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>App Y5</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>App Y6</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Print</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Excel</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+              const actualIndex = page * rowsPerPage + index; // Get the actual index in the data array
+              return (
+                <StyledTableRow key={actualIndex} style={{ borderBottom: '1px solid #ddd' }}>
+                  <TableCell>{row.MODULE_CD}</TableCell>
+                  <TableCell>{row.MENU_CD}</TableCell>
+                  <TableCell>{row.MENU_NM}</TableCell>
+                  <TableCell>{row.PAGE_ID}</TableCell>
+                  <TableCell>{row.PAGE_NM}</TableCell>
+                  {['PAGE_YN', 'PAGE_INQUIRY', 'PAGE_SAVE', 'PAGE_UPDATE', 'PAGE_DELETE', 'PAGE_APP_Y1', 'PAGE_APP_Y2', 'PAGE_APP_Y3', 'PAGE_APP_Y4', 'PAGE_APP_Y5', 'PAGE_APP_Y6', 'PAGE_PRINT', 'PAGE_EXCEL'].map((field) => (
+                    <TableCell align="center" key={field}>
+                      <Checkbox
+                        checked={permissions[actualIndex] ? permissions[actualIndex][field] : false}
+                        onChange={() => handleCheckboxChange(actualIndex, field)}
+                      />
+                    </TableCell>
+                  ))}
+                </StyledTableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
@@ -168,6 +164,8 @@ const EmpAccess = ({ USER_CD }) => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+
+
     </Box>
   );
 };
