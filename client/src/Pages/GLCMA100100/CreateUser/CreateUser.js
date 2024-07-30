@@ -1,80 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { Box, Grid, MenuItem, TextField, Button } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { createUserData } from "../../../features/userCreation/userCreationSlice";
+// import { createUserData } from "../../../features/userCreation/userCreationSlice";
 
-const CreateUser = () => {
-  const [userData, setUserData] = useState({
-    EMP_CD: "",
-    EMP_FNM: "",
-    EMP_SNM: "",
-    EMP_MNM: "",
-    EMP_LNM: "",
-    POS_CD: "",
-    DEPT_CD: "",
-    EMAIL: "",
-    EMAIL_PER: "",
-    MOB_NO_01: "",
-    MOB_PER_01: "",
-    MOB_NO_02: "",
-    MOB_PER_02: "",
-    EMP_TP: "",
-    REF_NO: "",
-    STATUS: "",
-    DATE_JOIN: "",
-    DATE_BIRTH: "",
-    GENDER: "",
-    RELIGION: "",
-    ADD_01: "",
-    ADD_STATE: "",
-    ADD_LANDMARK: "",
-    ADD_CITY: "",
-    ADD_PIN: "",
-    PAN_CARD: "",
-    NATION_ID: "",
-    REG_BY: "",
-    REG_DATE: "",
-    UPD_BY: null,
-    UPD_DATE: null,
-  });
-
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
-  
-  const dispatch = useDispatch();
-  const status = useSelector((state) => state.userCreation.status);
-  const error = useSelector((state) => state.userCreation.error);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({
-      ...userData,
-      [name]: value,
-    });
-  };
-
-  const validateForm = () => {
-    const errors = {};
-    Object.keys(userData).forEach((key) => {
-      if (!userData[key] && key !== "UPD_BY" && key !== "UPD_DATE") {
-        errors[key] = `${key} is required`;
-      }
-    });
-    return errors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const errors = validateForm();
-    if (Object.keys(errors).length === 0) {
-      dispatch(createUserData(userData));
-      setFormSubmitted(true);
-    } else {
-      setFormErrors(errors);
-      setFormSubmitted(false);
-    }
-  };
+const CreateUser = ({ userData, handleInputChange, formErrors }) => {
+ 
 
   return (
     <Box
@@ -97,7 +28,7 @@ const CreateUser = () => {
       }}
       noValidate
       autoComplete="off"
-      onSubmit={handleSubmit}
+
     >
       <div
         style={{
@@ -119,9 +50,7 @@ const CreateUser = () => {
             size="small"
             onChange={handleInputChange}
             value={userData.EMP_CD}
-            InputProps={{
-              readOnly: true,
-            }}
+    
          
           />
         </Grid>
@@ -492,12 +421,7 @@ const CreateUser = () => {
           />
         </Grid>
       </Grid>
-      <Button type="submit" variant="contained" color="primary">
-        Submit
-      </Button>
-      {status === "loading" && <p>Loading...</p>}
-      {status === "failed" && <p>Error: {error}</p>}
-      {formSubmitted && status === "succeeded" && <p>Form submitted successfully!</p>}
+   
     </Box>
   );
 };

@@ -14,13 +14,12 @@ import SideBar from "../../component/SideBar";
 import CommonBtn from "../../component/CommonComponnets/CommonBtn";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
-
 import IconButton from "@mui/material/IconButton";
-
 import SearchIcon from "@mui/icons-material/Search";
 import { fetchUserCreationData } from "../../features/userCreation/userCreationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CreateUser from "./CreateUser/CreateUser";
+import { createUserData } from "../../features/userCreation/userCreationSlice";
 
 const columns = [
   { id: "EMP_CD", label: "EMP_CD", minWidth: 70 },
@@ -30,8 +29,85 @@ const columns = [
 const GLCMA100100 = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [formErrors, setFormErrors] = useState({});
+
 
   const dispatch = useDispatch();
+  const [userData, setUserData] = useState({
+    EMP_CD: "",
+    EMP_FNM: "",
+    EMP_SNM: "",
+    EMP_MNM: "",
+    EMP_LNM: "",
+    POS_CD: "",
+    DEPT_CD: "",
+    EMAIL: "",
+    EMAIL_PER: "",
+    MOB_NO_01: "",
+    MOB_PER_01: "",
+    MOB_NO_02: "",
+    MOB_PER_02: "",
+    EMP_TP: "",
+    REF_NO: "",
+    STATUS: "",
+    DATE_JOIN: "",
+    DATE_BIRTH: "",
+    GENDER: "",
+    RELIGION: "",
+    ADD_01: "",
+    ADD_STATE: "",
+    ADD_LANDMARK: "",
+    ADD_CITY: "",
+    ADD_PIN: "",
+    PAN_CARD: "",
+    NATION_ID: "",
+    REG_BY: "",
+    REG_DATE: "",
+    UPD_BY: null,
+    UPD_DATE: null,
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const validateForm = () => {
+    const errors = {};
+ 
+    if (!userData.EMP_FNM) errors.EMP_FNM = "First Name is required";
+    if (!userData.EMP_SNM) errors.EMP_SNM = "Surname is required";
+    if (!userData.EMP_LNM) errors.EMP_LNM = "Last Name is required";
+    if (!userData.POS_CD) errors.POS_CD = "Position Code is required";
+    if (!userData.DEPT_CD) errors.DEPT_CD = "Department Code is required";
+    if (!userData.EMAIL) errors.EMAIL = "Email is required";
+    if (!userData.EMAIL_PER) errors.EMAIL_PER = "Personal Email is required";
+    if (!userData.MOB_NO_01) errors.MOB_NO_01 = "Mobile Number 1 is required";
+    if (!userData.EMP_TP) errors.EMP_TP = "Employee Type is required";
+    if (!userData.REF_NO) errors.REF_NO = "Reference Number is required";
+    if (!userData.STATUS) errors.STATUS = "Status is required";
+    if (!userData.DATE_JOIN) errors.DATE_JOIN = "Date of Joining is required";
+    if (!userData.DATE_BIRTH) errors.DATE_BIRTH = "Date of Birth is required";
+    if (!userData.GENDER) errors.GENDER = "Gender is required";
+    if (!userData.RELIGION) errors.RELIGION = "Religion is required";
+    if (!userData.ADD_01) errors.ADD_01 = "Address is required";
+    if (!userData.ADD_CITY) errors.ADD_CITY = "City Code is required";
+
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const Save_Click = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+    if (validateForm()) {
+      dispatch(createUserData(userData));
+      window.location.reload();
+    }
+  };
+
   const userCreation = useSelector((state) => state.userCreation);
 
   console.log(userCreation, "userdtaa");
@@ -56,9 +132,10 @@ const GLCMA100100 = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const Save_CLick = () => {
-    alert(`Save GLCMA100100 button clicked!`);
-  };
+
+
+  console.log(userData, "userdara")
+
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -72,7 +149,7 @@ const GLCMA100100 = () => {
         }}
       >
         <Box>
-          <CommonBtn PAGE_CD="GLCMA100100" SAVE_CLICK={Save_CLick} />
+          <CommonBtn PAGE_CD="GLCMA100100" SAVE_CLICK={Save_Click} />
         </Box>
         <Box
           sx={{
@@ -208,7 +285,11 @@ const GLCMA100100 = () => {
               marginLeft: "10px",
             }}
           >
-            <CreateUser />
+            <CreateUser
+              userData={userData}
+              formErrors={formErrors}
+              handleInputChange={handleInputChange}
+            />
           </Box>
         </Box>
       </Box>
