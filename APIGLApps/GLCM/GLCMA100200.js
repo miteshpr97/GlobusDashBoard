@@ -95,12 +95,12 @@ router.post("/Save", async (req, res) => {
 });
 
 // Update user's access
-router.put("/Update", async (req, res) => {
+router.put("/Update/:USER_CD", async (req, res) => {
   console.log("Updating user's access");
 
   const strParaMeter = {
     CRUD:'U',
-    USER_CD: req.body.USER_CD,
+    USER_CD: req.params.USER_CD,
     PAGE_CD: req.body.PAGE_CD,
     PAGE_YN: req.body.PAGE_YN,
     PAGE_INQUIRY: req.body.PAGE_INQUIRY,
