@@ -571,9 +571,13 @@ const EmpAccess = ({ USER_CD }) => {
     fetchData();
   }, [USER_CD]);
 
-<<<<<<< HEAD
-=======
   const updateUserAccess = async () => {
+    const userConfirmed = window.confirm("Are you sure you want to update the user access?");
+  
+    if (!userConfirmed) {
+      return; // If the user cancels, exit the function
+    }
+  
     try {
       const updates = Object.keys(permissions).map((index) => {
         const updateData = {
@@ -593,17 +597,17 @@ const EmpAccess = ({ USER_CD }) => {
           PAGE_PRINT: permissions[index].PAGE_PRINT ? "Y" : "N",
           PAGE_EXCEL: permissions[index].PAGE_EXCEL ? "Y" : "N",
         };
-
+  
         return _update_WithoutToken(`api/GLCMA100200/Update/${USER_CD}`, updateData);
       });
-
+  
       await Promise.all(updates);
       setOpenSnackbar(true); // Show success message
     } catch (error) {
       console.error("Error updating user access:", error);
     }
   };
->>>>>>> 68b081b44df32f8d64619c1fb5a8d8b0bd4e039e
+  
 
   const handleCheckboxChange = (index, field) => {
     setPermissions((prevState) => ({
@@ -734,9 +738,6 @@ const EmpAccess = ({ USER_CD }) => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
-<<<<<<< HEAD
-
-=======
       <Box mt={2}>
         <Button
           variant="contained"
@@ -761,7 +762,6 @@ const EmpAccess = ({ USER_CD }) => {
           Update successful!
         </Alert>
       </Snackbar>
->>>>>>> 68b081b44df32f8d64619c1fb5a8d8b0bd4e039e
     </Box>
   );
 };
