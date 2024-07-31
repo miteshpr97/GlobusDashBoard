@@ -8,18 +8,17 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Paper,
+  InputBase,
+  IconButton,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SideBar from "../../component/SideBar";
 import CommonBtn from "../../component/CommonComponnets/CommonBtn";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { fetchUserCreationData, createUserData } from "../../features/userCreation/userCreationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CreateUser from "./CreateUser/CreateUser";
-
 
 const columns = [
   { id: "EMP_CD", label: "EMP_CD", minWidth: 70 },
@@ -68,9 +67,6 @@ const GLCMA100100 = () => {
 
   const userCreation = useSelector((state) => state.userCreation);
 
-
-  
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserData((prevData) => ({ ...prevData, [name]: value }));
@@ -96,7 +92,6 @@ const GLCMA100100 = () => {
     if (!userData.ADD_01) errors.ADD_01 = "Address is required";
     if (!userData.ADD_CITY) errors.ADD_CITY = "City Code is required";
 
-
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -111,9 +106,41 @@ const GLCMA100100 = () => {
     }
   };
 
- 
-
-  console.log(userCreation, "userdtaa");
+  const resetForm = () => {
+    setUserData({
+      EMP_CD: "",
+      EMP_FNM: "",
+      EMP_SNM: "",
+      EMP_MNM: "",
+      EMP_LNM: "",
+      POS_CD: "",
+      DEPT_CD: "",
+      EMAIL: "",
+      EMAIL_PER: "",
+      MOB_NO_01: "",
+      MOB_PER_01: "",
+      MOB_NO_02: "",
+      MOB_PER_02: "",
+      EMP_TP: "",
+      REF_NO: "",
+      STATUS: "",
+      DATE_JOIN: "",
+      DATE_BIRTH: "",
+      GENDER: "",
+      RELIGION: "",
+      ADD_01: "",
+      ADD_STATE: "",
+      ADD_LANDMARK: "",
+      ADD_CITY: "",
+      ADD_PIN: "",
+      PAN_CARD: "",
+      NATION_ID: "",
+      REG_BY: "",
+      REG_DATE: "",
+      UPD_BY: null,
+      UPD_DATE: null,
+    });
+  };
 
   useEffect(() => {
     dispatch(fetchUserCreationData());
@@ -135,10 +162,6 @@ const GLCMA100100 = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-
-  console.log(userData, "userdara")
-
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -179,7 +202,6 @@ const GLCMA100100 = () => {
               placeholder="Search"
               inputProps={{ "aria-label": "search " }}
             />
-
             <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
               <SearchIcon />
             </IconButton>
@@ -187,6 +209,7 @@ const GLCMA100100 = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "#003285", color: "white" }}
+            onClick={resetForm}
           >
             ADD EMPLOYEE
           </Button>
@@ -280,7 +303,6 @@ const GLCMA100100 = () => {
           </Box>
           <Box
             sx={{
-              // width: "74%",
               width: "56vw",
               height: "100%",
               background: "white",
@@ -301,3 +323,4 @@ const GLCMA100100 = () => {
 };
 
 export default GLCMA100100;
+

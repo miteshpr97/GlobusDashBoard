@@ -575,7 +575,7 @@ const EmpAccess = ({ USER_CD }) => {
     const userConfirmed = window.confirm("Are you sure you want to update the user access?");
   
     if (!userConfirmed) {
-      return; // If the user cancels, exit the function
+      return; 
     }
   
     try {
