@@ -26,10 +26,15 @@ const columns = [
 ];
 
 const GLCMA100100 = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [formErrors, setFormErrors] = useState({});
+
+  const sidebarWidth = isSidebarOpen ? 200 : 0;
+  const UserListWidth = 270;
 
   const [userData, setUserData] = useState({
     EMP_CD: "",
@@ -164,16 +169,18 @@ const GLCMA100100 = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <SideBar />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          marginTop: "55px",
-        }}
-      >
+    <Box sx={{ display: "flex", width: "100vw", overflow: "hidden" }}>
+    {isSidebarOpen && <SideBar sx={{ width: sidebarWidth, flexShrink: 0 }} />}
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        p: 3,
+        marginTop: "55px",
+        overflowX: "hidden",
+        width: `calc(100vw - ${sidebarWidth}px)`,
+      }}
+    >
         <Box>
           <CommonBtn PAGE_CD="GLCMA100100" SAVE_CLICK={Save_Click} />
         </Box>
@@ -222,17 +229,20 @@ const GLCMA100100 = () => {
             display: "flex",
             justifyContent: "space-between",
             padding: "10px",
+            overflowX: "hidden",
           }}
         >
           <Box
             sx={{
-              width: "22vw",
-              height: "100%",
-              background: "white",
+              width: `${UserListWidth}px`,
+         
+              background: "#f3f3f3",
+              overflowX: "auto",
+              padding: "10px",
             }}
           >
-            <Paper sx={{ width: "100%", overflow: "hidden" }}>
-              <TableContainer sx={{ maxHeight: 440, overflowX: "auto" }}>
+            
+              <TableContainer component={Paper} sx={{ width: "100%", maxHeight: 440 }} >
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
@@ -299,15 +309,16 @@ const GLCMA100100 = () => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
-            </Paper>
+    
           </Box>
           <Box
             sx={{
-              width: "56vw",
+              flexGrow: 1,
               height: "100%",
-              background: "white",
+              background: "#f3f3f3",
+              overflowX: "auto",
+              width: `calc(100% - ${UserListWidth}px)`,
               padding: "10px",
-              marginLeft: "10px",
             }}
           >
             <CreateUser

@@ -639,7 +639,7 @@ const EmpAccess = ({ USER_CD }) => {
   };
 
   return (
-    <Box>
+    <Box >
       <TableContainer
         component={Paper}
         style={{

@@ -26,7 +26,7 @@ const CreateUser = ({ userData, handleInputChange, formErrors }) => {
         height: "100%",
         width: "100%",
         padding: "10px",
-        background: "#f3f3f3",
+        background: "white",
       }}
       noValidate
       autoComplete="off"
