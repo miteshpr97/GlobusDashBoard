@@ -95,32 +95,17 @@ const UserAccess = () => {
                     <TableCell>{row.CODE_DVN}</TableCell>
                     <TableCell>{row.CODE_NO}</TableCell>
                     <TableCell>{row.CODE_DO}</TableCell>
-                    {[
-                      "CODE_NM1",
-                      "CODE_NM2",
-                      "CODE_NM3",
-                      "CODE_NM4",
-                      "CODE_DIV1",
-                      "CODE_DIV2",
-                      "CODE_DIV3",
-                      "CODE_DIV4",
-                      "CODE_DIV5",
-                      "ORDER_NO",
-                      "USE_YN",
-                    ].map((field) => (
-                      <TableCell align="center" key={field}>
-                        <Checkbox
-                          checked={
-                            permissions[actualIndex]
-                              ? permissions[actualIndex][field]
-                              : false
-                          }
-                          onChange={() =>
-                            handleCheckboxChange(actualIndex, field)
-                          }
-                        />
-                      </TableCell>
-                    ))}
+                    <TableCell>{row.CODE_NM1}</TableCell>
+                    <TableCell>{row.CODE_NM2}</TableCell>
+                    <TableCell>{row.CODE_NM3}</TableCell>
+                    <TableCell>{row.CODE_NM4}</TableCell>
+                    <TableCell>{row.CODE_DIV1}</TableCell>
+                    <TableCell>{row.CODE_DIV2}</TableCell>
+                    <TableCell>{row.CODE_DIV3}</TableCell>
+                    <TableCell>{row.CODE_DIV4}</TableCell>
+                    <TableCell>{row.CODE_DIV5}</TableCell>
+                    <TableCell>{row.ORDER_NO}</TableCell>
+                    <TableCell>{row.USE_YN}</TableCell>
                   </StyledTableRow>
                 );
               })}
