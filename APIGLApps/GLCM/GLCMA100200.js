@@ -28,7 +28,7 @@ router.post("/User",async(req,res) => {
     console.log(error);
     res.status(500).send({ error: "An error occurred while getting specific user detail." });
   }
-})
+});
 
 // Getting template for user access Page...
 router.get("/",async(req,res) => {
@@ -41,7 +41,7 @@ router.get("/",async(req,res) => {
     console.log(error);
     res.status(500).send({error:"An error occured while fetching the template"});
   }
-})
+});
 
 // Getting user access by their user cd  
 router.get("/:USER_CD",async(req,res) => {
@@ -56,7 +56,7 @@ router.get("/:USER_CD",async(req,res) => {
     console.log(error);
     res.status(500).send({ error: "An error occurred while registering the user." });
   }
-})
+});
 
 // Save user's access
 router.post("/Save", async (req, res) => {
