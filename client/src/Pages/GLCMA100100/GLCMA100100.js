@@ -8,18 +8,17 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Paper,
+  InputBase,
+  IconButton,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SideBar from "../../component/SideBar";
 import CommonBtn from "../../component/CommonComponnets/CommonBtn";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { fetchUserCreationData } from "../../features/userCreation/userCreationSlice";
+import { fetchUserCreationData, createUserData } from "../../features/userCreation/userCreationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CreateUser from "./CreateUser/CreateUser";
-import { createUserData } from "../../features/userCreation/userCreationSlice";
 
 const columns = [
   { id: "EMP_CD", label: "EMP_CD", minWidth: 70 },
@@ -27,12 +26,16 @@ const columns = [
 ];
 
 const GLCMA100100 = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [formErrors, setFormErrors] = useState({});
 
+  const sidebarWidth = isSidebarOpen ? 200 : 0;
+  const UserListWidth = 270;
 
-  const dispatch = useDispatch();
   const [userData, setUserData] = useState({
     EMP_CD: "",
     EMP_FNM: "",
@@ -67,6 +70,8 @@ const GLCMA100100 = () => {
     UPD_DATE: null,
   });
 
+  const userCreation = useSelector((state) => state.userCreation);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserData((prevData) => ({ ...prevData, [name]: value }));
@@ -74,7 +79,6 @@ const GLCMA100100 = () => {
 
   const validateForm = () => {
     const errors = {};
- 
     if (!userData.EMP_FNM) errors.EMP_FNM = "First Name is required";
     if (!userData.EMP_SNM) errors.EMP_SNM = "Surname is required";
     if (!userData.EMP_LNM) errors.EMP_LNM = "Last Name is required";
@@ -93,7 +97,6 @@ const GLCMA100100 = () => {
     if (!userData.ADD_01) errors.ADD_01 = "Address is required";
     if (!userData.ADD_CITY) errors.ADD_CITY = "City Code is required";
 
-
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -108,9 +111,41 @@ const GLCMA100100 = () => {
     }
   };
 
-  const userCreation = useSelector((state) => state.userCreation);
-
-  console.log(userCreation, "userdtaa");
+  const resetForm = () => {
+    setUserData({
+      EMP_CD: "",
+      EMP_FNM: "",
+      EMP_SNM: "",
+      EMP_MNM: "",
+      EMP_LNM: "",
+      POS_CD: "",
+      DEPT_CD: "",
+      EMAIL: "",
+      EMAIL_PER: "",
+      MOB_NO_01: "",
+      MOB_PER_01: "",
+      MOB_NO_02: "",
+      MOB_PER_02: "",
+      EMP_TP: "",
+      REF_NO: "",
+      STATUS: "",
+      DATE_JOIN: "",
+      DATE_BIRTH: "",
+      GENDER: "",
+      RELIGION: "",
+      ADD_01: "",
+      ADD_STATE: "",
+      ADD_LANDMARK: "",
+      ADD_CITY: "",
+      ADD_PIN: "",
+      PAN_CARD: "",
+      NATION_ID: "",
+      REG_BY: "",
+      REG_DATE: "",
+      UPD_BY: null,
+      UPD_DATE: null,
+    });
+  };
 
   useEffect(() => {
     dispatch(fetchUserCreationData());
@@ -133,21 +168,19 @@ const GLCMA100100 = () => {
     setPage(0);
   };
 
-
-  console.log(userData, "userdara")
-
-
   return (
-    <Box sx={{ display: "flex" }}>
-      <SideBar />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          marginTop: "55px",
-        }}
-      >
+    <Box sx={{ display: "flex", width: "100vw", overflow: "hidden" }}>
+    {isSidebarOpen && <SideBar sx={{ width: sidebarWidth, flexShrink: 0 }} />}
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        p: 3,
+        marginTop: "55px",
+        overflowX: "hidden",
+        width: `calc(100vw - ${sidebarWidth}px)`,
+      }}
+    >
         <Box>
           <CommonBtn PAGE_CD="GLCMA100100" SAVE_CLICK={Save_Click} />
         </Box>
@@ -176,7 +209,6 @@ const GLCMA100100 = () => {
               placeholder="Search"
               inputProps={{ "aria-label": "search " }}
             />
-
             <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
               <SearchIcon />
             </IconButton>
@@ -184,6 +216,7 @@ const GLCMA100100 = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "#003285", color: "white" }}
+            onClick={resetForm}
           >
             ADD EMPLOYEE
           </Button>
@@ -196,17 +229,20 @@ const GLCMA100100 = () => {
             display: "flex",
             justifyContent: "space-between",
             padding: "10px",
+            overflowX: "hidden",
           }}
         >
           <Box
             sx={{
-              width: "22vw",
-              height: "100%",
-              background: "white",
+              width: `${UserListWidth}px`,
+         
+              background: "#f3f3f3",
+              overflowX: "auto",
+              padding: "10px",
             }}
           >
-            <Paper sx={{ width: "100%", overflow: "hidden" }}>
-              <TableContainer sx={{ maxHeight: 440, overflowX: "auto" }}>
+            
+              <TableContainer component={Paper} sx={{ width: "100%", maxHeight: 440 }} >
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
@@ -273,16 +309,16 @@ const GLCMA100100 = () => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
-            </Paper>
+    
           </Box>
           <Box
             sx={{
-              // width: "74%",
-              width: "56vw",
+              flexGrow: 1,
               height: "100%",
-              background: "white",
+              background: "#f3f3f3",
+              overflowX: "auto",
+              width: `calc(100% - ${UserListWidth}px)`,
               padding: "10px",
-              marginLeft: "10px",
             }}
           >
             <CreateUser
@@ -298,3 +334,4 @@ const GLCMA100100 = () => {
 };
 
 export default GLCMA100100;
+

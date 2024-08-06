@@ -48,25 +48,32 @@ const EmpList = () => {
   const handleRowClick = (row) => {
     setSelectedUser(row);
   };
+
+
+  const UserListWidth = 270; // Example fixed width for UserList
+
   return (
     <Box
       sx={{
         width: "100%",
-        padding: "10px",
         display: "flex",
         justifyContent: "space-between",
         background: "#dddddd",
+        overflowX: "hidden",
+
       }}
     >
       <Box
-        sx={{
-          width: '22vw',
-          height: "100%",
-          background: "white",
-        }}
+       sx={{
+        width: `${UserListWidth}px`,
+        height: "100%",
+        background: "white",
+        overflowX: "auto",
+        padding: "10px",
+      }}
       >
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 440, overflowX: "auto" }}>
+        
+          <TableContainer component={Paper} sx={{ width: "100%", maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
@@ -132,16 +139,18 @@ const EmpList = () => {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
-        </Paper>
+
       </Box>
       <Box
-    sx={{
-      width: "56vw",
-      height: "100%",
-      background: "white",
-      padding: "10px",
-      marginLeft:"10px"
-    }}
+
+      sx={{
+        flexGrow: 1,
+        height: "100%",
+        background: "white",
+        overflowX: "auto",
+        width: `calc(100% - ${UserListWidth}px)`,
+        padding: "10px",
+      }}
   >
       <EmpInfo user={selectedUser}/>
       </Box >

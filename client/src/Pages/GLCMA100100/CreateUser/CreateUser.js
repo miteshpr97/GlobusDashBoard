@@ -1,12 +1,14 @@
-import React, { useState } from "react";
 
-import { Box, Grid, MenuItem, TextField, Button } from "@mui/material";
+
+import { Box, Grid, MenuItem, TextField, } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 // import { createUserData } from "../../../features/userCreation/userCreationSlice";
 
 const CreateUser = ({ userData, handleInputChange, formErrors }) => {
- 
 
+
+  
+ 
   return (
     <Box
       component="form"
@@ -24,7 +26,7 @@ const CreateUser = ({ userData, handleInputChange, formErrors }) => {
         height: "100%",
         width: "100%",
         padding: "10px",
-        background: "#f3f3f3",
+        background: "white",
       }}
       noValidate
       autoComplete="off"

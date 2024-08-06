@@ -1,23 +1,25 @@
-import { Box } from "@mui/material";
 import React, { useState } from "react";
+import {
+  Box,
+  Paper,
+  InputBase,
+  IconButton,
+
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import SideBar from "../../component/SideBar";
 import CommonBtn from "../../component/CommonComponnets/CommonBtn";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import EmpList from "./EmpList/EmpList";
-// import EmpInfo from "./EmpInfo/EmpInfo";
+import UserList from "./UserList/UserList";
 
-const GLCMA100200 = () => {
-
+const GLCMA100300 = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  const Save_CLick = () => {
+  const Save_Click = () => {
     alert(`Save GLCMA100200 button clicked!`);
   };
 
-  const sidebarWidth = isSidebarOpen ? 200 : 0; 
+  const sidebarWidth = isSidebarOpen ? 200 : 0; // Adjust sidebar width based on its state
+
   return (
     <Box sx={{ display: "flex", width: "100vw", overflow: "hidden" }}>
       {isSidebarOpen && <SideBar sx={{ width: sidebarWidth, flexShrink: 0 }} />}
@@ -32,7 +34,7 @@ const GLCMA100200 = () => {
         }}
       >
         <Box>
-          <CommonBtn PAGE_CD="GLCMA100200" SAVE_CLICK={Save_CLick} />
+          <CommonBtn PAGE_CD="GLCMA100200" SAVE_CLICK={Save_Click} />
         </Box>
         <Box
           sx={{
@@ -57,17 +59,15 @@ const GLCMA100200 = () => {
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search"
-              inputProps={{ "aria-label": "search " }}
+              inputProps={{ "aria-label": "search" }}
             />
-
             <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
               <SearchIcon />
             </IconButton>
           </Paper>
         </Box>
-
         <Box
-           sx={{
+          sx={{
             width: "100%",
             marginTop: "10px",
             display: "flex",
@@ -76,11 +76,11 @@ const GLCMA100200 = () => {
             padding: "10px",
           }}
         >
-          <EmpList />
+          <UserList />
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default GLCMA100200;
+export default GLCMA100300;
