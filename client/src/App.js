@@ -7,6 +7,7 @@ import { Dashboard } from './Pages/Dashboard/Dashboard';
 import GLCMA100200 from './Pages/GLCMA100200/GLCMA100200';
 import GLCMA100100 from './Pages/GLCMA100100/GLCMA100100';
 import GLCMA100300 from './Pages/GLCMA100300/GLCMA100300';
+import GLAMAT001001 from './Pages/GLAMAT001001/GLAMAT001001';
 
 
 
@@ -18,7 +19,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}></Route>   
         <Route path='/UserCreation' element = {<GLCMA100100/>}></Route>
         <Route path='/UserAccess' element = {<GLCMA100200/>}></Route>
-        <Route path='/' element = {<GLCMA100300/>}></Route>
+        <Route path='/CommonCode' element = {<GLCMA100300/>}></Route>
+        <Route path='/GLAMAT001001' element = {<GLAMAT001001/>}></Route>
         
       </Routes>
 
