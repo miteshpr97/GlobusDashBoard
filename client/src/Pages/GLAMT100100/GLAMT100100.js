@@ -40,7 +40,7 @@ const GLAMT100100 = () => {
         }}
       >
         <Box>
-          <CommonBtn PAGE_CD="GLCMA100200" SAVE_CLICK={Save_Click} />
+          <CommonBtn PAGE_CD="GLMA100100" SAVE_CLICK={Save_Click} />
         </Box>
 
         {/* Search and Filter Section */}
