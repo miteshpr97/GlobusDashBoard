@@ -18,7 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}></Route>   
         <Route path='/UserCreation' element = {<GLCMA100100/>}></Route>
         <Route path='/UserAccess' element = {<GLCMA100200/>}></Route>
-        <Route path='/GLCMA100300' element = {<GLCMA100300/>}></Route>
+        <Route path='/' element = {<GLCMA100300/>}></Route>
         
       </Routes>
 
