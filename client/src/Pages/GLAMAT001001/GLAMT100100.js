@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { Box, Paper, InputBase, IconButton, Grid, TextField, MenuItem } from "@mui/material";
+import {
+  Box,
+  Paper,
+  InputBase,
+  IconButton,
+  Grid,
+  TextField,
+  MenuItem,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import SideBar from "../../component/SideBar";
 import CommonBtn from "../../component/CommonComponnets/CommonBtn";
 import CreateForm from "./CreateModal/CreateForm";
 import TableData from "./Table/TableData";
 
-const GLAMAT001001 = () => {
+const GLAMT100100 = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const Save_Click = () => {
@@ -19,7 +27,7 @@ const GLAMAT001001 = () => {
     <Box sx={{ display: "flex", width: "100vw", overflow: "hidden" }}>
       {/* Sidebar */}
       {isSidebarOpen && <SideBar sx={{ width: sidebarWidth, flexShrink: 0 }} />}
-      
+
       <Box
         component="main"
         sx={{
@@ -34,7 +42,7 @@ const GLAMAT001001 = () => {
         <Box>
           <CommonBtn PAGE_CD="GLCMA100200" SAVE_CLICK={Save_Click} />
         </Box>
-        
+
         {/* Search and Filter Section */}
         <Box
           component="form"
@@ -126,7 +134,7 @@ const GLAMAT001001 = () => {
             </Grid>
           </Grid>
         </Box>
-        
+
         {/* Create Form Section */}
         <Box
           sx={{
@@ -138,7 +146,7 @@ const GLAMAT001001 = () => {
         >
           <CreateForm />
         </Box>
-        
+
         {/* Table Section */}
         <Box
           sx={{
@@ -156,4 +164,4 @@ const GLAMAT001001 = () => {
   );
 };
 
-export default GLAMAT001001;
+export default GLAMT100100;
