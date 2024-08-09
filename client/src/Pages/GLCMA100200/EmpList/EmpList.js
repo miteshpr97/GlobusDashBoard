@@ -50,7 +50,7 @@ const EmpList = () => {
   };
 
 
-  const UserListWidth = 270; // Example fixed width for UserList
+  const UserListWidth = 270;
 
   return (
     <Box

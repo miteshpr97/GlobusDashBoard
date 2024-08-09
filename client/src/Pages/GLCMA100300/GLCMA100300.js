@@ -18,7 +18,7 @@ const GLCMA100300 = () => {
     alert(`Save GLCMA100200 button clicked!`);
   };
 
-  const sidebarWidth = isSidebarOpen ? 200 : 0; // Adjust sidebar width based on its state
+  const sidebarWidth = isSidebarOpen ? 200 : 0;
 
   return (
     <Box sx={{ display: "flex", width: "100vw", overflow: "hidden" }}>
