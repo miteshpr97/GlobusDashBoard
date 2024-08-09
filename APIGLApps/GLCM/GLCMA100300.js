@@ -2,7 +2,7 @@ const express = require("express");
 const dbUtil = require("../DBCall/DBUtil");
 const router = express.Router();
 
-router.post("/codeName",async(req,res) => {
+router.post("/codeNo",async(req,res) => {
   const strParaMeter = {
     MODULE_CD : req.body.MODULE_CD,
     SER_TEXT : req.body.SER_TEXT,
