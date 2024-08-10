@@ -2,6 +2,8 @@ const express = require("express");
 const dbUtil = require("../DBCall/DBUtil");
 const router = express.Router();
 
+// getting code number based on module code
+
 router.post("/codeNo",async(req,res) => {
   const strParaMeter = {
     MODULE_CD : req.body.MODULE_CD,
@@ -17,10 +19,9 @@ router.post("/codeNo",async(req,res) => {
   }
 });
 
-router.post("/",async(req,res) => {
+router.post("/data",async(req,res) => {
     const strParaMeter = {
       MODULE_CD : req.body.MODULE_CD,
-      C_DVN : req.body.C_DVN,
       CODE_NO : req.body.CODE_NO,
       REG_BY : req.body.REG_BY
     }; 
