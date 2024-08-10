@@ -1,20 +1,53 @@
-import React, { useState } from "react";
-import { Box, Button, ButtonGroup } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box} from "@mui/material";
 import UserAccess from "../UserAccess/UserAccess";
+import axios from "axios";
 
-const UserList = () => {
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+const UserList = ({ module }) => {
   const UserListWidth = 250; // Example fixed width for UserList
-  const [selectedValue, setSelectedValue] = useState("");
 
-  const handleClick = (value) => {
-    setSelectedValue(value);
-  };
 
-  const options = [
-    "M_DVN", "C_DVN", "CODE_NO", "CODE_NM", "CODE_NMH",
-    "CODE_NMA", "CODE_NMO", "SUB_GUN1", "SUB_GUN2", "SUB_GUN3",
-    "SUB_GUN4", "SUB_GUN5", "SORT_BY", "RMKS"
-  ];
+  const [moduleData, setModuleData] = useState("")
+
+
+  console.log(moduleData, " module data show");
+
+
+
+
+  console.log(module);
+
+
+  useEffect(() => {
+    const fetchModule = async () => {
+      try {
+        const response = await axios.post("/api/GLCMA100300/codeNo", {
+          MODULE_CD: module,
+
+        });
+
+        if (response.status === 200) {
+          const data = response.data;
+          setModuleData(data)
+
+        }
+      } catch (error) {
+        console.error("Error fetching permissions:", error);
+      }
+    };
+
+    fetchModule();
+
+  }, [module]);
+
 
   return (
     <Box
@@ -34,33 +67,46 @@ const UserList = () => {
           padding: "10px",
         }}
       >
-        <ButtonGroup
-          orientation="vertical"
-          aria-label="vertical outlined button group"
-          sx={{ width: "100%"}}
-        >
-          {options.map((option) => (
-            <Button
-              key={option}
-              onClick={() => handleClick(option)}
-              sx={{
-                backgroundColor: selectedValue === option ? "#003285" : "initial",
-                color: selectedValue === option ? "white" : "initial",
-                "&:hover": {
-                  backgroundColor: selectedValue === option ? "#003285" : "lightgray",
-                },
-                border:"1px solid #dddddd"
-              }}
-            >
-              {option}
-            </Button>
-          ))}
-        </ButtonGroup>
+
+<TableContainer component={Paper}>
+      <Table sx={{ minWidth: 150 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>M_DVN</TableCell>
+            <TableCell>C_DVN</TableCell>
+            <TableCell>CODE_NO</TableCell>
+            <TableCell>CODE_NM</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {(!moduleData || moduleData.length === 0) ? (
+            <TableRow>
+              <TableCell colSpan={4} align="center">Loading</TableCell>
+            </TableRow>
+          ) : (
+            moduleData.map((module, index) => (
+              <TableRow
+                key={index}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {module.M_DVN}
+                </TableCell>
+                <TableCell>{module.C_DVN}</TableCell>
+                <TableCell>{module.CODE_NO}</TableCell>
+                <TableCell>{module.CODE_NM}</TableCell>
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
       </Box>
       <Box
         sx={{
           flexGrow: 1,
-        
+
           background: "#f3f3f3",
           overflowX: "auto",
           width: `calc(100% - ${UserListWidth}px)`,
@@ -74,3 +120,17 @@ const UserList = () => {
 };
 
 export default UserList;
+
+
+
+
+
+
+// if (!moduleData || moduleData.length === 0) {
+//   return (
+//   // <div>loding...</div>
+
+ 
+  
+//   );
+// }

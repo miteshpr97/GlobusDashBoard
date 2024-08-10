@@ -4,6 +4,11 @@ import {
   Paper,
   InputBase,
   IconButton,
+  Input,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,8 +19,19 @@ import UserList from "./UserList/UserList";
 const GLCMA100300 = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
+  const [module, setModule] = useState('');
+
+
+  
+
+
   const Save_Click = () => {
     alert(`Save GLCMA100200 button clicked!`);
+  };
+
+
+  const handleChange = (event) => {
+    setModule(event.target.value);
   };
 
   const sidebarWidth = isSidebarOpen ? 200 : 0;
@@ -47,24 +63,32 @@ const GLCMA100300 = () => {
             justifyContent: "space-between",
           }}
         >
-          <Paper
-            component="form"
-            sx={{
-              p: "2px 4px",
-              display: "flex",
-              alignItems: "center",
-              width: 300,
-            }}
-          >
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search"
-              inputProps={{ "aria-label": "search" }}
-            />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-          </Paper>
+
+
+
+          <div  style={{  width:"400px"}}>
+            <FormControl fullWidth>
+              <InputLabel id="module-label">Module</InputLabel>
+              <Select
+                labelId="module-label"
+                id="module-select"
+                value={module}
+                label="Module"
+                onChange={handleChange}
+              >
+                <MenuItem value="AM">AM</MenuItem>
+                <MenuItem value="CM">CM</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+
+
+
+
+
+
+
+
         </Box>
         <Box
           sx={{
@@ -76,7 +100,12 @@ const GLCMA100300 = () => {
             padding: "10px",
           }}
         >
-          <UserList />
+          <UserList 
+
+          module={module}
+          
+          
+          />
         </Box>
       </Box>
     </Box>

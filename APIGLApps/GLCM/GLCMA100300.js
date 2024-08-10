@@ -17,7 +17,7 @@ router.post("/codeNo",async(req,res) => {
   }
 });
 
-router.post("/",async(req,res) => {
+router.post("/data",async(req,res) => {
     const strParaMeter = {
       MODULE_CD : req.body.MODULE_CD,
       C_DVN : req.body.C_DVN,
