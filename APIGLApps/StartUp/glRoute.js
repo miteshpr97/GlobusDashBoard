@@ -7,6 +7,7 @@ const apiAccessRight = require("../GLCM/GLCM1004");
 const apiUserCreation = require("../GLCM/GLCMA100100");
 const apiPageGLCMA100200 = require("../GLCM/GLCMA100200");
 const apiPageGLCMA100300 = require("../GLCM/GLCMA100300");
+const apiPageGLAMT100100 = require("../GLCM/GLAMT100100");
 
 require("express-async-errors");
 module.exports = function (app) {
@@ -17,5 +18,6 @@ module.exports = function (app) {
   app.use("/api/UserCreation", apiUserCreation);
   app.use("/api/GLCMA100200", apiPageGLCMA100200);
   app.use("/api/GLCMA100300", apiPageGLCMA100300);
+  app.use("/api/GLAMT100100", apiPageGLAMT100100);
   app.use(glErrors);
 };
