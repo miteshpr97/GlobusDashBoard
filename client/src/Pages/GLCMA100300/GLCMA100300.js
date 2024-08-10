@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import {
   Box,
-  Paper,
-  InputBase,
-  IconButton,
-  Input,
+
   FormControl,
   InputLabel,
   Select,
   MenuItem,
 
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+
 import SideBar from "../../component/SideBar";
 import CommonBtn from "../../component/CommonComponnets/CommonBtn";
 import UserList from "./UserList/UserList";
@@ -20,10 +17,6 @@ const GLCMA100300 = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const [module, setModule] = useState('');
-
-
-  
-
 
   const Save_Click = () => {
     alert(`Save GLCMA100200 button clicked!`);
@@ -81,13 +74,6 @@ const GLCMA100300 = () => {
               </Select>
             </FormControl>
           </div>
-
-
-
-
-
-
-
 
         </Box>
         <Box

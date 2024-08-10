@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -7,43 +7,37 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Checkbox,
-  Box,
   TablePagination,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import axios from "axios";
 
-const UserAccess = () => {
-  const data = Array.from({ length: 100 }, (_, index) => ({
-    CODE_DVN: `Code Division ${index + 1}`,
-    CODE_NO: `Code No ${index + 1}`,
-    CODE_DO: `Code Do ${index + 1}`,
-    CODE_NM1: `Code Name 1 ${index + 1}`,
-    CODE_NM2: `Code Name 2 ${index + 1}`,
-    CODE_NM3: `Code Name 3 ${index + 1}`,
-    CODE_NM4: `Code Name 4 ${index + 1}`,
-    CODE_DIV1: `Code Div 1 ${index + 1}`,
-    CODE_DIV2: `Code Div 2 ${index + 1}`,
-    CODE_DIV3: `Code Div 3 ${index + 1}`,
-    CODE_DIV4: `Code Div 4 ${index + 1}`,
-    CODE_DIV5: `Code Div 5 ${index + 1}`,
-    ORDER_NO: `Order No ${index + 1}`,
-    USE_YN: `Use Y/N ${index + 1}`,
-  }));
-
+const UserAccess = ({ selectedModule }) => {
+  const [moduleData, setModuleData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [permissions, setPermissions] = useState({});
 
-  const handleCheckboxChange = (index, field) => {
-    setPermissions((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        [field]: !prevState[index][field],
-      },
-    }));
-  };
+  useEffect(() => {
+    const fetchModuleData = async () => {
+      if (!selectedModule) return; 
+
+      try {
+        const response = await axios.post("/api/GLCMA100300/data", {
+          MODULE_CD: selectedModule.M_DVN,
+          CODE_NO: selectedModule.CODE_NO,
+        });
+
+        if (response.status === 200 && Array.isArray(response.data)) {
+          setModuleData(response.data);
+        } else {
+          console.error("Unexpected response data:", response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching module data:", error);
+      }
+    };
+
+    fetchModuleData();
+  }, [selectedModule]); 
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -54,11 +48,8 @@ const UserAccess = () => {
     setPage(0);
   };
 
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  }));
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, moduleData.length - page * rowsPerPage);
 
   return (
     <>
@@ -66,56 +57,56 @@ const UserAccess = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow style={{ backgroundColor: "#f5f5f5" }}>
-              <TableCell style={{ fontWeight: "bold" }}>Code Division</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code No</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Do</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Name 1</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Name 2</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Name 3</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Name 4</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Div 1</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Div 2</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Div 3</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Div 4</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code Div 5</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Order No</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Use Y/N</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Module</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Code DVN</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Code NO</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Code NM</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Code NMH</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Code NMA</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Code NMO</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 1</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 2</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 3</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 4</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 5</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>SORT_BY</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>RMKS</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data
+            {moduleData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => {
-                const actualIndex = page * rowsPerPage + index;
-                return (
-                  <StyledTableRow
-                    key={actualIndex}
-                    style={{ borderBottom: "1px solid #ddd" }}
-                  >
-                    <TableCell>{row.CODE_DVN}</TableCell>
-                    <TableCell>{row.CODE_NO}</TableCell>
-                    <TableCell>{row.CODE_DO}</TableCell>
-                    <TableCell>{row.CODE_NM1}</TableCell>
-                    <TableCell>{row.CODE_NM2}</TableCell>
-                    <TableCell>{row.CODE_NM3}</TableCell>
-                    <TableCell>{row.CODE_NM4}</TableCell>
-                    <TableCell>{row.CODE_DIV1}</TableCell>
-                    <TableCell>{row.CODE_DIV2}</TableCell>
-                    <TableCell>{row.CODE_DIV3}</TableCell>
-                    <TableCell>{row.CODE_DIV4}</TableCell>
-                    <TableCell>{row.CODE_DIV5}</TableCell>
-                    <TableCell>{row.ORDER_NO}</TableCell>
-                    <TableCell>{row.USE_YN}</TableCell>
-                  </StyledTableRow>
-                );
-              })}
+              .map((module, index) => (
+                <TableRow key={index}>
+                  <TableCell>{module.M_DVN}</TableCell>
+                  <TableCell>{module.C_DVN}</TableCell>
+                  <TableCell>{module.CODE_NO}</TableCell>
+                  <TableCell>{module.CODE_NM}</TableCell>
+                  <TableCell>{module.CODE_NMH}</TableCell>
+                  <TableCell>{module.CODE_NMA}</TableCell>
+                  <TableCell>{module.CODE_NMO}</TableCell>
+                  <TableCell>{module.SUB_GUN1}</TableCell>
+                  <TableCell>{module.SUB_GUN2}</TableCell>
+                  <TableCell>{module.SUB_GUN3}</TableCell>
+                  <TableCell>{module.SUB_GUN4}</TableCell>
+                  <TableCell>{module.SUB_GUN5}</TableCell>
+                  <TableCell>{module.ORDER_NO}</TableCell>
+                  <TableCell>{module.SORT_BY}</TableCell>
+                  <TableCell>{module.RMKS}</TableCell>
+                </TableRow>
+              ))}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={14} />
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={data.length}
+        count={moduleData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
