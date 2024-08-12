@@ -147,7 +147,7 @@ const GLAMT100100 = () => {
           <CreateForm />
         </Box>
 
-        {/* Table Section */}
+        {/* Table Section */}    
         <Box
           sx={{
             width: "100%",

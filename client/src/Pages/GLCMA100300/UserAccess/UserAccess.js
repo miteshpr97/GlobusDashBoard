@@ -77,7 +77,7 @@ const UserAccess = ({ selectedModule }) => {
             {moduleData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((module, index) => (
-                <TableRow key={index}>
+                <TableRow key={index}>               
                   <TableCell>{module.M_DVN}</TableCell>
                   <TableCell>{module.C_DVN}</TableCell>
                   <TableCell>{module.CODE_NO}</TableCell>
@@ -117,3 +117,4 @@ const UserAccess = ({ selectedModule }) => {
 };
 
 export default UserAccess;
+

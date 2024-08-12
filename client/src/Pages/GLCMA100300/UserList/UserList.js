@@ -17,10 +17,6 @@ const UserList = ({ module }) => {
   const [moduleData, setModuleData] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
 
-
- 
- 
-
   useEffect(() => {
     const fetchModule = async () => {
       try {
@@ -85,7 +81,7 @@ const UserList = ({ module }) => {
                     key={index}
                     onClick={() => handleRowClick(module)}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
-                  >
+                  > 
                     <TableCell component="th" scope="row">{module.M_DVN}</TableCell>
                     <TableCell>{module.C_DVN}</TableCell>
                     <TableCell>{module.CODE_NO}</TableCell>
