@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import {
   Button,
   TextField,
@@ -9,9 +9,28 @@ import {
 } from "@mui/material";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import axios from "axios";
 
 function CreateForm() {
   const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    REF_TNO: null,
+    REF_TYPE: "",
+    REF_NO: "",
+    REF_DESC: "",
+    RMKS: "",
+    LCURR_CD: "",
+    LAMT: "",
+    EXCHANGE_RATE: "",
+    FCURR_CD: "",
+    FAMT: "",
+    DOC_DTE: "",
+    POST_DTE: "",
+    REG_DATE: "",
+    REG_BY: "",
+    DOC_STATUS: "",
+    YEAR_CD: "",
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,6 +38,56 @@ function CreateForm() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = (`0${d.getMonth() + 1}`).slice(-2);
+    const day = (`0${d.getDate()}`).slice(-2);
+    return `${year}${month}${day}`;
+  };
+
+  const getCurrentYearMonth = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (`0${now.getMonth() + 1}`).slice(-2);
+    return `${year}${month}`;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const currentDate = new Date();
+    const formattedREG_DATE = currentDate.toISOString().slice(0, 19);
+    const formattedDOC_DTE = formatDate(formData.DOC_DTE);
+    const formattedPOST_DTE = formatDate(formData.POST_DTE);
+
+    const dataToPost = {
+      ...formData,
+      DOC_DTE: formattedDOC_DTE,
+      POST_DTE: formattedPOST_DTE,
+      REG_DATE: formattedREG_DATE,
+      YEAR_CD: getCurrentYearMonth(), // Set YEAR_CD to current year and month
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/GLAMT100100",
+        dataToPost
+      );
+      console.log("Form submitted successfully:", response.data);
+      handleClose();
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+    }
   };
 
   return (
@@ -57,11 +126,12 @@ function CreateForm() {
             color: (theme) => theme.palette.grey[500],
           }}
         >
-          <CloseIcon sx={{fontSize:"2rem"}}/>
+          <CloseIcon sx={{ fontSize: "2rem" }} />
         </IconButton>
         <DialogContent>
           <Box
             component="form"
+            onSubmit={handleSubmit}
             sx={{
               "& .MuiTextField-root": {
                 m: 0.6,
@@ -86,21 +156,22 @@ function CreateForm() {
                 <TextField
                   label="REG DATE"
                   variant="outlined"
-                  name="DATE"
+                  name="REG_DATE"
                   required
                   fullWidth
                   size="small"
-                  type="date"
+                  value={formData.REG_DATE}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  disabled
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="POSTING DATE"
                   variant="outlined"
-                  name="DATE"
+                  name="POST_DTE"
                   required
                   fullWidth
                   size="small"
@@ -108,13 +179,15 @@ function CreateForm() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  value={formData.POST_DTE}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="DOCUMENT DATE"
                   variant="outlined"
-                  name="DATE"
+                  name="DOC_DTE"
                   required
                   fullWidth
                   size="small"
@@ -122,86 +195,104 @@ function CreateForm() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  value={formData.DOC_DTE}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="REF TYPE"
                   variant="outlined"
-                  name="REF"
+                  name="REF_TYPE"
                   required
                   fullWidth
                   size="small"
+                  value={formData.REF_TYPE}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="REF NO"
                   variant="outlined"
-                  name="REF"
+                  name="REF_NO"
                   required
                   fullWidth
                   size="small"
+                  value={formData.REF_NO}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="DESC"
                   variant="outlined"
-                  name="DESC"
+                  name="REF_DESC"
                   required
                   fullWidth
                   size="small"
+                  value={formData.REF_DESC}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="REMARK"
                   variant="outlined"
-                  name="REMARK"
+                  name="RMKS"
                   required
                   fullWidth
                   size="small"
+                  value={formData.RMKS}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="LOCAL CURRENCY"
                   variant="outlined"
-                  name="LOCAL"
+                  name="LCURR_CD"
                   required
                   fullWidth
                   size="small"
+                  value={formData.LCURR_CD}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="LOCAL AMOUNT"
                   variant="outlined"
-                  name="LOCAL"
+                  name="LAMT"
                   required
                   fullWidth
                   size="small"
+                  value={formData.LAMT}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="FOREIGN CURRENCY"
                   variant="outlined"
-                  name="FOREIGN"
+                  name="FCURR_CD"
                   required
                   fullWidth
                   size="small"
+                  value={formData.FCURR_CD}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="FOREIGN AMOUNT"
                   variant="outlined"
-                  name="FOREIGN"
+                  name="FAMT"
                   required
                   fullWidth
                   size="small"
+                  value={formData.FAMT}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -212,36 +303,67 @@ function CreateForm() {
                   required
                   fullWidth
                   size="small"
+                  value={formData.EXCHANGE_RATE}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
                   label="TRANSACTION REF NO"
                   variant="outlined"
-                  name="TRANSACTION"
+                  name="REF_TNO"
+                  disabled
+                  fullWidth
+                  size="small"
+                  value={formData.REF_TNO}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="REGISTERED BY"
+                  variant="outlined"
+                  name="REG_BY"
                   required
                   fullWidth
                   size="small"
+                  value={formData.REG_BY}
+                  onChange={handleChange}
                 />
               </Grid>
-            </Grid>
-            <Container
-              sx={{
-                marginTop: "10px",
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Grid item xs={1}>
+              <Grid item xs={4}>
+                <TextField
+                  label="DOCUMENT STATUS"
+                  variant="outlined"
+                  name="DOC_STATUS"
+                  required
+                  fullWidth
+                  size="small"
+                  value={formData.DOC_STATUS}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="YEAR CODE"
+                  variant="outlined"
+                  name="YEAR_CD"
+                  required
+                  fullWidth
+                  size="small"
+                  value={getCurrentYearMonth()} // Display current year and month
+                  disabled
+                />
+              </Grid>
+              <Grid item xs={12} style={{ textAlign: "right" }}>
                 <Button
                   type="submit"
                   variant="contained"
-                  sx={{ backgroundColor: "#003285", marginTop: "10px" }}
+                  color="primary"
                 >
                   Submit
                 </Button>
               </Grid>
-            </Container>
+            </Grid>
           </Box>
         </DialogContent>
       </Dialog>
