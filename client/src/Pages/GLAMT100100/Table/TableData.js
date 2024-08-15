@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import moment from "moment";
 
 const TableData = () => {
   const headings = [
@@ -34,8 +35,8 @@ const TableData = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  console.log(data , "take data");
-  
+  console.log(data, "take data");
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,26 +86,26 @@ const TableData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-  {data
-    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-    .map((row, index) => (
-      <StyledTableRow key={index}>
-        <TableCell>{row.REG_DATE}</TableCell>
-        <TableCell>{row.POST_DTE}</TableCell>
-        <TableCell>{row.DOC_DTE}</TableCell>
-        <TableCell>{row.REF_TYPE}</TableCell>
-        <TableCell>{row.REF_NO}</TableCell>
-        <TableCell>{row.REF_DESC}</TableCell>
-        <TableCell>{row.RMKS}</TableCell>
-        <TableCell>{row.LCURR_CD}</TableCell>
-        <TableCell>{row.LAMT}</TableCell>
-        <TableCell>{row.FCURR_CD}</TableCell>
-        <TableCell>{row.FAMT}</TableCell>
-        <TableCell>{row.EXCHANGE_RATE}</TableCell>
-        <TableCell>{row.REF_TNO}</TableCell>
-      </StyledTableRow>
-    ))}
-</TableBody>
+            {data
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => (
+                <StyledTableRow key={index}>
+                  <TableCell>{moment(row.REG_DATE).format("DD/MM/YYYY")}</TableCell>
+                  <TableCell>{moment(row.POST_DTE).format("DD/MM/YYYY")}</TableCell>
+                  <TableCell>{moment(row.DOC_DTE).format("DD/MM/YYYY")}</TableCell>
+                  <TableCell>{row.REF_TYPE}</TableCell>
+                  <TableCell>{row.REF_NO}</TableCell>
+                  <TableCell>{row.REF_DESC}</TableCell>
+                  <TableCell>{row.RMKS}</TableCell>
+                  <TableCell>{row.LCURR_CD}</TableCell>
+                  <TableCell>{row.LAMT}</TableCell>
+                  <TableCell>{row.FCURR_CD}</TableCell>
+                  <TableCell>{row.FAMT}</TableCell>
+                  <TableCell>{row.EXCHANGE_RATE}</TableCell>
+                  <TableCell>{row.REF_TNO}</TableCell>
+                </StyledTableRow>
+              ))}
+          </TableBody>
 
         </Table>
       </TableContainer>
