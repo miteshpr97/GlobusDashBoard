@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+// 
+
+
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -11,6 +14,7 @@ import {
   Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import axios from "axios";
 
 const TableData = () => {
   const headings = [
@@ -29,10 +33,25 @@ const TableData = () => {
     "Transaction Ref No"
   ];
 
-  const data = Array.from({ length: 100 }, (_, index) => ({}));
-
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  console.log(data , "take data");
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post("api/GLAMT100100/details");
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -51,8 +70,9 @@ const TableData = () => {
 
   return (
     <Box>
-      <TableContainer component={Paper} sx={{    overflow: "auto", maxHeight: 440 }}>
-        <Table  size="sm"
+      <TableContainer component={Paper} sx={{ overflow: "auto", maxHeight: 440 }}>
+        <Table
+          size="small"
           stickyHeader
           style={{
             minWidth: 650,
@@ -68,18 +88,27 @@ const TableData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((_, index) => {
-                return (
-                  <StyledTableRow key={index}>
-                    {headings.map((_, idx) => (
-                      <TableCell key={idx}></TableCell>
-                    ))}
-                  </StyledTableRow>
-                );
-              })}
-          </TableBody>
+  {data
+    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    .map((row, index) => (
+      <StyledTableRow key={index}>
+        <TableCell>{row.REG_DATE}</TableCell>
+        <TableCell>{row.POST_DTE}</TableCell>
+        <TableCell>{row.DOC_DTE}</TableCell>
+        <TableCell>{row.REF_TYPE}</TableCell>
+        <TableCell>{row.REF_NO}</TableCell>
+        <TableCell>{row.REF_DESC}</TableCell>
+        <TableCell>{row.RMKS}</TableCell>
+        <TableCell>{row.LCURR_CD}</TableCell>
+        <TableCell>{row.LAMT}</TableCell>
+        <TableCell>{row.FCURR_CD}</TableCell>
+        <TableCell>{row.FAMT}</TableCell>
+        <TableCell>{row.EXCHANGE_RATE}</TableCell>
+        <TableCell>{row.REF_TNO}</TableCell>
+      </StyledTableRow>
+    ))}
+</TableBody>
+
         </Table>
       </TableContainer>
       <TablePagination
@@ -95,5 +124,4 @@ const TableData = () => {
   );
 };
 
-
-export default TableData
+export default TableData;
