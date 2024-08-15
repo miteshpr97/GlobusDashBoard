@@ -43,4 +43,31 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Get transaction details
+router.post("/details", async (req, res) => {
+  console.log("GetTransactionDetails");
+
+  const strParaMeter = {
+    SER_TXT: req.body.SER_TXT,
+    REF_TYPE: req.body.REF_TYPE,
+    FRM_DTE: req.body.FRM_DTE,
+    TO_DTE: req.body.TO_DTE,
+    REG_BY: req.body.REG_BY,
+};
+
+  try {
+    const result = await dbUtil.dbUtil_Temp.Select_SP(
+      "SP_GLAMT100100_02",
+      strParaMeter
+    );
+    console.log("Result", result);
+    res.status(201).send(result);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .send({ error: "An error occurred while fetching a transaction." });
+  }
+});
+
 module.exports = router;
