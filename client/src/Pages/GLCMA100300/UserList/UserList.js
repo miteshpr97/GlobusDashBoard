@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import UserAccess from "../UserAccess/UserAccess";
 import axios from "axios";
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -38,8 +37,6 @@ const UserList = ({ module }) => {
 
   const handleRowClick = (module) => {
     setSelectedModule(module);
-  
-    
   };
 
   return (
