@@ -81,22 +81,22 @@ const UserAccess = ({ selectedModule }) => {
     <>
       <TableContainer component={Paper} sx={{ width: "100%", maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow style={{ backgroundColor: "#f5f5f5" }}>
-              <TableCell style={{ fontWeight: "bold" }}>Module</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code DVN</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code NO</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code NM</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code NMH</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code NMA</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Code NMO</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 1</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 2</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 3</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 4</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>SUB_GUN 5</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>SORT_BY</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>RMKS</TableCell>
+          <TableHead >
+            <TableRow sx={{ background:"blue" }}>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px", background:"red" }}>Module</TableCell>
+              <TableCell sx={{ fontWeight: "bold" , padding:"10px"}}>Code DVN</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>Code NO</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>Code NM</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>Code NMH</TableCell>
+              <TableCell sx={{ fontWeight: "bold" , padding:"10px"}}>Code NMA</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>Code NMO</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SUB_GUN 1</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SUB_GUN 2</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SUB_GUN 3</TableCell>
+              <TableCell sx={{ fontWeight: "bold" , padding:"10px"}}>SUB_GUN 4</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SUB_GUN 5</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SORT_BY</TableCell>
+              <TableCell sx={{ fontWeight: "bold" , padding:"10px"}}>RMKS</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

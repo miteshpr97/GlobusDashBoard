@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
   Box,
-
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-
+  Grid,
+  TextField,
 } from "@mui/material";
 
 import SideBar from "../../component/SideBar";
@@ -16,12 +16,11 @@ import UserList from "./UserList/UserList";
 const GLCMA100300 = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  const [module, setModule] = useState('');
+  const [module, setModule] = useState("");
 
   const Save_Click = () => {
     alert(`Save GLCMA100200 button clicked!`);
   };
-
 
   const handleChange = (event) => {
     setModule(event.target.value);
@@ -56,25 +55,42 @@ const GLCMA100300 = () => {
             justifyContent: "space-between",
           }}
         >
-
-
-
-          <div style={{ width: "400px" }}>
-            <FormControl fullWidth>
-              <InputLabel id="module-label">Module</InputLabel>
-              <Select
-                labelId="module-label"
-                id="module-select"
-                value={module}
-                label="Module"
-                onChange={handleChange}
-              >
-                <MenuItem value="AM">AM</MenuItem>
-                <MenuItem value="CM">CM</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": {
+                width: "calc(100% - 10px)",
+                "& .MuiInputBase-root": {
+                  fontSize: "1.1rem",
+                },
+                "& .MuiInputLabel-root": {
+                  fontSize: "1.1rem",
+                },
+              },
+              width: "100%",
+              background: "#dddddd",
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <Grid container spacing={0.5}>
+              <Grid item xs={3}>
+                <TextField
+                  labelId="module-label"
+                  id="module-select"
+                  value={module}
+                  label="Module"
+                  onChange={handleChange}
+                  size="small"
+                  select
+                >
+                  {" "}
+                  <MenuItem value="AM">AM</MenuItem>
+                  <MenuItem value="CM">CM</MenuItem>
+                </TextField>
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
         <Box
           sx={{
@@ -86,12 +102,7 @@ const GLCMA100300 = () => {
             padding: "10px",
           }}
         >
-          <UserList
-
-            module={module}
-
-
-          />
+          <UserList module={module} />
         </Box>
       </Box>
     </Box>
