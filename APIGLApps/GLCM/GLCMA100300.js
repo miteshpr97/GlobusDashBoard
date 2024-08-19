@@ -38,7 +38,7 @@ router.post("/data",async(req,res) => {
 router.post("/", async (req, res) => {
   console.log("AddOrUpdateDetails");
 
-  const strParaMeter = {
+  const strParaMeter = [{
     M_DVN: req.body.M_DVN,
     C_DVN: req.body.C_DVN,
     CODE_NO: req.body.CODE_NO,
@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
     SORT_BY: req.body.SORT_BY,
     RMKS: req.body.RMKS,
     REG_BY: req.body.REG_BY,
-};
+}];
 
   try {
     const result = await dbUtil.dbUtil_Temp.Save_SP(
@@ -69,6 +69,11 @@ router.post("/", async (req, res) => {
       .status(500)
       .send({ error: "An error occurred while adding details." });
   }
-});
+});''
+
+
+
+
+
 
 module.exports = router;
