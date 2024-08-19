@@ -76,10 +76,14 @@ const UserList = ({ module }) => {
               ) : (
                 moduleData.map((module, index) => (
                   <TableRow
-                    key={index}
-                    onClick={() => handleRowClick(module)}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
-                  > 
+                  key={index}
+                  onClick={() => handleRowClick(module)}
+                  sx={{
+                    '&:last-child td, &:last-child th': { border: 0 },
+                    cursor: 'pointer',
+                    backgroundColor: selectedModule && selectedModule.CODE_NO === module.CODE_NO ? '#256d89' : 'inherit',
+                  }}
+                >
                     <TableCell component="th" scope="row" sx={{fontSize:"13px", padding:"10px"}}>{module.M_DVN}</TableCell>
                     <TableCell sx={{fontSize:"13px", padding:"10px"}}>{module.C_DVN}</TableCell>
                     <TableCell sx={{fontSize:"13px", padding:"10px"}}>{module.CODE_NO}</TableCell>

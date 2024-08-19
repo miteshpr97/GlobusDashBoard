@@ -102,12 +102,12 @@ const GLCMA100100 = () => {
   };
 
   const Save_Click = (event) => {
-    alert("djdjdjdj")
     if (event) {
       event.preventDefault();
     }
     if (validateForm()) {
       dispatch(createUserData(userData));
+      alert("data is succefully save")
       window.location.reload();
     }
   };

@@ -21,7 +21,7 @@ const UserAccess = ({ selectedModule }) => {
 
 
   console.log(moduleData, "data");
-  
+
 
   useEffect(() => {
     const fetchModuleData = async () => {
@@ -52,7 +52,8 @@ const UserAccess = ({ selectedModule }) => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
-    setPage(0);  };
+    setPage(0);
+  };
 
   const handleInputChange = (index, field, value) => {
     const updatedModuleData = [...moduleData];
@@ -60,43 +61,92 @@ const UserAccess = ({ selectedModule }) => {
     setModuleData(updatedModuleData);
   };
 
-  const handleUpdate = async () => {
-    try {
-      const response = await axios.post("/api/GLCMA100300/", moduleData);
 
-      if (response.status === 200) {
-        console.log("Data updated successfully!");
-      } else {
-        console.error("Failed to update data:", response.data);
+  const handleAddNewRow = () => {
+    const newRow = {
+      M_DVN: selectedModule?.M_DVN || "",
+      C_DVN: selectedModule?.C_DVN || "",
+      CODE_NO: "",
+      CODE_NM: "",
+      CODE_NMH: "",
+      CODE_NMA: "",
+      CODE_NMO: "",
+      SUB_GUN1: "",
+      SUB_GUN2: "",
+      SUB_GUN3: "",
+      SUB_GUN4: "",
+      SUB_GUN5: "",
+      SORT_BY: "",
+      RMKS: "",
+    };
+
+    setModuleData((prevData) => [newRow, ...prevData]);
+    setPage(0);
+  };
+
+  const handleUpdate = async () => {
+    const confirmUpdate = window.confirm("Are you sure you want to update the data?");
+
+    if (confirmUpdate) {
+      try {
+        const response = await axios.post("/api/GLCMA100300/", moduleData);
+
+        if (response.status === 200) {
+          console.log("Data updated successfully!");
+        } else {
+          console.error("Failed to update data:", response.data);
+        }
+      } catch (error) {
+        console.error("Error updating data:", error);
       }
-    } catch (error) {
-      console.error("Error updating data:", error);
+    } else {
+      console.log("Update canceled by the user.");
     }
   };
+
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, moduleData.length - page * rowsPerPage);
 
   return (
+
     <>
+
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddNewRow}
+          style={{ marginBottom: "16px" }}
+        >
+          Add New Row
+        </Button>
+      </div>
+
+
+
+
+
+
       <TableContainer component={Paper} sx={{ width: "100%", maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead >
-            <TableRow sx={{ background:"blue" }}>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px", background:"red" }}>Module</TableCell>
-              <TableCell sx={{ fontWeight: "bold" , padding:"10px"}}>Code DVN</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>Code NO</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>Code NM</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>Code NMH</TableCell>
-              <TableCell sx={{ fontWeight: "bold" , padding:"10px"}}>Code NMA</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>Code NMO</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SUB_GUN 1</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SUB_GUN 2</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SUB_GUN 3</TableCell>
-              <TableCell sx={{ fontWeight: "bold" , padding:"10px"}}>SUB_GUN 4</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SUB_GUN 5</TableCell>
-              <TableCell sx={{ fontWeight: "bold", padding:"10px" }}>SORT_BY</TableCell>
-              <TableCell sx={{ fontWeight: "bold" , padding:"10px"}}>RMKS</TableCell>
+            <TableRow sx={{ "& > *": { fontWeight: "bold", padding: "10px", backgroundColor: "#1976d2", color: "white" } }}>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>Module</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>Code DVN</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>Code NO</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>Code NM</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>Code NMH</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>Code NMA</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>Code NMO</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>SUB_GUN 1</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>SUB_GUN 2</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>SUB_GUN 3</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>SUB_GUN 4</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>SUB_GUN 5</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>SORT_BY</TableCell>
+              <TableCell sx={{ fontWeight: "bold", padding: "10px" }}>RMKS</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
