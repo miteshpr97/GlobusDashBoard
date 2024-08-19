@@ -102,6 +102,7 @@ const GLCMA100100 = () => {
   };
 
   const Save_Click = (event) => {
+    alert("djdjdjdj")
     if (event) {
       event.preventDefault();
     }
