@@ -129,15 +129,10 @@ const UserAccess = ({ selectedModule }) => {
         </Button>
       </div>
 
-
-
-
-
-
       <TableContainer component={Paper} sx={{ width: "100%", maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow sx={{ background: "blue" }}>
+            <TableRow >
               <TableCell sx={cellStyle}>Module</TableCell>
               <TableCell sx={cellStyle}>Code DVN</TableCell>
               <TableCell sx={cellStyle}>Code NO</TableCell>
