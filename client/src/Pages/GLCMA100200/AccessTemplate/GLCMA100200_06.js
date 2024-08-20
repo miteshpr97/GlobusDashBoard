@@ -59,7 +59,7 @@ const GLCMA100200_06 = () => {
           <TableBody>
             {pages.map((page, index) => (
               <StyledTableRow key={page} className={`page${index + 1}`}>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" >
                   {page}
                 </TableCell>
                 {actions.map((action) => (

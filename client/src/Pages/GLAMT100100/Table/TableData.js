@@ -194,8 +194,8 @@ const TableData = () => {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontWeight: "bold",
-    backgroundColor: theme.palette.primary.main, // Blue background
-    color: theme.palette.common.white, // White text
+     backgroundColor: "#045e84",
+  color:"white"
   }));
 
   // Function to format dates
