@@ -43,7 +43,7 @@ const GLCMA100300 = () => {
         }}
       >
         <Box>
-          <CommonBtn PAGE_CD="GLCMA100200" SAVE_CLICK={Save_Click} />
+          <CommonBtn PAGE_CD="GLCMA100300" SAVE_CLICK={Save_Click} />
         </Box>
         <Box
           sx={{
