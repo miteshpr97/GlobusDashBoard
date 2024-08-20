@@ -107,6 +107,7 @@ const GLCMA100100 = () => {
     }
     if (validateForm()) {
       dispatch(createUserData(userData));
+      alert("data is succefully save")
       window.location.reload();
     }
   };

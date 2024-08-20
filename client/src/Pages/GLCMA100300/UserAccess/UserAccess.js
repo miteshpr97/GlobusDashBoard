@@ -57,19 +57,49 @@ const UserAccess = ({ selectedModule }) => {
     setModuleData(updatedModuleData);
   };
 
-  const handleUpdate = async () => {
-    try {
-      const response = await axios.post("/api/GLCMA100300/", moduleData);
 
-      if (response.status === 200) {
-        console.log("Data updated successfully!");
-      } else {
-        console.error("Failed to update data:", response.data);
+  const handleAddNewRow = () => {
+    const newRow = {
+      M_DVN: selectedModule?.M_DVN || "",
+      C_DVN: selectedModule?.C_DVN || "",
+      CODE_NO: "",
+      CODE_NM: "",
+      CODE_NMH: "",
+      CODE_NMA: "",
+      CODE_NMO: "",
+      SUB_GUN1: "",
+      SUB_GUN2: "",
+      SUB_GUN3: "",
+      SUB_GUN4: "",
+      SUB_GUN5: "",
+      SORT_BY: "",
+      RMKS: "",
+    };
+
+    setModuleData((prevData) => [newRow, ...prevData]);
+    setPage(0);
+  };
+
+  const handleUpdate = async () => {
+    const confirmUpdate = window.confirm("Are you sure you want to update the data?");
+
+    if (confirmUpdate) {
+      try {
+        const response = await axios.post("/api/GLCMA100300/", moduleData);
+
+        if (response.status === 200) {
+          console.log("Data updated successfully!");
+        } else {
+          console.error("Failed to update data:", response.data);
+        }
+      } catch (error) {
+        console.error("Error updating data:", error);
       }
-    } catch (error) {
-      console.error("Error updating data:", error);
+    } else {
+      console.log("Update canceled by the user.");
     }
   };
+
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, moduleData.length - page * rowsPerPage);
@@ -84,7 +114,26 @@ const UserAccess = ({ selectedModule }) => {
   const inputPropsReadOnly = { readOnly: true };
 
   return (
+
     <>
+
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddNewRow}
+          style={{ marginBottom: "16px" }}
+        >
+          Add New Row
+        </Button>
+      </div>
+
+
+
+
+
+
       <TableContainer component={Paper} sx={{ width: "100%", maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
