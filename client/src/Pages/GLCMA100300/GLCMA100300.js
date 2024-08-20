@@ -43,7 +43,7 @@ const GLCMA100300 = () => {
         }}
       >
         <Box>
-          <CommonBtn PAGE_CD="GLCMA100200" SAVE_CLICK={Save_Click} />
+          <CommonBtn PAGE_CD="GLCMA100300" SAVE_CLICK={Save_Click} />
         </Box>
         <Box
           sx={{
@@ -59,7 +59,7 @@ const GLCMA100300 = () => {
 
 
 
-          <div  style={{  width:"400px"}}>
+          <div style={{ width: "400px" }}>
             <FormControl fullWidth>
               <InputLabel id="module-label">Module</InputLabel>
               <Select
@@ -86,11 +86,11 @@ const GLCMA100300 = () => {
             padding: "10px",
           }}
         >
-          <UserList 
+          <UserList
 
-          module={module}
-          
-          
+            module={module}
+
+
           />
         </Box>
       </Box>

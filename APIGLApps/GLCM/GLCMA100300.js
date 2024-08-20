@@ -35,6 +35,7 @@ router.post("/data",async(req,res) => {
 });
 
 // Add or update details
+
 // code to add or update single object
 // router.post("/", async (req, res) => {
 //   console.log("AddOrUpdateDetails");

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import UserAccess from "../UserAccess/UserAccess";
 import axios from "axios";
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,10 +15,6 @@ const UserList = ({ module }) => {
   const UserListWidth = 250;
   const [moduleData, setModuleData] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
-
-
- 
- 
 
   useEffect(() => {
     const fetchModule = async () => {
@@ -42,8 +37,6 @@ const UserList = ({ module }) => {
 
   const handleRowClick = (module) => {
     setSelectedModule(module);
-  
-    
   };
 
   return (
@@ -85,7 +78,7 @@ const UserList = ({ module }) => {
                     key={index}
                     onClick={() => handleRowClick(module)}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
-                  >
+                  > 
                     <TableCell component="th" scope="row">{module.M_DVN}</TableCell>
                     <TableCell>{module.C_DVN}</TableCell>
                     <TableCell>{module.CODE_NO}</TableCell>

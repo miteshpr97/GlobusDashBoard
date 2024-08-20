@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import SideBar from "../../component/SideBar";
-import CommonBtn from "../../component/CommonComponnets/CommonBtn";
+import CommonBtn from "../../component/CommonComponnets/CommonBtn"
 import CreateForm from "./CreateModal/CreateForm";
 import TableData from "./Table/TableData";
 
@@ -40,7 +40,7 @@ const GLAMT100100 = () => {
         }}
       >
         <Box>
-          <CommonBtn PAGE_CD="GLMA100100" SAVE_CLICK={Save_Click} />
+          <CommonBtn PAGE_CD="GLAMT100100" SAVE_CLICK={Save_Click} />
         </Box>
 
         {/* Search and Filter Section */}
@@ -147,7 +147,7 @@ const GLAMT100100 = () => {
           <CreateForm />
         </Box>
 
-        {/* Table Section */}
+        {/* Table Section */}    
         <Box
           sx={{
             width: "100%",

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   TextField,
   Grid,
-  Container,
   IconButton,
   Box,
 } from "@mui/material";
@@ -13,6 +12,10 @@ import axios from "axios";
 
 function CreateForm() {
   const [open, setOpen] = useState(false);
+  const [dropdownData, setDropdownData] = useState([]);
+console.log(dropdownData, "datadropdinw");
+
+
   const [formData, setFormData] = useState({
     REF_TNO: null,
     REF_TYPE: "",
@@ -26,10 +29,11 @@ function CreateForm() {
     FAMT: "",
     DOC_DTE: "",
     POST_DTE: "",
-    REG_DATE: "",
+    // REG_DATE: "",
     REG_BY: "",
     DOC_STATUS: "",
-    YEAR_CD: "",
+    YEAR_CD: "",    
+    REG_DATE: new Date().toISOString().split('T')[0]
   });
 
   const handleClickOpen = () => {
@@ -75,12 +79,12 @@ function CreateForm() {
       DOC_DTE: formattedDOC_DTE,
       POST_DTE: formattedPOST_DTE,
       REG_DATE: formattedREG_DATE,
-      YEAR_CD: getCurrentYearMonth(), // Set YEAR_CD to current year and month
+      YEAR_CD: getCurrentYearMonth(), 
     };
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/GLAMT100100",
+        "api/GLAMT100100",
         dataToPost
       );
       console.log("Form submitted successfully:", response.data);
@@ -89,6 +93,26 @@ function CreateForm() {
       console.error("Error submitting the form:", error);
     }
   };
+
+useEffect(()=>{
+  const fetchData = async () =>{
+    try{
+      const response = await axios.get("/api/GLCWP100100/dropdown");
+      setDropdownData(response.data);
+    }
+    catch (error){
+console.error("error fetching data:", error)
+    }
+  }
+
+  fetchData();
+
+}, []);
+
+// try{
+//   const response = await axios.get("/api/GLCWP100100/dropdown")
+// }
+
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -164,6 +188,29 @@ function CreateForm() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  disabled
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="TRANSACTION REF NO"
+                  variant="outlined"
+                  name="REF_TNO"
+                  disabled
+                  fullWidth
+                  size="small"
+                  value={formData.REF_TNO}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="YEAR CODE"
+                  variant="outlined"
+                  name="YEAR_CD"
+                  required
+                  fullWidth
+                  size="small"
+                  value={getCurrentYearMonth()}
                   disabled
                 />
               </Grid>
@@ -307,17 +354,7 @@ function CreateForm() {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  label="TRANSACTION REF NO"
-                  variant="outlined"
-                  name="REF_TNO"
-                  disabled
-                  fullWidth
-                  size="small"
-                  value={formData.REF_TNO}
-                />
-              </Grid>
+            
               <Grid item xs={4}>
                 <TextField
                   label="REGISTERED BY"
@@ -342,18 +379,7 @@ function CreateForm() {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  label="YEAR CODE"
-                  variant="outlined"
-                  name="YEAR_CD"
-                  required
-                  fullWidth
-                  size="small"
-                  value={getCurrentYearMonth()} // Display current year and month
-                  disabled
-                />
-              </Grid>
+         
               <Grid item xs={12} style={{ textAlign: "right" }}>
                 <Button
                   type="submit"
