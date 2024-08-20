@@ -6,7 +6,7 @@ export const fetchUserCreationData = createAsyncThunk(
   'userCreation/fetchUserCreationData',
   async () => {
     const response = await axios.get('api/UserCreation');
-    return response.data; // Ensure the API returns an array
+    return response.data.reverse(); // Ensure the API returns an array
   }
 );
 

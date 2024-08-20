@@ -52,8 +52,7 @@ const UserAccess = ({ selectedModule }) => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setPage(0);  };
 
   const handleInputChange = (index, field, value) => {
     const updatedModuleData = [...moduleData];
