@@ -3,7 +3,6 @@ import {
   Button,
   TextField,
   Grid,
-  Container,
   IconButton,
   Box,
 } from "@mui/material";
@@ -30,10 +29,11 @@ console.log(dropdownData, "datadropdinw");
     FAMT: "",
     DOC_DTE: "",
     POST_DTE: "",
-    REG_DATE: "",
+    // REG_DATE: "",
     REG_BY: "",
     DOC_STATUS: "",
-    YEAR_CD: "",
+    YEAR_CD: "",    
+    REG_DATE: new Date().toISOString().split('T')[0]
   });
 
   const handleClickOpen = () => {
@@ -79,7 +79,7 @@ console.log(dropdownData, "datadropdinw");
       DOC_DTE: formattedDOC_DTE,
       POST_DTE: formattedPOST_DTE,
       REG_DATE: formattedREG_DATE,
-      YEAR_CD: getCurrentYearMonth(), // Set YEAR_CD to current year and month
+      YEAR_CD: getCurrentYearMonth(), 
     };
 
     try {

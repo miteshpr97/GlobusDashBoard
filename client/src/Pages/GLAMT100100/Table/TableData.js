@@ -243,6 +243,7 @@ const TableData = () => {
                 </StyledTableRow>
               ))}
           </TableBody>
+
         </Table>
       </TableContainer>
       <TablePagination

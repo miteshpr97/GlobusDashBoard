@@ -59,7 +59,7 @@ const GLCMA100300 = () => {
 
 
 
-          <div  style={{  width:"400px"}}>
+          <div style={{ width: "400px" }}>
             <FormControl fullWidth>
               <InputLabel id="module-label">Module</InputLabel>
               <Select
@@ -86,11 +86,11 @@ const GLCMA100300 = () => {
             padding: "10px",
           }}
         >
-          <UserList 
+          <UserList
 
-          module={module}
-          
-          
+            module={module}
+
+
           />
         </Box>
       </Box>
