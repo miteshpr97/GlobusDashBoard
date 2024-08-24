@@ -377,7 +377,7 @@ export default function MenuItems() {
             <ListItemIcon
               sx={{
                 minWidth: 0,
-                mr: 1.5,
+                mr: 1.6,
                 justifyContent: "center",
                 color: "#045e84",
                 
@@ -435,7 +435,7 @@ export default function MenuItems() {
                     </ListItemIcon>
                     <ListItemText
                       primary={
-                        <div style={{ fontSize: "0.85rem", marginLeft:"6px" }}>{menu.text}</div> // Smaller font size for submenu
+                        <div style={{ fontSize: "0.85rem", marginLeft:"20px" }}>{menu.text}</div> // Smaller font size for submenu
                       }
                     />
                     {open[`${module.text}-${menu.text}`] ? (
@@ -473,7 +473,7 @@ export default function MenuItems() {
                           <ListItemIcon
                             sx={{
                               minWidth: 0,
-                              mr: 1,
+                              mr: 0.5,
                               justifyContent: "center",
                               color: isActivePath(subItem.path) ? "#1b4a54" : "#045e84", 
                               ":hover": {
@@ -488,6 +488,7 @@ export default function MenuItems() {
                               <div
                                 style={{
                                   fontSize: "0.8rem",
+                                  
                                   color: isActivePath(subItem.path) ? "#1b4a54" : "#045e84", 
                                 }}
                               >

@@ -372,6 +372,7 @@ const TableData = () => {
     padding: theme.spacing(1),
     textAlign: 'center',
     fontSize: '12.5px',
+    fontWeight:"600",
     fontFamily: 'Arial, sans-serif',
   }));
 
