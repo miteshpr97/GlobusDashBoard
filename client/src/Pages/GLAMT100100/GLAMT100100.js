@@ -39,8 +39,10 @@ const GLAMT100100 = () => {
           transition: "width 0.3s ease",
         }}
       >
-        <Box>
+        <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center", width:"100%", background:"#DDDDDD",}} >
           <CommonBtn PAGE_CD="GLAMT100100" SAVE_CLICK={Save_Click} />
+
+          <CreateForm />
         </Box>
 
         {/* Search and Filter Section */}
@@ -136,7 +138,7 @@ const GLAMT100100 = () => {
         </Box>
 
         {/* Create Form Section */}
-        <Box
+        {/* <Box
           sx={{
             width: "100%",
             marginTop: "10px",
@@ -145,7 +147,7 @@ const GLAMT100100 = () => {
           }}
         >
           <CreateForm />
-        </Box>
+        </Box> */}
 
         {/* Table Section */}    
         <Box
