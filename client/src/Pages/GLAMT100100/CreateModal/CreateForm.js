@@ -109,9 +109,6 @@ console.error("error fetching data:", error)
 
 }, []);
 
-// try{
-//   const response = await axios.get("/api/GLCWP100100/dropdown")
-// }
 
 
   return (

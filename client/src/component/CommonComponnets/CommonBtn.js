@@ -122,7 +122,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 import CustomButton from "../Buttons/CustomButton";
 import { Box, Stack } from "@mui/material";
 import { _post_WithoutToken } from "../../CommonUtilAPI/GLApiClient";

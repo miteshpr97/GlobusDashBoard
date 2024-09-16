@@ -6,9 +6,6 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const CreateUser = ({ userData, handleInputChange, formErrors }) => {
 
-
-  
- 
   return (
     <Box
       component="form"

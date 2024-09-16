@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 const UserList = ({ module }) => {
-  const UserListWidth = 250;
+  const UserListWidth = 270;
   const [moduleData, setModuleData] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
 
@@ -46,6 +46,7 @@ const UserList = ({ module }) => {
         height: "100%",
         display: "flex",
         overflowX: "hidden",
+        background: "white",
       }}
     >
       <Box
@@ -58,13 +59,13 @@ const UserList = ({ module }) => {
         }}
       >
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 150 }} aria-label="simple table">
+          <Table sx={{ minWidth: 100 }} aria-label="simple table">
             <TableHead>
-              <TableRow>
-                <TableCell  style={{ fontWeight: "bold" }}>M_DVN</TableCell>
-                <TableCell  style={{ fontWeight: "bold" }}>C_DVN</TableCell>
-                <TableCell  style={{ fontWeight: "bold" }}>CODE_NO</TableCell>
-                <TableCell  style={{ fontWeight: "bold" }}>CODE_NM</TableCell>
+              <TableRow sx={{background:"#f3f3f3"}}>
+                <TableCell  sx={{fontSize:"13px", fontWeight: "bold", padding:"10px" }}>M_DVN</TableCell>
+                <TableCell  sx={{ fontSize:"13px",fontWeight: "bold", padding:"10px" }}>C_DVN</TableCell>
+                <TableCell  sx={{fontSize:"13px", fontWeight: "bold", padding:"10px" }}>CODE_NO</TableCell>
+                <TableCell  sx={{ fontSize:"13px",fontWeight: "bold", padding:"10px" }}>CODE_NM</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -75,14 +76,18 @@ const UserList = ({ module }) => {
               ) : (
                 moduleData.map((module, index) => (
                   <TableRow
-                    key={index}
-                    onClick={() => handleRowClick(module)}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
-                  > 
-                    <TableCell component="th" scope="row">{module.M_DVN}</TableCell>
-                    <TableCell>{module.C_DVN}</TableCell>
-                    <TableCell>{module.CODE_NO}</TableCell>
-                    <TableCell>{module.CODE_NM}</TableCell>
+                  key={index}
+                  onClick={() => handleRowClick(module)}
+                  sx={{
+                    '&:last-child td, &:last-child th': { border: 0 },
+                    cursor: 'pointer',
+                    backgroundColor: selectedModule && selectedModule.CODE_NO === module.CODE_NO ? '#256d89' : 'inherit',
+                  }}
+                >
+                    <TableCell component="th" scope="row" sx={{fontSize:"13px", padding:"10px"}}>{module.M_DVN}</TableCell>
+                    <TableCell sx={{fontSize:"13px", padding:"10px"}}>{module.C_DVN}</TableCell>
+                    <TableCell sx={{fontSize:"13px", padding:"10px"}}>{module.CODE_NO}</TableCell>
+                    <TableCell sx={{fontSize:"13px", padding:"10px"}}>{module.CODE_NM}</TableCell>
                   </TableRow>
                 ))
               )}

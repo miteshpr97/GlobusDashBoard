@@ -49,6 +49,7 @@ export default function Header({ open, handleDrawerOpen }) {
             <MenuIcon />
           </IconButton>
         </div>
+
         <div
           style={{
             height: "40px",
@@ -56,7 +57,10 @@ export default function Header({ open, handleDrawerOpen }) {
             background: "white",
             borderRadius: "50%",
           }}
-        ></div>
+        >
+        <img src="https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg" height={40} width={40} style={{borderRadius:"50%"}} alt="" />
+        </div>
+
       </Toolbar>
     </AppBar>
   );

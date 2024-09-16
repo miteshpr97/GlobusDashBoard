@@ -6,11 +6,12 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
   Paper,
   InputBase,
   IconButton,
+  Stack,
+  Pagination, 
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SideBar from "../../component/SideBar";
@@ -27,9 +28,8 @@ const columns = [
 
 const GLCMA100100 = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
   const dispatch = useDispatch();
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1); // Page number now starts from 1
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [formErrors, setFormErrors] = useState({});
 
@@ -107,6 +107,7 @@ const GLCMA100100 = () => {
     }
     if (validateForm()) {
       dispatch(createUserData(userData));
+      alert("Data is successfully saved");
       window.location.reload();
     }
   };
@@ -159,28 +160,28 @@ const GLCMA100100 = () => {
     return <div>Error: {userCreation.error}</div>;
   }
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const handlePageChange = (event, value) => {
+    setPage(value);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  const filteredData = userCreation.data.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage
+  );
 
   return (
     <Box sx={{ display: "flex", width: "100vw", overflow: "hidden" }}>
-    {isSidebarOpen && <SideBar sx={{ width: sidebarWidth, flexShrink: 0 }} />}
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        p: 3,
-        marginTop: "55px",
-        overflowX: "hidden",
-        width: `calc(100vw - ${sidebarWidth}px)`,
-      }}
-    >
+      {isSidebarOpen && <SideBar sx={{ width: sidebarWidth, flexShrink: 0 }} />}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          marginTop: "55px",
+          overflowX: "hidden",
+          width: `calc(100vw - ${sidebarWidth}px)`,
+        }}
+      >
         <Box>
           <CommonBtn PAGE_CD="GLCMA100100" SAVE_CLICK={Save_Click} />
         </Box>
@@ -235,98 +236,75 @@ const GLCMA100100 = () => {
           <Box
             sx={{
               width: `${UserListWidth}px`,
-         
               background: "#f3f3f3",
               overflowX: "auto",
               padding: "10px",
+              minHeight: "100%",
             }}
           >
-            
-              <TableContainer component={Paper} sx={{ width: "100%", maxHeight: 440 }} >
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      {columns.map((column) => (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{
-                            minWidth: column.minWidth,
-                            fontWeight: "700",
-                            padding: "10px",
-                          }}
-                        >
-                          {column.label}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {userCreation.data
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row) => {
+            <TableContainer component={Paper} sx={{ width: "100%", minHeight: 640 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{
+                          minWidth: column.minWidth,
+                          fontWeight: "700",
+                          padding: "10px",
+                        }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredData.map((row) => (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.EMP_CD}>
+                      {columns.map((column) => {
+                        let value;
+                        if (column.id === "EMP_NM") {
+                          value = `${row.EMP_FNM} ${row.EMP_LNM}`;
+                        } else {
+                          value = row[column.id];
+                        }
                         return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.EMP_CD}
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{
+                              padding: "10px",
+                            }}
                           >
-                            {columns.map((column) => {
-                              let value;
-                              if (column.id === "EMP_NM") {
-                                value = `${row.EMP_FNM} ${row.EMP_LNM}`;
-                              } else {
-                                value = row[column.id];
-                              }
-                              return (
-                                <TableCell
-                                  key={column.id}
-                                  align={column.align}
-                                  style={{ padding: "10px" }}
-                                >
-                                  {column.format && typeof value === "number"
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
-                          </TableRow>
+                            {value}
+                          </TableCell>
                         );
                       })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={userCreation.data.length}
-                rowsPerPage={rowsPerPage}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {/* Stack for Pagination */}
+            <Stack spacing={2} sx={{ marginTop: 2, alignItems: "center" }}>
+              <Pagination
+                count={Math.ceil(userCreation.data.length / rowsPerPage)}
                 page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
+                onChange={handlePageChange}
+              
+                shape="rounded"
               />
-    
+            </Stack>
           </Box>
-          <Box
-            sx={{
-              flexGrow: 1,
-              height: "100%",
-              background: "#f3f3f3",
-              overflowX: "auto",
-              width: `calc(100% - ${UserListWidth}px)`,
-              padding: "10px",
-            }}
-          >
-            <CreateUser
-              userData={userData}
-              formErrors={formErrors}
-              handleInputChange={handleInputChange}
-            />
-          </Box>
+          <CreateUser
+            userData={userData}
+            setUserData={setUserData}
+            formErrors={formErrors}
+            handleInputChange={handleInputChange}
+          />
         </Box>
       </Box>
     </Box>
@@ -334,4 +312,3 @@ const GLCMA100100 = () => {
 };
 
 export default GLCMA100100;
-
