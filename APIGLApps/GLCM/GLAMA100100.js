@@ -90,7 +90,9 @@ router.post("/bank", async (req, res) => {
     console.log(error);
     res
       .status(500)
-      .send({ error: "An error occurred while adding a customer bank details." });
+      .send({
+        error: "An error occurred while adding a customer bank details.",
+      });
   }
 });
 
@@ -114,7 +116,9 @@ router.post("/bankDetails", async (req, res) => {
     console.error(error);
     res
       .status(500)
-      .send({ error: "An error occurred while fetching customer's bank details." });
+      .send({
+        error: "An error occurred while fetching customer's bank details.",
+      });
   }
 });
 
@@ -123,11 +127,11 @@ router.post("/tax", async (req, res) => {
   console.log("AddCustomerTaxDetails");
 
   const strParaMeter = {
-        REF_NO: req.body.REF_NO,
-        SEQ_NO: req.body.SEQ_NO,
-        VAT_NO: req.body.VAT_NO,
-        ACTIVE_YN: req.body.ACTIVE_YN,
-        REG_BY: req.body.REG_BY    
+    REF_NO: req.body.REF_NO,
+    SEQ_NO: req.body.SEQ_NO,
+    VAT_NO: req.body.VAT_NO,
+    ACTIVE_YN: req.body.ACTIVE_YN,
+    REG_BY: req.body.REG_BY,
   };
 
   try {
@@ -141,7 +145,9 @@ router.post("/tax", async (req, res) => {
     console.log(error);
     res
       .status(500)
-      .send({ error: "An error occurred while adding a customer's tax details." });
+      .send({
+        error: "An error occurred while adding a customer's tax details.",
+      });
   }
 });
 
@@ -165,7 +171,67 @@ router.post("/taxDetails", async (req, res) => {
     console.error(error);
     res
       .status(500)
-      .send({ error: "An error occurred while fetching a customer's tax details" });
+      .send({
+        error: "An error occurred while fetching a customer's tax details",
+      });
+  }
+});
+
+// Add a customer contact info
+router.post("/contact", async (req, res) => {
+  console.log("AddCustomerContactInfo");
+
+  const strParaMeter = {
+    REF_NO: req.body.REF_NO,
+    SEQ_NO: req.body.SEQ_NO,
+    CONTACT_PERSON: req.body.CONTACT_PERSON,
+    CONTACT_NO: req.body.CONTACT_NO,
+    EMAIL: req.body.EMAIL,
+    DESIGNATION: req.body.DESIGNATION,
+    ACTIVE_YN: req.body.ACTIVE_YN,
+    REG_BY: req.body.REG_BY,
+  };
+
+  try {
+    const result = await dbUtil.dbUtil_Temp.Save_SP(
+      "SP_GLAMA100100_07",
+      strParaMeter
+    );
+    console.log("Result", result);
+    res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .send({
+        error: "An error occurred while adding a customer's contact details.",
+      });
+  }
+});
+
+// Get customer contact details
+router.post("/contactDetails", async (req, res) => {
+  console.log("GetCustomerContactDetails");
+
+  const strParaMeter = {
+    REF_NO: req.body.REF_NO,
+    REG_BY: req.body.REG_BY,
+  };
+
+  try {
+    const result = await dbUtil.dbUtil_Temp.Select_SP(
+      "SP_GLAMA100100_08",
+      strParaMeter
+    );
+    console.log("Result", result);
+    res.status(201).json(result);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .send({
+        error: "An error occurred while fetching a customer's contact details",
+      });
   }
 });
 
