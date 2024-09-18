@@ -1,19 +1,16 @@
 //sidebar.js
 
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
-
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import Header from "./Header";
-import { useNavigate, useLocation } from "react-router-dom";
-import MenuItems from "./menuItems"; // Import the menuItems
+import MenuItems from "./menuItems"; 
 import logo from "../assets/logo/OWM_Final.png";
 
 
@@ -52,7 +49,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 
-  backgroundImage: `url(${logo})`, // Set the logo as the background image
+  backgroundImage: `url(${logo})`, 
   backgroundSize: "66px auto",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
@@ -80,9 +77,9 @@ const Drawer = styled(MuiDrawer, {
 export default function SideBar() {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
-  const [submenuOpen, setSubmenuOpen] = useState({}); // State to track open status of submenus
-  const navigate = useNavigate();
-  const location = useLocation(); // Add this line to get the current location
+  // const [submenuOpen, setSubmenuOpen] = useState({}); // State to track open status of submenus
+  // const navigate = useNavigate();
+  // const location = useLocation(); // Add this line to get the current location
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -92,16 +89,16 @@ export default function SideBar() {
     setOpen(false);
   };
 
-  const handleSubMenuClick = (path) => {
-    navigate(path);
-  };
+  // const handleSubMenuClick = (path) => {
+  //   navigate(path);
+  // };
 
-  const handleToggleSubMenu = (index) => {
-    setSubmenuOpen(prevState => ({
-      ...prevState,
-      [index]: !prevState[index]
-    }));
-  };
+  // const handleToggleSubMenu = (index) => {
+  //   setSubmenuOpen(prevState => ({
+  //     ...prevState,
+  //     [index]: !prevState[index]
+  //   }));
+  // };
 
 
 
