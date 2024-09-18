@@ -47,7 +47,7 @@ const CreateCustomer = () => {
         sx={{
           width: `${UserListWidth}px`,
           height: "100%",
-          background: "green",
+          background: "#f3f3f3",
           overflowX: "auto",
           padding: "10px",
           minHeight: "100%",
@@ -99,7 +99,7 @@ const CreateCustomer = () => {
         sx={{
           flexGrow: 1,
           height: "100%",
-          background: "pink",
+          background: "white",
           overflowX: "auto",
           width: `calc(100% - ${UserListWidth}px)`,
           padding: "10px",

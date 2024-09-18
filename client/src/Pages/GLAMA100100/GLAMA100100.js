@@ -72,7 +72,7 @@ const GLAMA100100 = () => {
             marginTop: "10px",
             display: "flex",
             overflowX: "hidden",
-            background: "red",
+            background: "#dddddd",
             padding: "10px",
           }}
         >
