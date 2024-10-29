@@ -1,8 +1,8 @@
 const msSqlconfig = {
-  user: "sa", // sql user
-  password: "server", //sql user password
-  server: "ODCLAP0102", // if it does not work try- localhost
-  database: "COMMON_DB",
+  user: "sa_owm", // sql user
+  password: "manager_owm@HR1", //sql user password
+  server: "103.235.104.114", // if it does not work try- localhost
+  database: "OWM.HRMS",
   options: {
     trustServerCertificate: true,
     trustedconnection: true,

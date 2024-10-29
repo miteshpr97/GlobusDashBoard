@@ -27,7 +27,7 @@ async function Select_SP(strSP_name, strParameter) {
         const [key, value] = entry;
         console.log("Key :" + key);
         console.log("Values :" + value);
-        reqObj.input(key, value);
+        reqObj.input("i_" + key, value);
       });
     }
     reqObj.output("O_ERR_LVL");
@@ -62,7 +62,7 @@ async function Save_SP(strSP_name, strParameter) {
         const [key, value] = entry;
         console.log("Key :" + key);
         console.log("Values :" + value);
-        reqObj.input(key, value);
+        reqObj.input("i_" + key, value);
       });
     }
     reqObj.output("O_ERR_LVL");
