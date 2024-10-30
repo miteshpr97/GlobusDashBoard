@@ -35,8 +35,8 @@ async function Select_SP(strSP_name, strParameter) {
     reqObj.output("O_ERR_NM");
     let resultSet = await reqObj.execute(strSP_name);
     if (resultSet.output.O_ERR_LVL == 0) {
-      console.log(resultSet.recordsets);
-      return resultSet.recordsets;
+      console.log(resultSet.recordsets[0]);
+      return resultSet.recordsets[0];
     } else {
       console.log(resultSet.output.O_ERR_LVL);
       console.log(resultSet.output.O_ERR_CD);
